@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/backgroundPet"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayaout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayaout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIconTint="@drawable/bottom_navigation_selector"
+        app:tabIndicatorColor="@color/greenPet"
+        app:tabSelectedTextColor="@color/greenPet">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_home_24"
+            android:text="@string/hometab"
+
+            />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_search_24"
+            android:text="@string/searchtab" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_person_24"
+            android:text="@string/profiletab" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+
+        android:background="@color/textColor"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayaout"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"></View>
+</androidx.constraintlayout.widget.ConstraintLayout>

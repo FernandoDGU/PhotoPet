@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="411dp"
+        android:layout_height="730dp"
+        android:background="@drawable/background001"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnIngresar"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_marginTop="400dp"
+        android:backgroundTint="@color/greenPet"
+        android:text="@string/btnSignin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/bluePet"
+        android:text="@string/btnSignup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="244dp"
+        android:layout_height="209dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnIngresar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_iconcamera2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
