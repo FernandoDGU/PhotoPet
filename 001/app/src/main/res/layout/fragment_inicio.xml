@@ -31,16 +31,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHomeCards"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="689dp"
         android:background="@color/backgroundPet"
         android:longClickable="false"
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:spanCount="3"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/HomeTitle"
+        app:spanCount="2"
         tools:ignore="MissingConstraints"
-        tools:itemCount="2"
+        tools:itemCount="10"
         tools:layout_editor_absoluteX="1dp"
         tools:listitem="@layout/card_home" />
 </androidx.constraintlayout.widget.ConstraintLayout>
