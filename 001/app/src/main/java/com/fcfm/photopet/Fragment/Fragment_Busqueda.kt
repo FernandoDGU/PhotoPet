@@ -1,5 +1,6 @@
 package com.fcfm.photopet.Fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,4 +17,8 @@ class Fragment_Busqueda: Fragment(){
     ): View? {
         return inflater.inflate(R.layout.fragment_busqueda, container, false)
     }
+
+
+
+
 }

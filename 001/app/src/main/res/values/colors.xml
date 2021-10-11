@@ -14,5 +14,6 @@
     <color name= "textColor">#3B3938</color>
     <color name= "textColorBlue">#1199EE</color>
     <color name="cardColor">#F7C991</color>
+    <color name="cardProfile">#FAF0E6</color>
 
 </resources>

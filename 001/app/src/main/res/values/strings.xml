@@ -19,4 +19,17 @@
     <string name="searchtab">Search</string>
     <string name="profiletab">Profile</string>
     <string name="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse dignissim.Suspendisse dignissim.</string>
+    <string name="SearchTitleradios">Search by: </string>
+    <string name="Searchradio1">User</string>
+    <string name="Searchradio2">Tag</string>
+
+    <string name="Orderadio1">Date</string>
+    <string name="Orderradio2">Popular</string>
+    <string name="Order">Order by: </string>
+
+    <string name="desc">Description: </string>
+    <string name="phone">Telephone: </string>
+
+    <string name="edit">Edit </string>
+    <string name="close">Sign off</string>
 </resources>
