@@ -25,9 +25,10 @@
 
         android:layout_marginTop="5dp"
         android:background="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HomeTitle"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"></View>
+        tools:ignore="MissingConstraints"></View>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHomeCards"
@@ -38,10 +39,28 @@
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:spanCount="2"
         tools:ignore="MissingConstraints"
         tools:itemCount="10"
-        tools:layout_editor_absoluteX="1dp"
         tools:listitem="@layout/card_home" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatbtnAddPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="170dp"
+        android:backgroundTintMode="add"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_add_24"
+        android:tint="@color/white"
+        android:tintMode="add"
+        app:backgroundTint="@color/black"
+        app:backgroundTintMode="screen"
+        app:layout_constraintBottom_toBottomOf="@+id/rvHomeCards"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

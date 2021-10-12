@@ -32,4 +32,14 @@
 
     <string name="edit">Edit </string>
     <string name="close">Sign off</string>
+
+    <string name="CreatePost">Create Post</string>
+    <string name="Post">Post</string>
+    <string name="btnDeleteImage">Delete current image</string>
+    <string name="btnTagsPost"> Post Tags</string>
+    <string name="btnPublicar">Publish</string>
+
+    <string name="addimage">Add Image</string>
+    <string name="descpost">Describe the publication</string>
+    <string name="descimage">Describe the current image</string>
 </resources>

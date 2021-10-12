@@ -15,5 +15,7 @@
     <color name= "textColorBlue">#1199EE</color>
     <color name="cardColor">#F7C991</color>
     <color name="cardProfile">#FAF0E6</color>
+    <color name="deleteImage">#FF5500</color>
+
 
 </resources>

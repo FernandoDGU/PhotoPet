@@ -90,6 +90,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="36dp"
+                android:backgroundTint="@color/greenPet"
                 android:text="@string/edit"
                 app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
@@ -100,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
+                android:backgroundTint="@color/greenPet"
                 android:text="@string/close"
                 app:layout_constraintStart_toEndOf="@+id/btnEdit"
                 app:layout_constraintTop_toTopOf="@+id/btnEdit" />
