@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.fcfm.photopet.CreatePostActivity
 import com.fcfm.photopet.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class Fragment_Inicio : Fragment(){
     private lateinit var rootView: View
@@ -26,11 +27,12 @@ class Fragment_Inicio : Fragment(){
     ): View? {
         rootView =  inflater.inflate(R.layout.fragment_inicio, container, false)
 
-        //Se manda a llamar el otro activity
-        //btnFloat.setOnClickListener{
-         //   val intent = Intent(this@Fragment_Inicio.context, CreatePostActivity::class.java)
-          //  startActivity(intent)
-        //}
+        val btnCreate = rootView?.findViewById<FloatingActionButton>(R.id.floatbtnAddPost)
+
+        btnCreate!!.setOnClickListener{
+            val intent = Intent(this@Fragment_Inicio.context, CreatePostActivity::class.java)
+            startActivity(intent)
+        }
 
         return rootView
     }
