@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity: AppCompatActivity(), View.OnClickListener {
@@ -13,8 +14,9 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
 
         val btnLogin = findViewById(R.id.btnLoginIngresar) as Button
-
+        val txtregister = findViewById<TextView>(R.id.SignUp)
         btnLogin.setOnClickListener(this)
+        txtregister.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -23,6 +25,9 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
                 R.id.btnLoginIngresar ->{
                     showHome()
                 }
+                R.id.SignUp ->{
+                    showRegister()
+                }
 
             }
         }
@@ -30,6 +35,11 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun showHome(){
         val intent = Intent(this, FragmentsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showRegister(){
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 

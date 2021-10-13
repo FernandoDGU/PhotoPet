@@ -63,7 +63,7 @@
             android:background="@color/cardProfile">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imageProfilePost"
                 android:layout_width="105dp"
                 android:layout_height="99dp"
                 android:layout_marginStart="16dp"
@@ -80,8 +80,8 @@
                 android:layout_marginStart="16dp"
                 android:text="Fernando D."
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="@+id/imageView5" />
+                app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
+                app:layout_constraintTop_toTopOf="@+id/imageProfilePost" />
 
             <Button
                 android:id="@+id/btnEdit"
@@ -93,7 +93,7 @@
                 android:backgroundTint="@color/greenPet"
                 android:text="@string/edit"
                 app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
                 app:layout_constraintTop_toBottomOf="@+id/txtNameProfile" />
 
             <Button
@@ -115,7 +115,7 @@
                 android:text="@string/desc"
                 android:textColor="@color/textColor"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                app:layout_constraintTop_toBottomOf="@+id/imageProfilePost" />
 
             <TextView
                 android:id="@+id/txtDescProfile"
