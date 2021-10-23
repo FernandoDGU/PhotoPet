@@ -1,4 +1,4 @@
-package com.fcfm.photopet.Fragment
+package com.fcfm.photopet.controller.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

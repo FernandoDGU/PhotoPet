@@ -1,12 +1,12 @@
-package com.fcfm.photopet
+package com.fcfm.photopet.controller
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.fcfm.photopet.Fragment.Fragment_Busqueda
-import com.fcfm.photopet.Fragment.Fragment_Inicio
-import com.fcfm.photopet.Fragment.Fragment_Perfil
+import com.fcfm.photopet.controller.Fragment.Fragment_Busqueda
+import com.fcfm.photopet.controller.Fragment.Fragment_Inicio
+import com.fcfm.photopet.controller.Fragment.Fragment_Perfil
+import com.fcfm.photopet.R
 import com.google.android.material.tabs.TabLayout
 
 class FragmentsActivity: AppCompatActivity() {

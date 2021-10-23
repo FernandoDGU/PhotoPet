@@ -1,4 +1,4 @@
-package com.fcfm.photopet.Fragment
+package com.fcfm.photopet.controller.Fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
