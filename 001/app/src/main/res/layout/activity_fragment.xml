@@ -11,9 +11,11 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/backgroundPet"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayaout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
@@ -51,9 +53,10 @@
     </com.google.android.material.tabs.TabLayout>
 
     <View
+        android:id="@+id/view4"
         android:layout_width="wrap_content"
-        android:layout_height="3dp"
 
+        android:layout_height="3dp"
         android:background="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/tabLayaout"
         tools:ignore="MissingConstraints"

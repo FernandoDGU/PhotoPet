@@ -43,4 +43,7 @@
     <string name="descpost">Describe the publication</string>
     <string name="descimage">Describe the current image</string>
 
+    <string name="myPosts">My posts</string>
+    <string name="myLikes">My likes</string>
+
 </resources>
