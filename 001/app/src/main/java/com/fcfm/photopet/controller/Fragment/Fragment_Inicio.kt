@@ -8,14 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fcfm.photopet.controller.CreatePostActivity
 import com.fcfm.photopet.R
-import com.fcfm.photopet.controller.adapter.HomeRecyclerAdapter
+import com.fcfm.photopet.controller.Adapter.HomeRecyclerAdapter
 import com.fcfm.photopet.model.Publication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -51,22 +49,22 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
         post = Publication(0,"Buenas tardes", "sadarien@gmail.com", null, R.drawable.background001)
         posts?.add(post)
 
-        post = Publication(1,"Buenas noches", "sadarien3@gmail.com", null, R.drawable.background001)
+        post = Publication(1,"Buenas noches", "sadarien3@gmail.com", null, R.drawable.puppy)
         posts?.add(post)
 
-        post = Publication(2,"Buenas mañanas", "sadarien5@gmail.com", null, R.drawable.background001)
+        post = Publication(2,"Buenas mañanas", "sadarien5@gmail.com", null, R.drawable.puppy2)
         posts?.add(post)
 
-        post = Publication(3,"Buenas buenas", "sadarie2n@gmail.com", null, R.drawable.background001)
+        post = Publication(3,"Buenas buenas", "sadarie2n@gmail.com", null, R.drawable.puppy)
         posts?.add(post)
 
-        post = Publication(4,"Buenas buenas buenas", "sadarien1@gmail.com", null, R.drawable.background001)
+        post = Publication(4,"Buenas buenas buenas", "sadarien1@gmail.com", null, R.drawable.puppy2)
         posts?.add(post)
 
         post = Publication(4,"sdfgdsfgsdfg", "sadariesdfgsdfgn1@gmail.com", null, R.drawable.background001)
         posts?.add(post)
 
-        post = Publication(4,"sdfgsdfgsdf", "sadariendsfgsdag1@gmail.com", null, R.drawable.background001)
+        post = Publication(4,"sdfgsdfgsdf", "sadariendsfgsdag1@gmail.com", null, R.drawable.puppy)
         posts?.add(post)
     }
 

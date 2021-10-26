@@ -22,6 +22,7 @@
     <string name="SearchTitleradios">Search by: </string>
     <string name="Searchradio1">User</string>
     <string name="Searchradio2">Tag</string>
+    <string name="Author">Author: </string>
 
     <string name="Orderadio1">Date</string>
     <string name="Orderradio2">Popular</string>

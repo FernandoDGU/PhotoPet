@@ -180,15 +180,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggle"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="327dp"
         tools:listitem="@layout/card_publications" />
 
     <RadioGroup
         android:id="@+id/toggle"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/black_out_line"
         android:checkedButton="@+id/Mylikes"
         android:orientation="horizontal"
