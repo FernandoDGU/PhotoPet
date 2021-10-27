@@ -61,9 +61,9 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
         //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
 
         if(post.imgArray == null){
-            holder.imgAlbumCard.setImageResource(post.intIdImage!!)
+            holder.imgAlbumCard.setImageResource(post.intIdImage!!)// Mostrar imagen cargada en android
         }else{
-            holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(post.imgArray!!))
+            holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(post.imgArray!!))// Mostrar imagen de bytearray (blob)
         }
 
     }

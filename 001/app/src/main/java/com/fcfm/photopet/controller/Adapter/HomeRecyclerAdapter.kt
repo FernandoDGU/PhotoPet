@@ -39,9 +39,9 @@ class HomeRecyclerAdapter (private val context: Fragment_Inicio,var posts: Mutab
         description.text = posts[position].description
         //image.text = posts[position].intIdImage
         if(posts[position].imgArray == null){
-            image.setImageResource(posts[position].intIdImage!!)
+            image.setImageResource(posts[position].intIdImage!!)// Mostrar imagen cargada en android
         }else{
-            image.setImageBitmap(ImageUtils.getBitMapFromByteArray(posts[position].imgArray!!))
+            image.setImageBitmap(ImageUtils.getBitMapFromByteArray(posts[position].imgArray!!))// Mostrar imagen de bytearray (blob)
         }
         //Picasso.get().load(listaPublicacion[position].foto).into(Muro_Img_Perfil)
 

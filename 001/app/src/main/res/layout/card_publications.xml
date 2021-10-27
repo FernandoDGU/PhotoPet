@@ -59,23 +59,29 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtAuthor" />
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/constraintLayout"
                     android:layout_width="83dp"
                     android:layout_height="82dp"
-                    android:layout_marginTop="-16dp"
-                    android:layout_marginBottom="-16dp"
-
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="-18dp"
+                    android:layout_marginBottom="-18dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/txtDesc"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/textColor"
+                    app:strokeWidth="2dp">
 
                     <ImageView
                         android:id="@+id/imagePost"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -83,7 +89,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/puppy" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
