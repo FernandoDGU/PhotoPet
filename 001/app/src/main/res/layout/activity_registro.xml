@@ -162,15 +162,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
-                android:layout_marginTop="68dp"
+                android:layout_marginTop="58dp"
                 android:layout_marginEnd="60dp"
                 android:ems="10"
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
 
-                app:layout_constraintTop_toBottomOf="@+id/editTextPasslRegister" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/PassError" />
 
             <TextView
                 android:id="@+id/textPhoneRegister"
@@ -207,6 +207,62 @@
                 android:text="@string/btnSignup"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextPhoneRegister" />
+
+            <TextView
+                android:id="@+id/NameError"
+                android:layout_width="303dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:textColor="@color/design_default_color_error"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+            <TextView
+                android:id="@+id/LastError"
+                android:layout_width="303dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:textColor="@color/design_default_color_error"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextLast" />
+
+            <TextView
+                android:id="@+id/EmailError"
+                android:layout_width="303dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:textColor="@color/design_default_color_error"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister" />
+
+            <TextView
+                android:id="@+id/PassError"
+                android:layout_width="303dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:textColor="@color/design_default_color_error"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextPasslRegister" />
+
+            <TextView
+                android:id="@+id/PhoneError"
+                android:layout_width="303dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:textColor="@color/design_default_color_error"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPhoneRegister" />
