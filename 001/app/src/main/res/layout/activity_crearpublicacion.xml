@@ -104,8 +104,6 @@
                 android:backgroundTintMode="add"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_add_24"
-                android:tint="@color/white"
-                android:tintMode="add"
                 app:backgroundTint="@color/black"
                 app:backgroundTintMode="screen"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -182,34 +180,37 @@
 
             <Button
                 android:id="@+id/btnDeleteImage"
-                android:layout_width="wrap_content"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/deleteImage"
+                android:background="@drawable/rounded_button_red"
                 android:text="@string/btnDeleteImage"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
             <Button
                 android:id="@+id/btnTagsPost"
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/textColor"
+                android:background="@drawable/rounded_button_black"
                 android:text="@string/btnTagsPost"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnDeleteImage" />
 
             <Button
                 android:id="@+id/btnPublicar"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="100dp"
-                android:backgroundTint="@color/greenPet"
+                android:background="@drawable/rounded_button_green"
                 android:text="@string/btnPublicar"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

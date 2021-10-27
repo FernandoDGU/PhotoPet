@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PhotoPet</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="account">"No tienes una cuenta? "</string>
+    <string name="singup">Registrarse</string>
+    <string name="title">PHOTOPET</string>
+    <string name="btnSignin">Ingresar</string>
+    <string name="btnSignup">Registrarse</string>
+    <string name="namesReg">Nombre(s)</string>
+    <string name="lastReg">Apellidos</string>
+    <string name="descReg">"Descripción "</string>
+    <string name="phoneReg">Número de teléfono</string>
+    <string name="photoRegister">Elige una foto</string>
+    <string name="hometab">Inicio</string>
+    <string name="searchtab">Búsqueda</string>
+    <string name="profiletab">Perfil</string>
+    <string name="SearchTitleradios">"Buscar por: "</string>
+    <string name="Searchradio1">Usuario</string>
+    <string name="Searchradio2">Etiqueta</string>
+    <string name="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse dignissim.Suspendisse dignissim.</string>
+    <string name="CreatePost">Crear Públicació</string>
+    <string name="Order">"Ordenar por: "</string>
+    <string name="desc">"Descripción: "</string>
+    <string name="phone">"Teléfono: "</string>
+    <string name="edit">Editar</string>
+    <string name="close">Cerrar sesión</string>
+    <string name="Post">Publicación</string>
+    <string name="btnDeleteImage">Eliminar imagen actual</string>
+    <string name="btnTagsPost">Etiquetas de la publicación</string>
+    <string name="btnPublicar">Publicar</string>
+    <string name="addimage">"Agregar imagen "</string>
+    <string name="descpost">Describe la publicación</string>
+    <string name="descimage">Describe la imagen actual</string>
+    <string name="myPosts">Mis publicaciones</string>
+    <string name="myLikes">Mis me gusta</string>
+    <string name="Author">"Autor: "</string>
+    <string name="Orderadio1">Fecha</string>
+    <string name="Orderradio2">Popular</string>
+</resources>

@@ -10,6 +10,8 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,24 +87,26 @@
 
             <Button
                 android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="36dp"
-                android:backgroundTint="@color/greenPet"
+                android:background="@drawable/rounded_button_green"
                 android:text="@string/edit"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
                 app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
                 app:layout_constraintTop_toBottomOf="@+id/txtNameProfile" />
 
             <Button
                 android:id="@+id/btnCerrarSesion"
-                android:layout_width="wrap_content"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:backgroundTint="@color/greenPet"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/rounded_button_green"
                 android:text="@string/close"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/btnEdit"
                 app:layout_constraintTop_toTopOf="@+id/btnEdit" />
 
@@ -175,8 +179,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProfileCards"
         android:layout_width="412dp"
-        android:layout_height="699dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="70dp"
         android:background="@color/backgroundPet"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +194,7 @@
         android:id="@+id/toggle"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/black_out_line"
         android:checkedButton="@+id/Mylikes"
         android:orientation="horizontal"

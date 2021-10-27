@@ -10,9 +10,10 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        app:layout_constraintTop_toTopOf="parent"
 
-        >
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,15 +50,15 @@
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="-30dp"
         android:background="@color/greenPet"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:strokeColor="@color/textColor"
         app:strokeWidth="2dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:ignore="MissingConstraints">
 
 
         <Space
@@ -126,8 +127,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
                         android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <RadioButton
                             android:id="@+id/radioUser"
@@ -195,7 +198,10 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
                         android:id="@+id/OrderDate"
@@ -226,16 +232,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchCards"
         android:layout_width="409dp"
-        android:layout_height="441dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+
         android:background="@color/backgroundPet"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/materialCardBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView"
         tools:ignore="MissingConstraints"
-
-        tools:layout_editor_absoluteX="1dp"
         tools:listitem="@layout/card_publications" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
