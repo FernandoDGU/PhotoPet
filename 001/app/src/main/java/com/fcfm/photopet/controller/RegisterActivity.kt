@@ -12,7 +12,15 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
+import com.fcfm.photopet.model.User
+import com.fcfm.photopet.utils.retrofit.RestEngine
+import com.fcfm.photopet.utils.retrofit.RetrofitMessage
+import com.fcfm.photopet.utils.retrofit.ServiceUser
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     lateinit var etName:EditText
@@ -48,6 +56,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         etPass = findViewById(R.id.editTextPasslRegister) as EditText
         etName = findViewById(R.id.editTextName) as EditText
         etPhone = findViewById(R.id.editTextPhoneRegister) as EditText
+        etDesc = findViewById(R.id.editTextDescRegister) as EditText
 
         //ERROR TEXT VARIABLES
         errorName = findViewById(R.id.NameError) as TextView
@@ -68,7 +77,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 when(v!!.id){
                     R.id.buttonRegister ->{
                         if(validate()){
-                            showHome()
+                            createUser()
                         }else{
                             Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
                         }
@@ -79,6 +88,41 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                     }
                 }
             }
+    }
+
+    private fun createUser(){
+        val encodedString:String =  Base64.getEncoder().encodeToString(this.imgArray)
+        val strEncodeImage:String = "data:image/png;base64," + encodedString
+        val user = User(
+            etEmail.text.toString(),
+            "${etName.text} ${etLast.text}",
+            etPass.text.toString(),
+            etPhone.text.toString(),
+            etDesc.text.toString(),
+            strEncodeImage
+        );
+
+        val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
+        val result: Call<RetrofitMessage> = service.insertUser(user)
+
+        result.enqueue(object: Callback<RetrofitMessage> {
+            override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                Toast.makeText(this@RegisterActivity,t.message.toString(),Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
+                val item =  response.body()
+                when(item!!.message){
+                    "ok" -> {
+                        showHome()
+                    }
+                    "23000" -> {
+                        Toast.makeText(this@RegisterActivity,R.string.Err23000,Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        })
     }
 
     private fun showHome(){
@@ -131,7 +175,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             errorPass.text = "Este campo no puede estar vacío"
             return false
         }else if (!isValidPassword(etPass.text.toString())){
-            errorPass.text = "La contraseña debe de contener al menos:\nUn número \nUn carácter" +
+            errorPass.text = "La contraseña debe de contener al menos:\nUn número \nUn carácter especial: @#$%^&+=" +
                     "\nUna mayúscula y una minúscula"
             return false
         }else if(etPass.text.toString().length < 8){

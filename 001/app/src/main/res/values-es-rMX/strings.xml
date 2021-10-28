@@ -38,4 +38,5 @@
     <string name="Author">"Autor: "</string>
     <string name="Orderadio1">Fecha</string>
     <string name="Orderradio2">Popular</string>
+    <string name="Err23000">Ya hay una cuenta con ese correo.</string>
 </resources>
