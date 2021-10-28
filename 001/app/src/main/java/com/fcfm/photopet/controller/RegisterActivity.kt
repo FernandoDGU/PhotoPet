@@ -1,14 +1,18 @@
 package com.fcfm.photopet.controller
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.media.Image
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
+import java.io.ByteArrayOutputStream
 
 class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     lateinit var etName:EditText
@@ -17,6 +21,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     lateinit var etPass:EditText
     lateinit var etDesc:EditText
     lateinit var etPhone:EditText
+    lateinit var Photo:ImageView
 
 
     lateinit var errorName:TextView
@@ -25,6 +30,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     lateinit var errorPass:TextView
     lateinit var errorPhone:TextView
 
+    var imgArray:ByteArray? =  null
+    private val REQUEST_GALLERY = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +40,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
 
         val btnRegistro = findViewById(R.id.buttonRegister) as Button
+        Photo = findViewById(R.id.RegisterImage) as ImageView
 
         //EDIT TEXT VARIABLES
         etLast = findViewById(R.id.editTextLast) as EditText
@@ -49,7 +57,10 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         errorPhone = findViewById(R.id.PhoneError) as TextView
 
 
+
+
         btnRegistro.setOnClickListener(this)
+        Photo.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -62,6 +73,9 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                             Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
                         }
 
+                    }
+                    R.id.RegisterImage ->{
+                        loadImage()
                     }
                 }
             }
@@ -143,6 +157,28 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         }
 
         return true
+    }
+
+
+    private fun loadImage(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_GALLERY)
+    }
+
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY){
+            //val photo = data?.extras?.get("data") as Bitmap
+            val photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data!!.data)
+            val stream = ByteArrayOutputStream()
+            photo.compress(Bitmap.CompressFormat.JPEG, 80, stream)
+            imgArray =  stream.toByteArray()
+            this.Photo!!.setImageBitmap(photo)
+            //Photo.setImageURI(data!!.data)
+            val bitmap = (Photo!!.getDrawable() as BitmapDrawable).bitmap
+        }
     }
 
 

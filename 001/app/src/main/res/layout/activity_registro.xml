@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/RegisterImage"
                 android:layout_width="95dp"
                 android:layout_height="96dp"
                 android:layout_marginTop="10dp"
@@ -67,7 +67,7 @@
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterImage"
 
                 />
 
