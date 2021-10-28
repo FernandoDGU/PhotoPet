@@ -39,4 +39,6 @@
     <string name="Orderadio1">Fecha</string>
     <string name="Orderradio2">Popular</string>
     <string name="Err23000">Ya hay una cuenta con ese correo.</string>
+    <string name="taglist">Lista de etiquetas</string>
+    <string name="goBack">Regresar</string>
 </resources>

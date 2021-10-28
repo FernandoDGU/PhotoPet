@@ -48,4 +48,8 @@
     <string name="myPosts">My posts</string>
     <string name="myLikes">My likes</string>
 
+    <string name="taglist">Tag\'s list</string>
+    <string name="goBack">Go back</string>
+
+
 </resources>

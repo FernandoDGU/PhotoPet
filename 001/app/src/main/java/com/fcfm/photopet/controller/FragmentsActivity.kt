@@ -1,12 +1,14 @@
 package com.fcfm.photopet.controller
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.fcfm.photopet.controller.Fragment.Fragment_Busqueda
 import com.fcfm.photopet.controller.Fragment.Fragment_Inicio
 import com.fcfm.photopet.controller.Fragment.Fragment_Perfil
 import com.fcfm.photopet.R
+import com.fcfm.photopet.utils.loggedUser
 import com.google.android.material.tabs.TabLayout
 
 class FragmentsActivity: AppCompatActivity() {
@@ -14,7 +16,6 @@ class FragmentsActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
         supportActionBar?.hide()
-
         val tabLayout = findViewById(R.id.tabLayaout) as TabLayout
         //Tabs from fragment
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{

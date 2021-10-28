@@ -37,7 +37,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
 
-                android:src="@drawable/ic_iconcamera2"
+                android:src="@drawable/puppy"
                 app:civ_border_width="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

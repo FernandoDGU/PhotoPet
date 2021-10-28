@@ -8,11 +8,13 @@ import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.User
+import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.RetrofitMessage
 import com.fcfm.photopet.utils.retrofit.ServiceUser
@@ -91,8 +93,16 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun createUser(){
-        val encodedString:String =  Base64.getEncoder().encodeToString(this.imgArray)
-        val strEncodeImage:String = "data:image/png;base64," + encodedString
+        if(this.imgArray == null){
+            val bitmap = (Photo!!.getDrawable() as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+            this.imgArray = baos.toByteArray()
+        }
+        val encodedString: String =  Base64.getEncoder().encodeToString(this.imgArray)
+        val strEncodeImage: String = "data:image/png;base64," + encodedString
+
+
         val user = User(
             etEmail.text.toString(),
             "${etName.text} ${etLast.text}",
@@ -114,6 +124,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 val item =  response.body()
                 when(item!!.message){
                     "ok" -> {
+                        loggedUser.setUser(user)
                         showHome()
                     }
                     "23000" -> {
@@ -221,7 +232,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             imgArray =  stream.toByteArray()
             this.Photo!!.setImageBitmap(photo)
             //Photo.setImageURI(data!!.data)
-            val bitmap = (Photo!!.getDrawable() as BitmapDrawable).bitmap
+
         }
     }
 
