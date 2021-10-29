@@ -43,7 +43,7 @@ class RestEngine{
 
 
 
-        private val ip: String = "192.168.1.119";
+        private val ip: String = "";
     }
 
 

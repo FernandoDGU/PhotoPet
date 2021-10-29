@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.User
+import com.fcfm.photopet.utils.LoadingDialogActivity
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.RetrofitMessage
@@ -19,11 +20,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity: AppCompatActivity(), View.OnClickListener {
+    lateinit var loading: LoadingDialogActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-
+        loading = LoadingDialogActivity(this)
         val btnLogin = findViewById(R.id.btnLoginIngresar) as Button
         val txtregister = findViewById<TextView>(R.id.SignUp)
         btnLogin.setOnClickListener(this)
@@ -34,7 +36,9 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
         if(v!=null){
             when (v!!.id){
                 R.id.btnLoginIngresar ->{
+
                     validation()
+
                 }
                 R.id.SignUp ->{
                     showRegister()
@@ -57,6 +61,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
         }else{
             PassErr.visibility = View.GONE;
         }
+        loading.startLoading()
         loggingUser()
         //showHome()
     }
@@ -69,12 +74,14 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
 
         result.enqueue(object: Callback<User> {
             override fun onFailure(call: Call<User>, t: Throwable) {
+                loading.isDismiss()
                 Toast.makeText(this@LoginActivity,t.message.toString(), Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 val item =  response.body()
                 if(item!!.description.isNullOrEmpty()){
+                    loading.isDismiss()
                     Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
                 }else{
                     loggedUser.setUser(item)
@@ -88,6 +95,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
     private fun showHome(){
         val intent = Intent(this, FragmentsActivity::class.java)
         intent.putExtra("destiny", "register");
+        loading.isDismiss()
         startActivity(intent)
     }
 

@@ -58,6 +58,7 @@
 
     <string name="Err23000_R">There\'s already an account with that email.</string>
     <string name="Err0_G">An error has occured, please try again.</string>
+    <string name="Loading">Loading...</string>
 
 
 </resources>

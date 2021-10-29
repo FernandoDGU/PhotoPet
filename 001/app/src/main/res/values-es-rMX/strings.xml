@@ -46,4 +46,5 @@
     <string name="emptyDesc">No hay descripción</string>
     <string name="emptyPhone">No hay un teléfono</string>
     <string name="Err0_G">Ha ocurrido un error, por favor intente nuevamente</string>
+    <string name="Loading">Cargando...</string>
 </resources>

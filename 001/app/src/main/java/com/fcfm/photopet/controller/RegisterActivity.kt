@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.ImageUtils
+import com.fcfm.photopet.utils.LoadingDialogActivity
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.RetrofitMessage
@@ -31,6 +32,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     var destiny: String? = null
     var choosedPhoto: Boolean = false
     private val REQUEST_GALLERY = 1001
+    private lateinit var loading : LoadingDialogActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +66,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         }
 
 
-
+        loading = LoadingDialogActivity(this)
         RegisterImage.setOnClickListener(this)
     }
 
@@ -72,17 +74,21 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             if(v!= null){
                 when(v!!.id){
                     R.id.buttonRegister ->{
+                        loading.startLoading()
                         if(validate()){
                             createUser()
                         }else{
+                            loading.isDismiss()
                             Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
                         }
 
                     }
                     R.id.buttonModify ->{
+                        loading.startLoading()
                         if(validate()){
                             modifyUser()
                         }else{
+                            loading.isDismiss()
                             Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
                         }
 
@@ -121,6 +127,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
         result.enqueue(object: Callback<RetrofitMessage> {
             override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                loading.isDismiss()
                 Toast.makeText(this@RegisterActivity,t.message.toString(),Toast.LENGTH_LONG).show()
             }
 
@@ -132,6 +139,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                         showHome()
                     }
                     "23000" -> {
+                        loading.isDismiss()
                         Toast.makeText(this@RegisterActivity,R.string.Err23000_R,Toast.LENGTH_LONG).show()
                     }
                 }
@@ -170,6 +178,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
         result.enqueue(object: Callback<RetrofitMessage> {
             override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                loading.isDismiss()
                 Toast.makeText(this@RegisterActivity,t.message.toString(),Toast.LENGTH_LONG).show()
             }
 
@@ -178,9 +187,11 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 when(item!!.message){
                     "ok" -> {
                         loggedUser.setUser(user)
+                        loading.isDismiss()
                         finish()
                     }
                     "0" -> {
+                        loading.isDismiss()
                         Toast.makeText(this@RegisterActivity,R.string.Err0_G,Toast.LENGTH_LONG).show()
                     }
                 }
@@ -191,6 +202,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun showHome(){
         val intent = Intent(this, FragmentsActivity::class.java)
+        loading.isDismiss()
         startActivity(intent)
     }
 
