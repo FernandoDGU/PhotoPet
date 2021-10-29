@@ -1,3 +1,4 @@
+-- CREATE DATABASE photopetdb;
 -- USE photopetdb; 
 
 DROP TABLE IF EXISTS publication_tag;
@@ -55,3 +56,48 @@ CREATE TABLE IF NOT EXISTS publication_tag (
 	CONSTRAINT FK_PT_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication),
 	CONSTRAINT FK_PT_TAG FOREIGN KEY (id_tag) REFERENCES tag(id_tag)
 );
+
+-- /////////SP AND FUNCTION//////////
+
+-- SP TODAS LAS PUBLICACIONES CON LA PRIMERA FOTO 
+DROP PROCEDURE IF EXISTS Post_images;
+
+DELIMITER // 
+CREATE PROCEDURE Post_images (
+
+)
+BEGIN
+	SELECT distinct P.id_publication, P.description, P.email, A.image
+	FROM publication P 
+    INNER JOIN album A
+    ON P.id_publication = A.id_publication
+    Group by P.id_publication;
+    
+END //
+DELIMITER ; 
+
+Call Post_images();
+
+-- FUNCION QUE RETORNA EL ID DE LA ULTIMA PUBLICACION DE UN USUARIO
+DROP FUNCTION IF EXISTS Last_publication;
+
+DELIMITER // 
+CREATE FUNCTION Last_publication(
+	pa_email VARCHAR(60)
+)
+RETURNS INT 
+READS SQL DATA 
+BEGIN 
+	DECLARE last_id INT;
+    SELECT P.id_publication INTO last_id
+    FROM publication P
+	INNER JOIN user U 
+	ON P.email = U.email
+    WHERE P.email = pa_email
+	ORDER BY P.id_publication DESC LIMIT 1;
+
+	RETURN last_id;
+END //
+DELIMITER ; 
+
+-- SELECT Last_publication('email@.com');
