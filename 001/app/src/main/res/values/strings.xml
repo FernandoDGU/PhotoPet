@@ -7,6 +7,7 @@
     <string name="title">PHOTOPET</string>
     <string name="btnSignin">Sign in</string>
     <string name="btnSignup">Sign Up</string>
+    <string name="btnEdit">Apply changes</string>
 
     <!--Registro-->
     <string name="namesReg">Name(s)</string>
@@ -14,7 +15,9 @@
     <string name="descReg">Description</string>
     <string name="phoneReg">Telephone number</string>
     <string name="photoRegister">Choose a photo</string>
-    <string name="Err23000">There\'s already an account with that email.</string>
+
+
+    <string name="ErrEmpty_L">Please introduce a value</string>
 
     <string name="hometab">Home</string>
     <string name="searchtab">Search</string>
@@ -50,6 +53,11 @@
 
     <string name="taglist">Tag\'s list</string>
     <string name="goBack">Go back</string>
+    <string name="emptyDesc">There is no description</string>
+    <string name="emptyPhone">There is no phone</string>
+
+    <string name="Err23000_R">There\'s already an account with that email.</string>
+    <string name="Err0_G">An error has occured, please try again.</string>
 
 
 </resources>

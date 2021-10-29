@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showRegister(){
         val intent = Intent(this, RegisterActivity::class.java)
+        intent.putExtra("destiny", "register");
         startActivity(intent)
     }
 }

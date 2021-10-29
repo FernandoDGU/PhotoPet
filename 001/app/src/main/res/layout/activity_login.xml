@@ -118,4 +118,30 @@
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
+    <TextView
+        android:id="@+id/EmailErr"
+        android:layout_width="303dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:textColor="@color/design_default_color_error"
+        android:text="@string/ErrEmpty_L"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextemail" />
+
+    <TextView
+        android:id="@+id/PassErr"
+        android:layout_width="303dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:textColor="@color/design_default_color_error"
+        android:text="@string/ErrEmpty_L"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

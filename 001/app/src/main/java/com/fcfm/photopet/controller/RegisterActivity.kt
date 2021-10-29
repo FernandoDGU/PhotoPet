@@ -4,20 +4,21 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.media.Image
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
+import android.text.InputType
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.User
+import com.fcfm.photopet.utils.ImageUtils
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.RetrofitMessage
 import com.fcfm.photopet.utils.retrofit.ServiceUser
+import kotlinx.android.synthetic.main.activity_registro.*
+import kotlinx.android.synthetic.main.fragment_perfil.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,22 +26,10 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 class RegisterActivity: AppCompatActivity(), View.OnClickListener {
-    lateinit var etName:EditText
-    lateinit var etLast:EditText
-    lateinit var etEmail:EditText
-    lateinit var etPass:EditText
-    lateinit var etDesc:EditText
-    lateinit var etPhone:EditText
-    lateinit var Photo:ImageView
-
-
-    lateinit var errorName:TextView
-    lateinit var errorLast:TextView
-    lateinit var errorEmail:TextView
-    lateinit var errorPass:TextView
-    lateinit var errorPhone:TextView
 
     var imgArray:ByteArray? =  null
+    var destiny: String? = null
+    var choosedPhoto: Boolean = false
     private val REQUEST_GALLERY = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,30 +37,35 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_registro)
         supportActionBar?.hide()
 
+         destiny = intent.getStringExtra("destiny");
+        if(destiny == "modify"){
+            val actualUser = loggedUser.getUser()
+            editTextName.setText(actualUser.firstname)
+            editTextLast.setText(actualUser.lastname)
 
-        val btnRegistro = findViewById(R.id.buttonRegister) as Button
-        Photo = findViewById(R.id.RegisterImage) as ImageView
+            editTextEmailRegister.setText(actualUser.email)
+            editTextEmailRegister.isEnabled = false
 
-        //EDIT TEXT VARIABLES
-        etLast = findViewById(R.id.editTextLast) as EditText
-        etEmail = findViewById(R.id.editTextEmailRegister) as EditText
-        etPass = findViewById(R.id.editTextPasslRegister) as EditText
-        etName = findViewById(R.id.editTextName) as EditText
-        etPhone = findViewById(R.id.editTextPhoneRegister) as EditText
-        etDesc = findViewById(R.id.editTextDescRegister) as EditText
+            editTextDescRegister.setText(actualUser.description)
+            editTextPhoneRegister.setText(actualUser.phone)
 
-        //ERROR TEXT VARIABLES
-        errorName = findViewById(R.id.NameError) as TextView
-        errorLast = findViewById(R.id.LastError) as TextView
-        errorEmail = findViewById(R.id.EmailError) as TextView
-        errorPass = findViewById(R.id.PassError) as TextView
-        errorPhone = findViewById(R.id.PhoneError) as TextView
+            var byteArray:ByteArray? = null
+            val strImage:String =  actualUser.image!!.replace("data:image/png;base64,","")
+            byteArray =  Base64.getDecoder().decode(strImage)
+            RegisterImage!!.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+
+            buttonRegister.visibility = View.GONE
+            buttonModify.visibility = View.VISIBLE
+            buttonModify.setOnClickListener(this)
+        }else if(destiny == "register"){
+            buttonModify.visibility = View.GONE
+            buttonRegister.visibility = View.VISIBLE
+            buttonRegister.setOnClickListener(this)
+        }
 
 
 
-
-        btnRegistro.setOnClickListener(this)
-        Photo.setOnClickListener(this)
+        RegisterImage.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -80,6 +74,14 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                     R.id.buttonRegister ->{
                         if(validate()){
                             createUser()
+                        }else{
+                            Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                    R.id.buttonModify ->{
+                        if(validate()){
+                            modifyUser()
                         }else{
                             Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
                         }
@@ -94,7 +96,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun createUser(){
         if(this.imgArray == null){
-            val bitmap = (Photo!!.getDrawable() as BitmapDrawable).bitmap
+            val bitmap = (RegisterImage!!.getDrawable() as BitmapDrawable).bitmap
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
             this.imgArray = baos.toByteArray()
@@ -104,11 +106,13 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
 
         val user = User(
-            etEmail.text.toString(),
-            "${etName.text} ${etLast.text}",
-            etPass.text.toString(),
-            etPhone.text.toString(),
-            etDesc.text.toString(),
+            editTextEmailRegister.text.toString(),
+            "${editTextName.text} ${editTextLast.text}",
+            editTextName.text.toString(),
+            editTextLast.text.toString(),
+            editTextPasslRegister.text.toString(),
+            editTextPhoneRegister.text.toString(),
+            editTextDescRegister.text.toString(),
             strEncodeImage
         );
 
@@ -128,7 +132,56 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                         showHome()
                     }
                     "23000" -> {
-                        Toast.makeText(this@RegisterActivity,R.string.Err23000,Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@RegisterActivity,R.string.Err23000_R,Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        })
+    }
+
+    private fun modifyUser(){
+        var pass = editTextPasslRegister.text.toString()
+        if(pass.isNullOrEmpty()) pass = loggedUser.getUser().password!!
+
+        var strEncodeImage = loggedUser.getUser().image
+        if(choosedPhoto){
+        val bitmap = (RegisterImage!!.getDrawable() as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        this.imgArray = baos.toByteArray()
+        val encodedString: String =  Base64.getEncoder().encodeToString(this.imgArray)
+        strEncodeImage = "data:image/png;base64," + encodedString
+        }
+
+        val user = User(
+            editTextEmailRegister.text.toString(),
+            "${editTextName.text} ${editTextLast.text}",
+            editTextName.text.toString(),
+            editTextLast.text.toString(),
+            pass,
+            editTextPhoneRegister.text.toString(),
+            editTextDescRegister.text.toString(),
+            strEncodeImage
+        );
+
+        val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
+        val result: Call<RetrofitMessage> = service.updateUser(user.email!!, user)
+
+        result.enqueue(object: Callback<RetrofitMessage> {
+            override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                Toast.makeText(this@RegisterActivity,t.message.toString(),Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
+                val item =  response.body()
+                when(item!!.message){
+                    "ok" -> {
+                        loggedUser.setUser(user)
+                        finish()
+                    }
+                    "0" -> {
+                        Toast.makeText(this@RegisterActivity,R.string.Err0_G,Toast.LENGTH_LONG).show()
                     }
                 }
 
@@ -142,32 +195,32 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun validateName():Boolean {
-        if(etName.text.toString().isEmpty()){
-            errorName.text = "Este campo no puede estar vacío"
+        if(editTextName.text.toString().isEmpty()){
+            NameError.text = "Este campo no puede estar vacío"
             return false
         }
-        errorName.text = ""
+        NameError.text = ""
         return true
     }
 
     private fun validateLast():Boolean{
-        if(etLast.text.toString().isEmpty()){
-            errorLast.text = "Este campo no puede estar vacío"
+        if(editTextLast.text.toString().isEmpty()){
+            LastError.text = "Este campo no puede estar vacío"
             return false
         }
-        errorLast.text = ""
+        LastError.text = ""
         return true
     }
 
     private fun validateEmail():Boolean{
-        if(etEmail.text.toString().isEmpty()){
-            errorEmail.text = "Este campo no puede estar vacío"
+        if(editTextEmailRegister.text.toString().isEmpty()){
+            EmailError.text = "Este campo no puede estar vacío"
             return false
-        }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.text).matches()){
-            errorEmail.text = "Correo no valido"
+        }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(editTextEmailRegister.text).matches()){
+            EmailError.text = "Correo no valido"
             return false
         }
-        errorEmail.text = ""
+        EmailError.text = ""
         return true
     }
 
@@ -182,27 +235,30 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun validatePass():Boolean{
-        if(etPass.text.toString().isEmpty()){
-            errorPass.text = "Este campo no puede estar vacío"
-            return false
-        }else if (!isValidPassword(etPass.text.toString())){
-            errorPass.text = "La contraseña debe de contener al menos:\nUn número \nUn carácter especial: @#$%^&+=" +
-                    "\nUna mayúscula y una minúscula"
-            return false
-        }else if(etPass.text.toString().length < 8){
-            errorPass.text = "La contraseña debe ser mayor a 8 caracteres"
-            return false
+        if(editTextPasslRegister.text.toString().isEmpty() && destiny == "register"){
+            if(editTextPasslRegister.text.toString().isEmpty()){
+                PassError.text = "Este campo no puede estar vacío"
+                return false
+            }else if (!isValidPassword(editTextPasslRegister.text.toString())){
+                PassError.text = "La contraseña debe de contener al menos:\nUn número \nUn carácter especial: @#$%^&+=" +
+                        "\nUna mayúscula y una minúscula"
+                return false
+            }else if(editTextPasslRegister.text.toString().length < 8){
+                PassError.text = "La contraseña debe ser mayor a 8 caracteres"
+                return false
+            }
         }
-        errorPass.text = ""
+
+        PassError.text = ""
         return true
     }
 
     private fun validatePhone():Boolean{
-        if(etPhone.text.toString().length < 10 && !etPhone.text.isEmpty()){
-            errorPhone.text = "Deben de ser 10 numeros"
+        if(editTextPhoneRegister.text.toString().length < 10 && !editTextPhoneRegister.text.isEmpty()){
+            PhoneError.text = "Deben de ser 10 numeros"
             return false
         }
-        errorPhone.text = ""
+        PhoneError.text = ""
         return true
     }
 
@@ -230,7 +286,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             val stream = ByteArrayOutputStream()
             photo.compress(Bitmap.CompressFormat.JPEG, 80, stream)
             imgArray =  stream.toByteArray()
-            this.Photo!!.setImageBitmap(photo)
+            this.RegisterImage!!.setImageBitmap(photo)
+            if(destiny == "modify") choosedPhoto = true
             //Photo.setImageURI(data!!.data)
 
         }

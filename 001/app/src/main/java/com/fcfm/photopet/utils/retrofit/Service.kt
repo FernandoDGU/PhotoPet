@@ -12,18 +12,18 @@ interface ServiceUser{
     fun getUsers(): Call<List<User>>
 
     @GET("user.php?email={emailParam}")
-    fun getUser(@Path("email") email: String): Call<User>
+    fun getUser(@Path("emailParam") email: String): Call<User>
 
-    @GET("user.php?email={emailParam}&pass={passParam}")
-    fun loggedUser(@Path("emailParam") email: String, @Path("passParam") password: String): Call<List<User>>
+    @GET("user.php")
+    fun logInUser(@Query("email") email: String, @Query("pass") password: String): Call<User>
 
     @Headers("Content-Type: application/json")
     @POST("user.php")
     fun insertUser(@Body userData: User): Call<RetrofitMessage>
 
     @Headers("Content-Type: application/json")
-    @PUT("user.php?email={emailParam}")
-    fun updateUser(@Path("emailParam") email: String, @Body userData: User): Call<Int>
+    @PUT("user.php")
+    fun updateUser(@Query("email") email: String, @Body userData: User): Call<RetrofitMessage>
 
     @DELETE("user.php?email={emailParam}")
     fun deleteUser(@Path("emailParam") email: String): Call<Int>
