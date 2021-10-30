@@ -38,13 +38,12 @@
         android:layout_marginEnd="50dp"
         android:background="@color/white"
         android:scaleType="fitXY"
-
-        android:tint="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/view7"
         app:layout_constraintEnd_toStartOf="@+id/TitlePost"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_24" />
+        app:srcCompat="@drawable/ic_arrow_back_24"
+        app:tint="@color/textColor" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="409dp"
@@ -129,20 +128,6 @@
             app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ToggleButton
-            android:id="@+id/toggleButtonLike"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
-            android:background="@drawable/toggle_selector"
-            android:text="ToggleButton"
-            android:textOff=""
-            android:textOn=""
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtNamePost"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/DescPost"
             android:layout_width="350dp"
@@ -170,6 +155,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtCountPost" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/BtnLike"
+            android:layout_width="50dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="54dp"
+            android:scaleType="centerCrop"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtNamePost"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/twitter_like" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
