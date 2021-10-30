@@ -79,7 +79,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                             createUser()
                         }else{
                             loading.isDismiss()
-                            Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
                         }
 
                     }
@@ -89,7 +89,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                             modifyUser()
                         }else{
                             loading.isDismiss()
-                            Toast.makeText(this, "Error, Por favor revise los datos", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
                         }
 
                     }
@@ -208,7 +208,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun validateName():Boolean {
         if(editTextName.text.toString().isEmpty()){
-            NameError.text = "Este campo no puede estar vacío"
+            NameError.text = getString(R.string.ErrEmpty_L)
             return false
         }
         NameError.text = ""
@@ -217,7 +217,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun validateLast():Boolean{
         if(editTextLast.text.toString().isEmpty()){
-            LastError.text = "Este campo no puede estar vacío"
+            LastError.text = getString(R.string.ErrEmpty_L)
             return false
         }
         LastError.text = ""
@@ -226,10 +226,10 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun validateEmail():Boolean{
         if(editTextEmailRegister.text.toString().isEmpty()){
-            EmailError.text = "Este campo no puede estar vacío"
+            EmailError.text = getString(R.string.ErrEmpty_L)
             return false
         }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(editTextEmailRegister.text).matches()){
-            EmailError.text = "Correo no valido"
+            EmailError.text = getString(R.string.ErrEmail)
             return false
         }
         EmailError.text = ""
@@ -247,16 +247,15 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun validatePass():Boolean{
-        if(editTextPasslRegister.text.toString().isEmpty() && destiny == "register"){
+        if(editTextPasslRegister.text.toString().isEmpty() || destiny == "register"){
             if(editTextPasslRegister.text.toString().isEmpty()){
-                PassError.text = "Este campo no puede estar vacío"
+                PassError.text = getString(R.string.ErrEmpty_L)
                 return false
             }else if (!isValidPassword(editTextPasslRegister.text.toString())){
-                PassError.text = "La contraseña debe de contener al menos:\nUn número \nUn carácter especial: @#$%^&+=" +
-                        "\nUna mayúscula y una minúscula"
+                PassError.text = getString(R.string.ErrCharacter)
                 return false
             }else if(editTextPasslRegister.text.toString().length < 8){
-                PassError.text = "La contraseña debe ser mayor a 8 caracteres"
+                PassError.text = getString(R.string.ErrPass)
                 return false
             }
         }
@@ -267,7 +266,10 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun validatePhone():Boolean{
         if(editTextPhoneRegister.text.toString().length < 10 && !editTextPhoneRegister.text.isEmpty()){
-            PhoneError.text = "Deben de ser 10 numeros"
+            PhoneError.text = getString(R.string.ErrPhone)
+            return false
+        }else if(editTextPhoneRegister.text.toString().length > 10){
+            PhoneError.text = getString(R.string.ErrPhone)
             return false
         }
         PhoneError.text = ""

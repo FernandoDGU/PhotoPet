@@ -81,7 +81,7 @@
 
     <Button
         android:id="@+id/btnLoginIngresar"
-        android:layout_width="110dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:background="@drawable/rounded_button_green"

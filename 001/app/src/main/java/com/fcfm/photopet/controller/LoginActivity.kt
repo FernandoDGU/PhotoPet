@@ -80,7 +80,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
 
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 val item =  response.body()
-                if(item!!.description.isNullOrEmpty()){
+                if(item!!.email.isNullOrEmpty()){
                     loading.isDismiss()
                     Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
                 }else{

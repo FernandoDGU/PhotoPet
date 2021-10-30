@@ -47,4 +47,9 @@
     <string name="emptyPhone">No hay un teléfono</string>
     <string name="Err0_G">Ha ocurrido un error, por favor intente nuevamente</string>
     <string name="Loading">Cargando...</string>
+    <string name="ErrData">"Error, por favor verifica tus datos "</string>
+    <string name="ErrEmail">Correo no válido</string>
+    <string name="ErrPass">Tu contraseña debe de ser mayor a 8 caracteres</string>
+    <string name="ErrPhone">Deben ser 10 números</string>
+    <string name="ErrCharacter">La contraseña debe de contener:"\n"Un número"\n"Un carácter especial: @#$%^+="\n"Una mayúscula y una minúscula</string>
 </resources>

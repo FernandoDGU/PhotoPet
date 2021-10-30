@@ -17,7 +17,7 @@
     <string name="photoRegister">Choose a photo</string>
 
 
-    <string name="ErrEmpty_L">Please introduce a value</string>
+
 
     <string name="hometab">Home</string>
     <string name="searchtab">Search</string>
@@ -56,9 +56,21 @@
     <string name="emptyDesc">There is no description</string>
     <string name="emptyPhone">There is no phone</string>
 
+
+    <!--Validaciones-->
     <string name="Err23000_R">There\'s already an account with that email.</string>
     <string name="Err0_G">An error has occured, please try again.</string>
     <string name="Loading">Loading...</string>
+
+    <string name="ErrEmpty_L">Please introduce a value</string>
+    <string name="ErrData">Error, please check your data</string>
+    <string name="ErrEmail">Email not valid</string>
+    <string name="ErrPass">Your password must be at least 8 characters long</string>
+    <string name="ErrPhone">Must be 10 numbers</string>
+    <string name="ErrCharacter">The password must contain:"\n"a number"\n"a especial character: @#$%^+="\n"an uppercase and a lowercase </string>
+
+
+
 
 
 </resources>

@@ -10,7 +10,9 @@ DROP TABLE IF EXISTS user;
 
 CREATE TABLE IF NOT EXISTS user (
 	email 					VARCHAR(60)	NOT NULL PRIMARY KEY,
-    name					VARCHAR(50) NOT NULL, 
+    fullname				VARCHAR(100) NOT NULL,
+    firstname				VARCHAR(50) NOT NULL,
+    lastname				VARCHAR(50) NOT NULL,
     password				VARCHAR(50) NOT NULL,
     phone 					VARCHAR(10) NULL,
     description 			TEXT NULL,
