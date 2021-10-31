@@ -97,11 +97,13 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
         intent.putExtra("destiny", "register");
         loading.isDismiss()
         startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 
     private fun showRegister(){
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.transparencia, R.anim.static_anim)
     }
 
 }

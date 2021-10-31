@@ -38,7 +38,6 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
         supportActionBar?.hide()
-
          destiny = intent.getStringExtra("destiny");
         if(destiny == "modify"){
             val actualUser = loggedUser.getUser()

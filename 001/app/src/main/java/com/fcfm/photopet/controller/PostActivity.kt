@@ -3,6 +3,7 @@ package com.fcfm.photopet.controller
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
@@ -15,13 +16,14 @@ class PostActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_publicacion)
         supportActionBar?.hide()
-
+        overridePendingTransition(R.anim.zoom_in, R.anim.static_anim)
         val likebtn = findViewById(R.id.BtnLike) as LottieAnimationView
 
         var like = false
         likebtn.setOnClickListener{
             like = likeAnimation(likebtn, R.raw.apple_event, like)
         }
+
     }
 
 
@@ -45,5 +47,10 @@ class PostActivity: AppCompatActivity() {
         }
 
         return !like
+    }
+
+    override public fun finish(){
+        super.finish()
+        overridePendingTransition(R.anim.static_anim, R.anim.zoom_out)
     }
 }

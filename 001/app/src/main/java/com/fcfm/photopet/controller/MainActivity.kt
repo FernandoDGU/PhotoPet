@@ -40,11 +40,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun showLogin(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.transparencia, R.anim.static_anim)
     }
 
     private fun showRegister(){
         val intent = Intent(this, RegisterActivity::class.java)
         intent.putExtra("destiny", "register");
         startActivity(intent)
+        overridePendingTransition(R.anim.transparencia, R.anim.static_anim)
+        //overridePendingTransition(R.anim.translate_left_side, R.anim.static_anim)
     }
 }

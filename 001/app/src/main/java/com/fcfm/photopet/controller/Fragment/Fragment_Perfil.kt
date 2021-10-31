@@ -95,6 +95,7 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
         val intent = Intent(context, RegisterActivity::class.java)
         intent.putExtra("destiny", "modify");
         startActivity(intent)
+        activity?.overridePendingTransition(0, 0)
     }
 
     private fun loadData(){
