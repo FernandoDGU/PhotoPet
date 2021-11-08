@@ -43,6 +43,10 @@
     <string name="btnDeleteImage">Delete current image</string>
     <string name="btnTagsPost"> Post Tags</string>
     <string name="btnPublicar">Publish</string>
+    <string name="searchTag">Search tag</string>
+    <string name="createTag">Create tag</string>
+    <string name="tagNameErr">There\'s already a tag with that name.</string>
+
 
     <string name="addimage">Add Image</string>
     <string name="descpost">Describe the publication</string>

@@ -80,6 +80,40 @@ DELIMITER ;
 
 Call Post_images();
 
+DROP PROCEDURE IF EXISTS Post_images_id;
+
+DELIMITER // 
+CREATE PROCEDURE Post_images_id (
+	pId_publication INT
+)
+BEGIN
+	SELECT distinct P.id_publication, P.description, P.email, A.image
+	FROM publication P 
+    INNER JOIN album A
+    ON P.id_publication = A.id_publication
+    WHERE P.id_publication = pId_publication
+    Group by P.id_publication;
+    
+END //
+DELIMITER ; 
+
+DROP PROCEDURE IF EXISTS Posts_images_user;
+
+DELIMITER // 
+CREATE PROCEDURE Posts_images_user (
+	pEmail VARCHAR(60)
+)
+BEGIN
+	SELECT distinct P.id_publication, P.description, P.email, A.image
+	FROM publication P 
+    INNER JOIN album A
+    ON P.id_publication = A.id_publication
+    WHERE P.email = pEmail
+    Group by P.id_publication;
+    
+END //
+DELIMITER ;
+
 -- FUNCION QUE RETORNA EL ID DE LA ULTIMA PUBLICACION DE UN USUARIO
 DROP FUNCTION IF EXISTS Last_publication;
 

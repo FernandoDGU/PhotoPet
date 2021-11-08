@@ -94,7 +94,6 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun showHome(){
         val intent = Intent(this, FragmentsActivity::class.java)
-        intent.putExtra("destiny", "register");
         loading.isDismiss()
         startActivity(intent)
         overridePendingTransition(0, 0)
@@ -102,6 +101,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun showRegister(){
         val intent = Intent(this, RegisterActivity::class.java)
+        intent.putExtra("destiny", "register");
         startActivity(intent)
         overridePendingTransition(R.anim.transparencia, R.anim.static_anim)
     }

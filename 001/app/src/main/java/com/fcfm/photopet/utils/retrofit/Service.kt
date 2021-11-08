@@ -1,5 +1,6 @@
 package com.fcfm.photopet.utils.retrofit
 
+import com.fcfm.photopet.model.Tag
 import com.fcfm.photopet.model.User
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,4 +29,13 @@ interface ServiceUser{
     @DELETE("user.php?email={emailParam}")
     fun deleteUser(@Path("emailParam") email: String): Call<Int>
 
+}
+
+interface ServiceTag{
+    @GET("tag.php")
+    fun getTags(): Call<List<Tag>>
+
+    @Headers("Content-Type: application/json")
+    @POST("tag.php")
+    fun insertTag(@Body tagData: Tag): Call<RetrofitMessage>
 }
