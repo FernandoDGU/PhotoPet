@@ -1,5 +1,6 @@
 package com.fcfm.photopet.utils.retrofit
 
+import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.Tag
 import com.fcfm.photopet.model.User
 import retrofit2.Call
@@ -38,4 +39,10 @@ interface ServiceTag{
     @Headers("Content-Type: application/json")
     @POST("tag.php")
     fun insertTag(@Body tagData: Tag): Call<RetrofitMessage>
+}
+
+interface ServicePost{
+    @Headers("Content-Type: application/json")
+    @POST("publication.php")
+    fun insertPost(@Body postData: Publication): Call<RetrofitMessage>
 }

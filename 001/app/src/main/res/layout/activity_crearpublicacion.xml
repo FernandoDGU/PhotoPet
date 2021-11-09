@@ -40,7 +40,7 @@
         android:background="@color/white"
         android:scaleType="fitXY"
 
-        android:tint="@color/textColor"
+        app:tint="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,10 +112,13 @@
 
             <ImageView
                 android:id="@+id/imagesCreatePost"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="300dp"
+                android:maxHeight="400dp"
                 android:layout_marginTop="8dp"
-                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/floatbtnAddImage"
@@ -126,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="1"
+                android:text="0/10"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +172,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtCount" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/textDescImage"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -188,7 +191,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintTop_toBottomOf="@+id/textDescImage" />
 
             <Button
                 android:id="@+id/btnTagsPost"

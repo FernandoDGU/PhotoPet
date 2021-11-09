@@ -55,4 +55,8 @@
     <string name="searchTag">Buscar etiqueta</string>
     <string name="createTag">Crear etiqueta</string>
     <string name="tagNameErr">Ya hay una etiqueta con ese nombre.</string>
+    <string name="imagesOverloadErr">Máximo de imágenes cargadas. Puede eliminar imágenes previamente añadidas.</string>
+    <string name="postDescEmptyErr">La publicación necesita una descripción.</string>
+    <string name="postEmptyErr">La publicación necesita al menos una imagen</string>
+    <string name="emptyDescImage">No hay una descripción para esta imagen.</string>
 </resources>

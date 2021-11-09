@@ -46,6 +46,10 @@
     <string name="searchTag">Search tag</string>
     <string name="createTag">Create tag</string>
     <string name="tagNameErr">There\'s already a tag with that name.</string>
+    <string name="imagesOverloadErr">Maximum images uploaded. You can delete previously added images.</string>
+    <string name="postDescEmptyErr">The post needs a description.</string>
+    <string name="postEmptyErr">The post needs at least one image.</string>
+    <string name="emptyDescImage">There\'s is not a description for this image.</string>
 
 
     <string name="addimage">Add Image</string>
