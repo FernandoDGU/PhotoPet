@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.utils.ImageUtils
+import java.util.*
 
 class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publication>): RecyclerView.Adapter<PostListRecyclerAdapter.ViewHolder>(),
     Filterable {
@@ -60,11 +61,9 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
         holder.albumPosition =  position
         //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
 
-        if(post.imgArray == null){
-            holder.imgAlbumCard.setImageResource(post.intIdImage!!)// Mostrar imagen cargada en android
-        }else{
-            holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(post.imgArray!!))// Mostrar imagen de bytearray (blob)
-        }
+        val strImage:String =  posts[position].imgArray!!.replace("data:image/png;base64,","")
+        val byteArray =  Base64.getDecoder().decode(strImage)
+        holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
 
     }
 

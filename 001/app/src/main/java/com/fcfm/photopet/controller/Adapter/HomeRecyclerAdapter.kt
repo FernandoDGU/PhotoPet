@@ -9,6 +9,7 @@ import com.fcfm.photopet.R
 import com.fcfm.photopet.controller.Fragment.Fragment_Inicio
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.utils.ImageUtils
+import java.util.*
 
 class HomeRecyclerAdapter (private val context: Fragment_Inicio,var posts: MutableList<Publication>, private val itemClickListener: OnPostClickListenener): RecyclerView.Adapter<HomeRecyclerAdapter.HomeRecyclerViewHolder>()
     {
@@ -37,14 +38,10 @@ class HomeRecyclerAdapter (private val context: Fragment_Inicio,var posts: Mutab
         val image = holder.itemView.findViewById<ImageView>(R.id.imageHomecard)
 
         description.text = posts[position].description
-        //image.text = posts[position].intIdImage
-        if(posts[position].imgArray == null){
-            image.setImageResource(posts[position].intIdImage!!)// Mostrar imagen cargada en android
-        }else{
-            image.setImageBitmap(ImageUtils.getBitMapFromByteArray(posts[position].imgArray!!))// Mostrar imagen de bytearray (blob)
-        }
-        //Picasso.get().load(listaPublicacion[position].foto).into(Muro_Img_Perfil)
 
+        val strImage:String =  posts[position].imgArray!!.replace("data:image/png;base64,","")
+        val byteArray =  Base64.getDecoder().decode(strImage)
+        image.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
     }
 
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +18,13 @@ import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.ImageUtils
 import com.fcfm.photopet.utils.loggedUser
+import com.fcfm.photopet.utils.retrofit.RestEngine
+import com.fcfm.photopet.utils.retrofit.ServicePost
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_registro.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class Fragment_Perfil: Fragment(), View.OnClickListener{
@@ -57,27 +63,23 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
     }
 
     private fun fillPostList(){
-        var post: Publication? = null
-        post = Publication(0,"Buenas tardes", "sadarien@gmail.com", null, R.drawable.background001)
-        posts?.add(post)
+        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+        val result: Call<List<Publication>> = service.getPublications()
 
-        post = Publication(1,"Buenas noches", "sadarien3@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
+        result.enqueue(object: Callback<List<Publication>> {
+            override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
+                //loading.isDismiss()
+                Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
+            }
 
-        post = Publication(2,"Buenas mañanas", "sadarien5@gmail.com", null, R.drawable.puppy2)
-        posts?.add(post)
-
-        post = Publication(3,"Buenas buenas", "sadarie2n@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
-
-        post = Publication(4,"Buenas buenas buenas", "sadarien1@gmail.com", null, R.drawable.puppy2)
-        posts?.add(post)
-
-        post = Publication(4,"sdfgdsfgsdfg", "sadariesdfgsdfgn1@gmail.com", null, R.drawable.background001)
-        posts?.add(post)
-
-        post = Publication(4,"sdfgsdfgsdf", "sadariendsfgsdag1@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
+            override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                val item =  response.body()
+                for(p in item!!){
+                    posts.add(p)
+                }
+                postAdapter!!.notifyDataSetChanged()
+            }
+        })
     }
 
     override fun onClick(v: View?) {
@@ -109,9 +111,8 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
     }
 
     private fun loadUserData(){
-        var byteArray:ByteArray? = null
         val strImage:String =  actualUser.image!!.replace("data:image/png;base64,","")
-        byteArray =  Base64.getDecoder().decode(strImage)
+        val byteArray =  Base64.getDecoder().decode(strImage)
         profileImg.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
         profileName.setText(actualUser.fullname)
         profileEmail.setText(actualUser.email)

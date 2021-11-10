@@ -289,22 +289,29 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
             override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
                 val item =  response.body()
-                /*for( tag in item!!){
+                if(item!![0].id_tag != null){
+                    /*for( tag in item!!){
                     tagList.add(tag)
                 }*/
-                tagList = item!!.toMutableList()
+                    tagList = item.toMutableList()
 
-                for(tag in selectedTagList){
-                    for(innerTag in tagList){
-                        if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
-                            tagList.remove(innerTag)
-                            break
+                    for(tag in selectedTagList){
+                        for(innerTag in tagList){
+                            if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
+                                if(tag.id_tag == null){
+                                    selectedTagList.remove(tag)
+                                    selectedTagList.add(innerTag)
+                                }
+                                tagList.remove(innerTag)
+                                break
+                            }
+
                         }
-
                     }
+                    autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
+                    autoCompleteTag.setAdapter(autoTagListAdapter)
                 }
-                autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
-                autoCompleteTag.setAdapter(autoTagListAdapter)
+
             }
         })
 

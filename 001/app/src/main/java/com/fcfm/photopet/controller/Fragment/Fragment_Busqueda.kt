@@ -5,12 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fcfm.photopet.R
 import com.fcfm.photopet.controller.Adapter.PostListRecyclerAdapter
 import com.fcfm.photopet.model.Publication
+import com.fcfm.photopet.utils.retrofit.RestEngine
+import com.fcfm.photopet.utils.retrofit.ServicePost
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Fragment_Busqueda: Fragment(), androidx.appcompat.widget.SearchView.OnQueryTextListener{
     private lateinit var rootView: View
@@ -37,27 +43,23 @@ class Fragment_Busqueda: Fragment(), androidx.appcompat.widget.SearchView.OnQuer
 
 
     private fun fillPostList(){
-        var post: Publication? = null
-        post = Publication(0,"Buenas tardes", "sadarien@gmail.com", null, R.drawable.background001)
-        posts?.add(post)
+        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+        val result: Call<List<Publication>> = service.getPublications()
 
-        post = Publication(1,"Buenas noches", "sadarien3@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
+        result.enqueue(object: Callback<List<Publication>> {
+            override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
+                //loading.isDismiss()
+                Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
+            }
 
-        post = Publication(2,"Buenas mañanas", "sadarien5@gmail.com", null, R.drawable.puppy2)
-        posts?.add(post)
-
-        post = Publication(3,"Buenas buenas", "sadarie2n@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
-
-        post = Publication(4,"Buenas buenas buenas", "sadarien1@gmail.com", null, R.drawable.puppy2)
-        posts?.add(post)
-
-        post = Publication(4,"sdfgdsfgsdfg", "sadariesdfgsdfgn1@gmail.com", null, R.drawable.background001)
-        posts?.add(post)
-
-        post = Publication(4,"sdfgsdfgsdf", "sadariendsfgsdag1@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
+            override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                val item =  response.body()
+                for(p in item!!){
+                    posts.add(p)
+                }
+                postAdapter!!.notifyDataSetChanged()
+            }
+        })
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

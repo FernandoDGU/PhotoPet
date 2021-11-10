@@ -42,6 +42,9 @@ interface ServiceTag{
 }
 
 interface ServicePost{
+    @GET("publication.php")
+    fun getPublications(): Call<List<Publication>>
+
     @Headers("Content-Type: application/json")
     @POST("publication.php")
     fun insertPost(@Body postData: Publication): Call<RetrofitMessage>

@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +23,14 @@ import com.fcfm.photopet.controller.Adapter.HomeRecyclerAdapter
 import com.fcfm.photopet.controller.FragmentsActivity
 import com.fcfm.photopet.controller.PostActivity
 import com.fcfm.photopet.model.Publication
+import com.fcfm.photopet.model.Tag
+import com.fcfm.photopet.utils.retrofit.RestEngine
+import com.fcfm.photopet.utils.retrofit.ServicePost
+import com.fcfm.photopet.utils.retrofit.ServiceTag
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
     private lateinit var rootView: View
@@ -37,44 +45,39 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
         savedInstanceState: Bundle?
     ): View? {
         rootView =  inflater.inflate(R.layout.fragment_inicio, container, false)
-        this.fillPostList()
+
         val btnCreate = rootView.findViewById<FloatingActionButton>(R.id.floatbtnAddPost)
         val recyclerPostHome = rootView.findViewById<RecyclerView>(R.id.rvHomeCards)
         recyclerPostHome.layoutManager = GridLayoutManager(context, 2)
         recyclerPostHome.adapter = homeAdapter
-        homeAdapter.notifyDataSetChanged()
         activity?.overridePendingTransition(0, 0)
         btnCreate!!.setOnClickListener{
             val intent = Intent(context, CreatePostActivity::class.java)
             startActivity(intent)
             activity?.overridePendingTransition(R.anim.translate_left_side, R.anim.static_anim)
         }
-
+        this.fillPostList()
         return rootView
     }
 
     private fun fillPostList(){
-        var post:Publication? = null
-        post = Publication(0,"Buenas tardes", "sadarien@gmail.com", null, R.drawable.background001)
-        posts?.add(post)
+        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+        val result: Call<List<Publication>> = service.getPublications()
 
-        post = Publication(1,"Buenas noches", "sadarien3@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
+        result.enqueue(object: Callback<List<Publication>> {
+            override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
+                //loading.isDismiss()
+                Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
+            }
 
-        post = Publication(2,"Buenas mañanas", "sadarien5@gmail.com", null, R.drawable.puppy2)
-        posts?.add(post)
-
-        post = Publication(3,"Buenas buenas", "sadarie2n@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
-
-        post = Publication(4,"Buenas buenas buenas", "sadarien1@gmail.com", null, R.drawable.puppy2)
-        posts?.add(post)
-
-        post = Publication(4,"sdfgdsfgsdfg", "sadariesdfgsdfgn1@gmail.com", null, R.drawable.background001)
-        posts?.add(post)
-
-        post = Publication(4,"sdfgsdfgsdf", "sadariendsfgsdag1@gmail.com", null, R.drawable.puppy)
-        posts?.add(post)
+            override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                val item =  response.body()
+                for(p in item!!){
+                    posts.add(p)
+                }
+                homeAdapter.notifyDataSetChanged()
+            }
+        })
     }
 
     override fun onitemClick(post: Publication) {
