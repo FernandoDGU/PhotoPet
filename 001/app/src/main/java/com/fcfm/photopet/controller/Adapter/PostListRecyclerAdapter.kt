@@ -84,7 +84,7 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
 
                     posts.filter { post ->
 
-                        post.description!!.lowercase().contains(queryString) //|| post.strDescription!!.toLowerCase().contains(queryString)
+                        post.email!!.lowercase().contains(queryString) //|| post.strDescription!!.toLowerCase().contains(queryString)
                     }
                 }
 

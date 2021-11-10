@@ -119,6 +119,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                     windowTagsPost.setContentView(viewTagsPost)
                     autoCompleteTag = viewTagsPost.findViewById<AutoCompleteTextView>(R.id.autotv_Tag)
 
+
                     autoCompleteTag.setOnItemClickListener { parent, view, position, id ->
                         var selectedTag = parent!!.getItemAtPosition(position) as Tag
                         selectedTagList.add(selectedTag);
@@ -218,7 +219,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                     var index = imagePos - 1
                     if(albumList.size == 1){
-                        imagesCreatePost.setImageResource(R.drawable.puppy)
+                        imagesCreatePost.setImageResource(R.drawable.puppy) //PONER IMAGEN DEFAULT
                         albumList.removeAt(index)
                         imagePos = 0
                         textDescImage.text = null
@@ -378,7 +379,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
     override fun onFocusChange(v: View?, hasFocus: Boolean) {
         if(!hasFocus){
-            val descriptionImage = textDescImage.text.toString()
+            val descriptionImage = textDescImage.text.toString() //Botón guardar descripción
             if(descriptionImage.isEmpty() || imagePos == 0)
                 return
             val index = imagePos - 1;

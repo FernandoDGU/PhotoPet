@@ -78,9 +78,11 @@
 
             <TextView
                 android:id="@+id/txtNameProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="Fernando D."
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
@@ -124,11 +126,15 @@
 
             <TextView
                 android:id="@+id/txtDescProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="I like dogs"
+                android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/Lorem"
                 android:textColor="@color/textColor"
+                app:layout_constraintBottom_toTopOf="@+id/txtEmailProfile"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 
@@ -156,7 +162,9 @@
 
             <TextView
                 android:id="@+id/txtEmailProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="dogs.love@gmail.com"
@@ -169,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="123456789"
+                android:text="0123456789"
                 android:textColor="@color/textColor"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
