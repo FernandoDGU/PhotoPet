@@ -17,7 +17,7 @@
     <string name="searchtab">Búsqueda</string>
     <string name="profiletab">Perfil</string>
     <string name="SearchTitleradios">"Buscar por: "</string>
-    <string name="Searchradio1">Usuario</string>
+    <string name="Searchradio1">Descripción</string>
     <string name="Searchradio2">Etiqueta</string>
     <string name="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse dignissim.Suspendisse dignissim.</string>
     <string name="CreatePost">Crear Publicación</string>

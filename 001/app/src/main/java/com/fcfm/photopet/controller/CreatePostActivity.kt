@@ -33,6 +33,10 @@ import android.graphics.BitmapFactory
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.utils.retrofit.ServicePost
 import java.util.*
+import android.view.WindowManager
+
+
+
 
 
 class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.OnClickListener, TagListRecyclerAdapter.OnTagClickListenener, TagListRecyclerAdapter.OnDeleteClickListener {
@@ -55,6 +59,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
         windowTagsPost = Dialog(this)
         btnPublicar.setOnClickListener(this)
         btnTagsPost.setOnClickListener(this)
+        BtnbackPostC.setOnClickListener(this)
         floatbtnAddImage.setOnClickListener(this)
         btnLeft.setOnClickListener(this)
         btnRight.setOnClickListener(this)
@@ -219,7 +224,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                     var index = imagePos - 1
                     if(albumList.size == 1){
-                        imagesCreatePost.setImageResource(R.drawable.puppy) //PONER IMAGEN DEFAULT
+                        imagesCreatePost.setImageResource(R.drawable.picture) //PONER IMAGEN DEFAULT
                         albumList.removeAt(index)
                         imagePos = 0
                         textDescImage.text = null
@@ -238,6 +243,12 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         textDescImage.setText(albumList[index].description)
 
                     }
+                }
+                R.id.btnGuardarDesc -> {
+
+                }
+                R.id.BtnbackPostC ->{
+                    onBackPressed()
                 }
             }
         }
@@ -379,12 +390,14 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
     override fun onFocusChange(v: View?, hasFocus: Boolean) {
         if(!hasFocus){
+            //window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
             val descriptionImage = textDescImage.text.toString() //Botón guardar descripción
             if(descriptionImage.isEmpty() || imagePos == 0)
                 return
             val index = imagePos - 1;
             albumList[index].description = descriptionImage
         }
+
 
     }
 

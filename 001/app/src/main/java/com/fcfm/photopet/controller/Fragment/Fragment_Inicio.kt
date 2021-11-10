@@ -72,10 +72,13 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
 
             override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
                 val item =  response.body()
-                for(p in item!!){
-                    posts.add(p)
+                if(item!![0].id_publication != null){
+                    for(p in item!!){
+                        posts.add(p)
+                    }
+                    homeAdapter.notifyDataSetChanged()
                 }
-                homeAdapter.notifyDataSetChanged()
+
             }
         })
     }

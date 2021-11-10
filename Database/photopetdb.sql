@@ -8,6 +8,9 @@ DROP TABLE IF EXISTS publication;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS user;
 
+-- select * from publication
+-- select * from album
+
 CREATE TABLE IF NOT EXISTS user (
 	email 					VARCHAR(60)	NOT NULL PRIMARY KEY,
     fullname				VARCHAR(100) NOT NULL,
@@ -69,7 +72,7 @@ CREATE PROCEDURE Post_images (
 
 )
 BEGIN
-	SELECT distinct P.id_publication, P.description, P.email, A.image
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray
 	FROM publication P 
     INNER JOIN album A
     ON P.id_publication = A.id_publication

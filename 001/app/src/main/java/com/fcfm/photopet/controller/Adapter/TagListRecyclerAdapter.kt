@@ -3,6 +3,7 @@ package com.fcfm.photopet.controller.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +31,6 @@ class TagListRecyclerAdapter(private val context: CreatePostActivity, var tags: 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagListViewHolder {
         val viewRecycler = LayoutInflater.from(parent.context).inflate(R.layout.drawer_taglist, parent, false)
-
         return TagListViewHolder(viewRecycler)
     }
 
@@ -38,7 +38,6 @@ class TagListRecyclerAdapter(private val context: CreatePostActivity, var tags: 
         holder.itemView.setOnClickListener { itemClickListener.onitemClick((tags[position])) }
         holder.itemView.btn_delete_tag.setOnClickListener { deleteClickListener.ondeleteitemClick(tags[position]) }
         val tagname = holder.itemView.findViewById<TextView>(R.id.txt_tagname)
-
         tagname.text = tags[position].tagname
     }
 

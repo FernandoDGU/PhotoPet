@@ -24,7 +24,7 @@
     <string name="profiletab">Profile</string>
     <string name="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Suspendisse dignissim.Suspendisse dignissim.</string>
     <string name="SearchTitleradios">Search by: </string>
-    <string name="Searchradio1">User</string>
+    <string name="Searchradio1">Description</string>
     <string name="Searchradio2">Tag</string>
     <string name="Author">Author: </string>
 

@@ -33,15 +33,18 @@ class HomeRecyclerAdapter (private val context: Fragment_Inicio,var posts: Mutab
     }
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
-        holder.itemView.setOnClickListener { itemClickListener.onitemClick((posts[position])) }
-        val description = holder.itemView.findViewById<TextView>(R.id.textHomecard)
-        val image = holder.itemView.findViewById<ImageView>(R.id.imageHomecard)
 
-        description.text = posts[position].description
+            holder.itemView.setOnClickListener { itemClickListener.onitemClick((posts[position])) }
+            val description = holder.itemView.findViewById<TextView>(R.id.textHomecard)
+            val image = holder.itemView.findViewById<ImageView>(R.id.imageHomecard)
 
-        val strImage:String =  posts[position].imgArray!!.replace("data:image/png;base64,","")
-        val byteArray =  Base64.getDecoder().decode(strImage)
-        image.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+            description.text = posts[position].description
+
+            val strImage:String =  posts[position].imgArray!!.replace("data:image/png;base64,","")
+            val byteArray =  Base64.getDecoder().decode(strImage)
+            image.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+
+
     }
 
 }

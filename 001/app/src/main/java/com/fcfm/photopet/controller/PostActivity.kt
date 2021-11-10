@@ -4,13 +4,16 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.fcfm.photopet.R
 
-class PostActivity: AppCompatActivity() {
+class PostActivity: AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,10 +21,13 @@ class PostActivity: AppCompatActivity() {
         supportActionBar?.hide()
         overridePendingTransition(R.anim.zoom_in, R.anim.static_anim)
         val likebtn = findViewById(R.id.BtnLike) as LottieAnimationView
-
+        val btnback = findViewById(R.id.BtnbackPost) as ImageButton
         var like = false
         likebtn.setOnClickListener{
             like = likeAnimation(likebtn, R.raw.apple_event, like)
+        }
+        btnback.setOnClickListener{
+            onBackPressed()
         }
 
     }

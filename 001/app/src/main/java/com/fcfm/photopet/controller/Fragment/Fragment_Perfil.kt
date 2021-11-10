@@ -74,10 +74,13 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
 
             override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
                 val item =  response.body()
-                for(p in item!!){
-                    posts.add(p)
+                if(item!![0].id_publication != null){
+                    for(p in item!!){
+                        posts.add(p)
+                    }
+                    postAdapter!!.notifyDataSetChanged()
                 }
-                postAdapter!!.notifyDataSetChanged()
+
             }
         })
     }

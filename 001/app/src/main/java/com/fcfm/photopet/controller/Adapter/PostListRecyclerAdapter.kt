@@ -55,15 +55,15 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val post =  this.posts[position]
-        holder.txtAuthor.text =  post.email
-        holder.txtDescription.setText(post.description)
-        holder.albumPosition =  position
-        //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
+            val post = this.posts[position]
+            holder.txtAuthor.text = post.email
+            holder.txtDescription.setText(post.description)
+            holder.albumPosition = position
+            //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
 
-        val strImage:String =  posts[position].imgArray!!.replace("data:image/png;base64,","")
-        val byteArray =  Base64.getDecoder().decode(strImage)
-        holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+            val strImage: String = posts[position].imgArray!!.replace("data:image/png;base64,", "")
+            val byteArray = Base64.getDecoder().decode(strImage)
+            holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
 
     }
 

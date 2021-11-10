@@ -87,14 +87,44 @@
                     app:srcCompat="@drawable/ic_search_24"
                     tools:layout_editor_absoluteY="0dp" />-->
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/editSearch"
-                    android:layout_width="300dp"
-                    android:layout_height="50dp"
+                <AutoCompleteTextView
+                    android:id="@+id/autotv_search"
+                    android:layout_width="250dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@null"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/editSearch"
+                    android:layout_width="290dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/iconSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/ic_baseline_search_24"
+                    android:translationX="12dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toStartOf="@+id/autotv_search"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,7 +138,7 @@
                     android:id="@+id/SearchBy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
+                    android:layout_marginStart="70dp"
                     android:text="@string/SearchTitleradios"
                     android:textColor="@color/textColor"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -133,8 +163,8 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <RadioButton
-                            android:id="@+id/radioUser"
-                            android:layout_width="100dp"
+                            android:id="@+id/radioDesc"
+                            android:layout_width="110dp"
                             android:layout_height="match_parent"
                             android:text="@string/Searchradio1"
                             android:textColor="@color/textColor" />
