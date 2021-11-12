@@ -36,14 +36,13 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
     private lateinit var rootView: View
     private var posts: MutableList<Publication> = mutableListOf()
     private var homeAdapter = HomeRecyclerAdapter(this, posts,this)
-    private lateinit var scene: Scene
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         rootView =  inflater.inflate(R.layout.fragment_inicio, container, false)
 
         val btnCreate = rootView.findViewById<FloatingActionButton>(R.id.floatbtnAddPost)
@@ -57,6 +56,7 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
             activity?.overridePendingTransition(R.anim.translate_left_side, R.anim.static_anim)
         }
         this.fillPostList()
+
         return rootView
     }
 
@@ -73,7 +73,7 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
             override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
                 val item =  response.body()
                 if(item!![0].id_publication != null){
-                    for(p in item!!){
+                    for(p in item){
                         posts.add(p)
                     }
                     homeAdapter.notifyDataSetChanged()
@@ -84,9 +84,8 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
     }
 
     override fun onitemClick(post: Publication) {
-        Log.d("post", post.description!!)
-        Toast.makeText(context, post.id_publication.toString(), Toast.LENGTH_SHORT).show()
         val intent = Intent(context, PostActivity::class.java)
+        intent.putExtra("post", post)
         startActivity(intent)
         activity?.overridePendingTransition(0, 0)
     }

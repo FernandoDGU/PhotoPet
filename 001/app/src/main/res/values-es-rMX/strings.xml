@@ -36,7 +36,7 @@
     <string name="myPosts">Mis publicaciones</string>
     <string name="myLikes">Mis me gusta</string>
     <string name="Author">"Autor: "</string>
-    <string name="Orderadio1">Fecha</string>
+    <string name="Orderadio1">Nuevo</string>
     <string name="Orderradio2">Popular</string>
     <string name="Err23000_R">Ya hay una cuenta con ese correo.</string>
     <string name="taglist">Lista de etiquetas</string>
@@ -59,4 +59,7 @@
     <string name="postDescEmptyErr">La publicación necesita una descripción.</string>
     <string name="postEmptyErr">La publicación necesita al menos una imagen</string>
     <string name="emptyDescImage">No hay una descripción para esta imagen.</string>
+    <string name="Orderradio3">Viejo</string>
+    <string name="NoDescImageMessage">Esta imagen no cuenta con descripción</string>
+    <string name="Tags">"Etiquetas: "</string>
 </resources>

@@ -95,6 +95,7 @@
                     android:layout_marginTop="8dp"
                     android:background="@null"
                     android:ems="10"
+                    android:completionThreshold="0"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -166,6 +167,7 @@
                             android:id="@+id/radioDesc"
                             android:layout_width="110dp"
                             android:layout_height="match_parent"
+                            android:checked="true"
                             android:text="@string/Searchradio1"
                             android:textColor="@color/textColor" />
 
@@ -234,19 +236,22 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
-                        android:id="@+id/OrderDate"
+                        android:id="@+id/OrderOld"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/Orderradio3"
+                        android:textColor="@color/textColor" />
+
+                    <RadioButton
+                        android:id="@+id/OrderNew"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/Orderadio1"
                         android:textColor="@color/textColor" />
 
-                    <RadioButton
-                        android:id="@+id/OrderUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Searchradio1"
-                        android:textColor="@color/textColor" />
+
 
                     <RadioButton
                         android:id="@+id/OrderPopular"

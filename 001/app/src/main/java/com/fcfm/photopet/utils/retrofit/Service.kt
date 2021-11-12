@@ -1,8 +1,7 @@
 package com.fcfm.photopet.utils.retrofit
 
-import com.fcfm.photopet.model.Publication
+import com.fcfm.photopet.model.*
 import com.fcfm.photopet.model.Tag
-import com.fcfm.photopet.model.User
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -36,6 +35,9 @@ interface ServiceTag{
     @GET("tag.php")
     fun getTags(): Call<List<Tag>>
 
+    @GET("tag.php")
+    fun getTagPost(@Query("id_post") id_tag: Int): Call<List<Tag>>
+
     @Headers("Content-Type: application/json")
     @POST("tag.php")
     fun insertTag(@Body tagData: Tag): Call<RetrofitMessage>
@@ -45,7 +47,26 @@ interface ServicePost{
     @GET("publication.php")
     fun getPublications(): Call<List<Publication>>
 
+    @GET("tag.php")
+    fun getPostTag(@Query("id_tag") id_tag: Int): Call<List<Publication>>
+
     @Headers("Content-Type: application/json")
     @POST("publication.php")
     fun insertPost(@Body postData: Publication): Call<RetrofitMessage>
+
+    @GET("likes.php")
+    fun getLikedPost(@Query("id_post") id_post: Int, @Query("email") email: String): Call<Int>
+
+    @Headers("Content-Type: application/json")
+    @POST("likes.php")
+    fun likePost(@Body likeData: LikedPublication): Call<RetrofitMessage>
+
+    @Headers("Content-Type: application/json")
+    @DELETE("likes.php")
+    fun dislikePost(@Query("id_post") id_post: Int, @Query("email") email: String): Call<RetrofitMessage>
+}
+
+interface ServiceAlbum{
+    @GET("album.php")
+    fun getAlbumPost(@Query("id_post") id_album: Int): Call<List<Album>>
 }

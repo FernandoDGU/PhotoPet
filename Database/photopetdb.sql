@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS publication_tag (
 -- /////////SP AND FUNCTION//////////
 
 -- SP TODAS LAS PUBLICACIONES CON LA PRIMERA FOTO 
+
 DROP PROCEDURE IF EXISTS Post_images;
 
 DELIMITER // 
@@ -72,16 +73,16 @@ CREATE PROCEDURE Post_images (
 
 )
 BEGIN
-	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author', publication_likes(P.id_publication) as 'likes'
 	FROM publication P 
     INNER JOIN album A
     ON P.id_publication = A.id_publication
+    INNER JOIN user U
+    ON p.email = U.email
     Group by P.id_publication;
     
 END //
 DELIMITER ; 
-
-Call Post_images();
 
 DROP PROCEDURE IF EXISTS Post_images_id;
 
@@ -90,10 +91,12 @@ CREATE PROCEDURE Post_images_id (
 	pId_publication INT
 )
 BEGIN
-	SELECT distinct P.id_publication, P.description, P.email, A.image
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author', publication_likes(P.id_publication) as 'likes'
 	FROM publication P 
     INNER JOIN album A
     ON P.id_publication = A.id_publication
+    INNER JOIN user U
+    ON p.email = U.email
     WHERE P.id_publication = pId_publication
     Group by P.id_publication;
     
@@ -107,15 +110,64 @@ CREATE PROCEDURE Posts_images_user (
 	pEmail VARCHAR(60)
 )
 BEGIN
-	SELECT distinct P.id_publication, P.description, P.email, A.image
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author', publication_likes(P.id_publication) as 'likes'
 	FROM publication P 
     INNER JOIN album A
     ON P.id_publication = A.id_publication
+    INNER JOIN user U
+    ON p.email = U.email
     WHERE P.email = pEmail
     Group by P.id_publication;
     
 END //
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS Post_by_tag;
+
+
+
+DELIMITER // 
+CREATE PROCEDURE Post_by_tag (
+	pId_tag INT
+)
+BEGIN
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author'
+	FROM publication P 
+    INNER JOIN album A
+    ON P.id_publication = A.id_publication
+    INNER JOIN user U
+    ON P.email = U.email
+    INNER JOIN publication_tag PT
+    ON P.id_publication = PT.id_publication
+    WHERE PT.id_tag = pId_tag
+    Group by P.id_publication;
+    
+END //
+DELIMITER ; 
+
+DROP PROCEDURE IF EXISTS Tags_by_Post;
+
+
+
+DELIMITER // 
+CREATE PROCEDURE Tags_by_Post (
+	pId_publication INT
+)
+BEGIN
+	SELECT distinct T.id_tag, T.tagname
+	FROM tag T
+    INNER JOIN publication P
+    ON pId_publication = P.id_publication
+    
+    INNER JOIN publication_tag PT
+    ON P.id_publication = PT.id_publication
+    
+    WHERE PT.id_tag = T.id_tag
+    Group by T.id_tag;
+    
+END //
+DELIMITER ; 
+
 
 -- FUNCION QUE RETORNA EL ID DE LA ULTIMA PUBLICACION DE UN USUARIO
 DROP FUNCTION IF EXISTS Last_publication;
@@ -136,6 +188,25 @@ BEGIN
 	ORDER BY P.id_publication DESC LIMIT 1;
 
 	RETURN last_id;
+END //
+DELIMITER ; 
+
+
+DROP FUNCTION IF EXISTS publication_likes;
+
+DELIMITER // 
+CREATE FUNCTION publication_likes(
+	pId_publication INT
+)
+RETURNS INT 
+READS SQL DATA 
+BEGIN 
+	DECLARE likes INT;
+    SELECT COUNT(id_publication) INTO likes
+    FROM liked_publications
+    WHERE pId_publication = id_publication;
+
+	RETURN likes;
 END //
 DELIMITER ; 
 

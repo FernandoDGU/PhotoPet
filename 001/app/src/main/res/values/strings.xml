@@ -28,8 +28,9 @@
     <string name="Searchradio2">Tag</string>
     <string name="Author">Author: </string>
 
-    <string name="Orderadio1">Date</string>
+    <string name="Orderadio1">New</string>
     <string name="Orderradio2">Popular</string>
+    <string name="Orderradio3">Old</string>
     <string name="Order">Order by: </string>
 
     <string name="desc">Description: </string>
@@ -40,6 +41,9 @@
 
     <string name="CreatePost">Create Post</string>
     <string name="Post">Post</string>
+    <string name="NoDescImageMessage">This image has no description</string>
+    <string name="Tags">Tags: </string>
+
     <string name="btnDeleteImage">Delete current image</string>
     <string name="btnTagsPost"> Post Tags</string>
     <string name="btnPublicar">Publish</string>

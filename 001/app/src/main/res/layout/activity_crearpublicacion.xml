@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:ignore="MissingConstraints"></View>
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/BtnbackPostC"
@@ -37,15 +37,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/white"
-        android:scaleType="fitXY"
 
-        app:tint="@color/textColor"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_24" />
+        app:srcCompat="@drawable/ic_arrow_back_24"
+        app:tint="@color/textColor" />
 
     <ScrollView
         android:layout_width="409dp"

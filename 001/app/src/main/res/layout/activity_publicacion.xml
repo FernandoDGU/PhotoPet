@@ -27,8 +27,7 @@
         android:background="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitlePost"
-        ></View>
+        app:layout_constraintTop_toBottomOf="@+id/TitlePost" />
 
     <ImageButton
         android:id="@+id/BtnbackPost"
@@ -36,8 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/white"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/view7"
         app:layout_constraintEnd_toStartOf="@+id/TitlePost"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,132 +45,160 @@
         app:srcCompat="@drawable/ic_arrow_back_24"
         app:tint="@color/textColor" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="409dp"
         android:layout_height="689dp"
-        android:layout_marginStart="2dp"
-        android:background="@color/backgroundPet"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="2dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view7">
 
-
-        <ImageView
-            android:id="@+id/imagesPost"
-            android:layout_width="400dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="12dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DescPost"
-            app:srcCompat="@drawable/puppy" />
-
-        <TextView
-            android:id="@+id/txtCountPost"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="1"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagesPost" />
-
-        <ImageButton
-            android:id="@+id/btnRightPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="48dp"
-            android:backgroundTint="@color/greenPet"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtCountPost"
-            app:layout_constraintTop_toBottomOf="@+id/imagesPost"
-            app:srcCompat="@drawable/ic_arrow_forward_24" />
-
-        <ImageButton
-            android:id="@+id/btnLeftPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/greenPet"
-            app:layout_constraintEnd_toStartOf="@+id/txtCountPost"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagesPost"
-            app:srcCompat="@drawable/ic_arrow_back_24"
-            app:tint="@color/white" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageProfilePost"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/puppy2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/txtNamePost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="53dp"
-            android:text="Darien Miguel  \nSánchez Árevalo"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/DescPost"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra luctus nulla eget viverra. Mauris arcu est, scelerisque."
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNamePost" />
-
-        <TextView
-            android:id="@+id/DescImagePost"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="175dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="176dp"
-            android:layout_marginBottom="79dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra luctus"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCountPost" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/BtnLike"
-            android:layout_width="50dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="54dp"
-            android:scaleType="centerCrop"
-            android:scaleX="2"
-            android:scaleY="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txtNamePost"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/twitter_like" />
+            android:layout_marginStart="2dp"
+            android:background="@color/backgroundPet">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imagesPost"
+                android:layout_width="410dp"
+                android:layout_height="400dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="400dp"
+                android:minHeight="300dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DescPost"
+                app:srcCompat="@drawable/picture" />
+
+
+            <TextView
+                android:id="@+id/txtCountPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagesPost" />
+
+            <ImageButton
+                android:id="@+id/btnRightPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
+                android:backgroundTint="@color/greenPet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtCountPost"
+                app:layout_constraintTop_toBottomOf="@+id/imagesPost"
+                app:srcCompat="@drawable/ic_arrow_forward_24" />
+
+            <ImageButton
+                android:id="@+id/btnLeftPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/greenPet"
+                app:layout_constraintEnd_toStartOf="@+id/txtCountPost"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagesPost"
+                app:srcCompat="@drawable/ic_arrow_back_24"
+                app:tint="@color/white" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageProfilePost"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/puppy2"
+                app:civ_border_color="@color/textColor"
+                app:civ_border_width="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/txtNamePost"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Darien Miguel  \nSánchez Árevalo"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/DescPost"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra luctus nulla eget viverra. Mauris arcu est, scelerisque."
+                android:textColor="@color/textColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.727"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageProfilePost" />
+
+            <TextView
+                android:id="@+id/DescImagePost"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="175dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="176dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra luctus"
+                android:textColor="@color/textColor"
+                app:layout_constraintBottom_toTopOf="@+id/txtTagsPost"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCountPost" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/BtnLike"
+                android:layout_width="50dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="32dp"
+                android:scaleType="centerCrop"
+                android:scaleX="2"
+                android:scaleY="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtNamePost"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/twitter_like" />
+
+            <TextView
+                android:id="@+id/txtTagsPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/Tags"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

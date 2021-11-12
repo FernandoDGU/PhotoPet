@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.utils.ImageUtils
+import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publication>): RecyclerView.Adapter<PostListRecyclerAdapter.ViewHolder>(),
@@ -23,6 +24,7 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
         val txtAuthor = itemView?.findViewById<TextView>(R.id.txtAuthor)
         val txtDescription =  itemView?.findViewById<TextView>(R.id.txtDesc)
         val imgAlbumCard =  itemView?.findViewById<ImageView>(R.id.imagePost)
+        val ivAuthor =  itemView?.findViewById<CircleImageView>(R.id.iv_author)
         var albumPosition:Int =  0
 
         init{
@@ -56,14 +58,17 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             val post = this.posts[position]
-            holder.txtAuthor.text = post.email
+            holder.txtAuthor.text = post.author
             holder.txtDescription.setText(post.description)
             holder.albumPosition = position
             //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
 
-            val strImage: String = posts[position].imgArray!!.replace("data:image/png;base64,", "")
-            val byteArray = Base64.getDecoder().decode(strImage)
+            var strImage: String = posts[position].imgArray!!.replace("data:image/png;base64,", "")
+            var byteArray = Base64.getDecoder().decode(strImage)
             holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+            strImage= posts[position].authorImage!!.replace("data:image/png;base64,", "")
+            byteArray = Base64.getDecoder().decode(strImage)
+            holder.ivAuthor.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
 
     }
 
@@ -84,7 +89,7 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
 
                     posts.filter { post ->
 
-                        post.email!!.lowercase().contains(queryString) //|| post.strDescription!!.toLowerCase().contains(queryString)
+                        post.description!!.lowercase().contains(queryString) //|| post.strDescription!!.toLowerCase().contains(queryString)
                     }
                 }
 
