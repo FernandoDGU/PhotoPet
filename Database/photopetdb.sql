@@ -122,6 +122,29 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS Post_images_user_likes;
+
+
+DELIMITER // 
+CREATE PROCEDURE Post_images_user_likes (
+	pEmail VARCHAR(60)
+)
+BEGIN
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author', publication_likes(P.id_publication) as 'likes'
+	FROM publication P 
+    INNER JOIN album A
+    ON P.id_publication = A.id_publication
+    INNER JOIN user U
+    ON p.email = U.email
+    INNER JOIN liked_publications LP
+    ON LP.email = pEmail
+    WHERE LP.id_publication = P.id_publication
+    Group by P.id_publication
+    ORDER BY P.id_publication DESC;
+    
+END //
+DELIMITER ; 
+
 DROP PROCEDURE IF EXISTS Post_by_tag;
 
 
@@ -131,7 +154,7 @@ CREATE PROCEDURE Post_by_tag (
 	pId_tag INT
 )
 BEGIN
-	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author'
+	SELECT distinct P.id_publication, P.description, P.email, A.image as imgArray, U.image as 'authorImage', U.fullname as 'author', publication_likes(P.id_publication) as 'likes'
 	FROM publication P 
     INNER JOIN album A
     ON P.id_publication = A.id_publication
@@ -146,7 +169,6 @@ END //
 DELIMITER ; 
 
 DROP PROCEDURE IF EXISTS Tags_by_Post;
-
 
 
 DELIMITER // 

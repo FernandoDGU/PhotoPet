@@ -32,7 +32,7 @@ import retrofit2.Response
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         rootView =  inflater.inflate(R.layout.fragment_busqueda, container, false)
         val recyclerPostSearch = rootView.findViewById<RecyclerView>(R.id.rvSearchCards)
         val editSV = rootView.findViewById<androidx.appcompat.widget.SearchView>(R.id.editSearch)
@@ -47,7 +47,7 @@ import retrofit2.Response
 
         recyclerPostSearch.layoutManager =  LinearLayoutManager(context)
         this.fillPostList()
-        this.postAdapter =  PostListRecyclerAdapter(context, posts)
+        this.postAdapter =  PostListRecyclerAdapter(context, posts, activity)
         recyclerPostSearch.adapter = this.postAdapter
 
         editSV.setOnQueryTextListener(this)

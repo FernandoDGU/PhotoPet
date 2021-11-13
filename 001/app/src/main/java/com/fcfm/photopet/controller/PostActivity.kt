@@ -2,6 +2,7 @@ package com.fcfm.photopet.controller
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -23,14 +24,17 @@ import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PostActivity: AppCompatActivity(), View.OnClickListener{
 
-    private lateinit var post:Publication
+    private var post:Publication = Publication()
 
     private lateinit var likebtn: LottieAnimationView
     private lateinit var btnback: ImageButton
+    private lateinit var btnModif: Button
 
     private lateinit var imageProfilePost: CircleImageView
     private lateinit var txtNamePost: TextView
@@ -99,6 +103,14 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
                 R.id.BtnbackPost ->{
                     onBackPressed()
                 }
+                R.id.BtnModif ->{
+                    val intent = Intent(this, CreatePostActivity::class.java)
+                    post.albums = null
+                    post.tags = null
+                    intent.putExtra("post", post)
+                    startActivity(intent)
+                    this.overridePendingTransition(0, 0)
+                }
                 R.id.btnLeftPost ->{
                     if(post.albums!!.isEmpty())
                         return
@@ -130,6 +142,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
     private fun findingViews(){
         likebtn = findViewById(R.id.BtnLike)
         btnback = findViewById(R.id.BtnbackPost)
+        btnModif = findViewById(R.id.BtnModif)
         imageProfilePost = findViewById(R.id.imageProfilePost)
         txtNamePost = findViewById(R.id.txtNamePost)
         DescPost = findViewById(R.id.DescPost)
@@ -140,10 +153,17 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
         DescImagePost = findViewById(R.id.DescImagePost)
         txtTagsPost = findViewById(R.id.txtTagsPost)
 
+        btnModif.setOnClickListener(this)
         likebtn.setOnClickListener(this)
         btnback.setOnClickListener(this)
         btnLeftPost.setOnClickListener(this)
         btnRightPost.setOnClickListener(this)
+
+        if(loggedUser.getUser().email.equals(post.email)){
+            btnModif.visibility = View.VISIBLE
+            likebtn.visibility = View.GONE
+        }
+
     }
 
     private fun fillPage(){

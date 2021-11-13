@@ -47,8 +47,14 @@ interface ServicePost{
     @GET("publication.php")
     fun getPublications(): Call<List<Publication>>
 
-    @GET("tag.php")
+    @GET("publication.php")//era tag.php porq? no sé
     fun getPostTag(@Query("id_tag") id_tag: Int): Call<List<Publication>>
+
+    @GET("publication.php")
+    fun getUserPosts(@Query("email") email: String): Call<List<Publication>>
+
+    @GET("publication.php")
+    fun getUserLikedPosts(@Query("email") email: String, @Query("likes") likes: Int): Call<List<Publication>>
 
     @Headers("Content-Type: application/json")
     @POST("publication.php")
@@ -64,6 +70,10 @@ interface ServicePost{
     @Headers("Content-Type: application/json")
     @DELETE("likes.php")
     fun dislikePost(@Query("id_post") id_post: Int, @Query("email") email: String): Call<RetrofitMessage>
+
+    @Headers("Content-Type: application/json")
+    @PUT("publication.php")
+    fun updatePost(@Body postData: Publication): Call<RetrofitMessage>
 }
 
 interface ServiceAlbum{

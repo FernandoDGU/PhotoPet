@@ -10,8 +10,9 @@ import com.fcfm.photopet.utils.retrofit.ServiceTag
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
-class Tag(var id_tag: Int? = null, var tagname: String? = null) {
+class Tag(var id_tag: Int? = null, var tagname: String? = null)  : Serializable {
     override fun toString(): String {
         return this.tagname!!
     }

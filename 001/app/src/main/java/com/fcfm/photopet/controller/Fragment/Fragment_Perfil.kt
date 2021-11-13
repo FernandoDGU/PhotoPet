@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -35,6 +36,8 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
     private lateinit var profileDescription: TextView
     private lateinit var profileEmail: TextView
     private lateinit var profilePhone: TextView
+    private lateinit var Myposts: RadioButton
+    private lateinit var Mylikes: RadioButton
 
     private lateinit var actualUser: User
 
@@ -50,21 +53,28 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
         val recyclerPostSearch = rootView.findViewById<RecyclerView>(R.id.rvProfileCards)
         recyclerPostSearch.layoutManager =  LinearLayoutManager(context)
         editBtn = rootView.findViewById<Button>(R.id.btnEdit)
+        Myposts = rootView.findViewById<RadioButton>(R.id.Myposts)
+        Mylikes = rootView.findViewById<RadioButton>(R.id.Mylikes)
         actualUser = loggedUser.getUser()
         loadData()
 
         editBtn.setOnClickListener(this)
+        Myposts.setOnClickListener(this)
+        Mylikes.setOnClickListener(this)
 
-        this.fillPostList()
-        this.postAdapter =  PostListRecyclerAdapter(context, posts)
+        this.fillPostList(true)
+        this.postAdapter =  PostListRecyclerAdapter(context, posts, activity)
         recyclerPostSearch.adapter = this.postAdapter
 
         return rootView
     }
 
-    private fun fillPostList(){
+    private fun fillPostList(order:Boolean){//1 My posts, 0 My likes
         val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
-        val result: Call<List<Publication>> = service.getPublications()
+        val result: Call<List<Publication>> = if(order)
+            service.getUserPosts(loggedUser.getUser().email!!)
+        else
+            service.getUserLikedPosts(loggedUser.getUser().email!!, 1)
 
         result.enqueue(object: Callback<List<Publication>> {
             override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
@@ -73,6 +83,7 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
             }
 
             override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                posts.clear()
                 val item =  response.body()
                 if(item!![0].id_publication != null){
                     for(p in item!!){
@@ -87,9 +98,15 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
 
     override fun onClick(v: View?) {
         if(v!=null){
-            when (v!!.id){
+            when (v.id){
                 R.id.btnEdit ->{
                     showModifyUser()
+                }
+                R.id.Myposts ->{
+                    this.fillPostList(true)
+                }
+                R.id.Mylikes ->{
+                    this.fillPostList(false)
                 }
 
             }

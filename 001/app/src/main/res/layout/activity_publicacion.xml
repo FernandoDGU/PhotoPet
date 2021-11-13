@@ -118,7 +118,7 @@
                 android:id="@+id/imageProfilePost"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:src="@drawable/puppy2"
                 app:civ_border_color="@color/textColor"
@@ -131,13 +131,13 @@
                 android:id="@+id/txtNamePost"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="Darien Miguel  \nSánchez Árevalo"
                 android:textColor="@color/textColor"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,13 +177,30 @@
                 android:layout_width="50dp"
                 android:layout_height="42dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
                 android:scaleType="centerCrop"
                 android:scaleX="2"
                 android:scaleY="2"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtNamePost"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/twitter_like" />
+
+            <Button
+                android:id="@+id/BtnModif"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/rounded_button_green"
+                android:text="@string/edit"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtNamePost"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtTagsPost"
