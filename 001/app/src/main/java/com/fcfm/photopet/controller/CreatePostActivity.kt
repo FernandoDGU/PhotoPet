@@ -77,7 +77,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
     override fun onClick(v: View?) {
         if(v!=null){
-            when (v!!.id){
+            when (v.id){
                 R.id.btnPublicar ->{
                     val postDesc = textDescCreatePost.text.toString();
                     if(postDesc.isEmpty()){

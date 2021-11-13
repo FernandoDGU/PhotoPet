@@ -238,7 +238,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     fun isValidPassword(password: String?) : Boolean {
         password?.let {
-            val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+            val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%*^&+=])(?=\\S+$).{4,}$"
             val passwordMatcher = Regex(passwordPattern)
 
             return passwordMatcher.find(password) != null

@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.fcfm.photopet.R
+import com.fcfm.photopet.model.Publication
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

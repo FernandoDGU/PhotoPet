@@ -61,6 +61,7 @@ class Fragment_Inicio : Fragment(), HomeRecyclerAdapter.OnPostClickListenener{
     }
 
     private fun fillPostList(){
+
         val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
         val result: Call<List<Publication>> = service.getPublications()
 

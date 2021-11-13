@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS publication (
     description				TEXT NOT NULL,
     email					VARCHAR(60) NOT NULL,
 	
-    CONSTRAINT FK_PUBLICATION_USER FOREIGN KEY (email) REFERENCES user(email)
+    CONSTRAINT FK_PUBLICATION_USER FOREIGN KEY (email) REFERENCES user(email) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS album (
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS album (
     image					MEDIUMBLOB NOT NULL,
     description 			TEXT NULL,
 	
-    CONSTRAINT FK_ALBUM_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication)
+    CONSTRAINT FK_ALBUM_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS liked_publications (
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS liked_publications (
 	id_publication 			INT NOT NULL,
     email					VARCHAR(60) NOT NULL,
     
-	CONSTRAINT FK_LP_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication),
-	CONSTRAINT FK_LP_USER FOREIGN KEY (email) REFERENCES user(email)
+	CONSTRAINT FK_LP_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication) ON DELETE CASCADE,
+	CONSTRAINT FK_LP_USER FOREIGN KEY (email) REFERENCES user(email) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS publication_tag (
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS publication_tag (
 	id_publication 			INT NOT NULL,
     id_tag					INT NOT NULL,
     
-	CONSTRAINT FK_PT_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication),
-	CONSTRAINT FK_PT_TAG FOREIGN KEY (id_tag) REFERENCES tag(id_tag)
+	CONSTRAINT FK_PT_PUBLICATION FOREIGN KEY (id_publication) REFERENCES publication(id_publication) ON DELETE CASCADE,
+	CONSTRAINT FK_PT_TAG FOREIGN KEY (id_tag) REFERENCES tag(id_tag) ON DELETE CASCADE
 );
 
 -- /////////SP AND FUNCTION//////////
