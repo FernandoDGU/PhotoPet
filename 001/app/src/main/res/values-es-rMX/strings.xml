@@ -62,4 +62,24 @@
     <string name="Orderradio3">Viejo</string>
     <string name="NoDescImageMessage">Esta imagen no cuenta con descripción</string>
     <string name="Tags">"Etiquetas: "</string>
+    <string name="save">Guardar</string>
+    <string name="nextImage">Siguiente Imagen</string>
+    <string name="prevImage">Anterior Imagen</string>
+    <string name="postImageContent">Imagen actual de la publicación</string>
+    <string name="imageCount">0/10</string>
+    <string name="addimageButton">Botón agregar imagen</string>
+    <string name="appLogo">Logo de PhotoPet</string>
+    <string name="delete">Eliminar</string>
+    <string name="searchByTag">Buscar por etiqueta</string>
+    <string name="searchByDesc">Buscar por descripción</string>
+    <string name="LikeButton">Presionar para dar Me Gusta</string>
+    <string name="DislikeButton">Presionar para dar No Me Gusta</string>
+    <string name="InternetErr">Por favor verifica tu conexión a internet.</string>
+    <string name="deleteAccount">Eliminar cuenta</string>
+    <string name="deletePost">Eliminar publicación</string>
+    <string name="titleDeleteUser">El</string>
+    <string name="dialogDeleteAccountMessage">¿Estás seguro que quieres eliminar tu cuenta?</string>
+    <string name="dialogYes">Sí</string>
+    <string name="dialogNo">No</string>
+    <string name="dialogDeletePostMessage">¿Estás seguro que quieres eliminar esta publicación?</string>
 </resources>

@@ -30,14 +30,19 @@ import android.graphics.BitmapFactory
 import com.fcfm.photopet.model.Publication
 import java.util.*
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
+import com.fcfm.photopet.controller.Fragment.Fragment_Perfil
 import com.fcfm.photopet.utils.ImageUtils
+import com.fcfm.photopet.utils.LoadingDialog
+import com.fcfm.photopet.utils.UserApplication
 import com.fcfm.photopet.utils.retrofit.*
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
 
 class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.OnClickListener, TagListRecyclerAdapter.OnTagClickListenener, TagListRecyclerAdapter.OnDeleteClickListener {
     lateinit var viewTagsPost: View
     lateinit var windowTagsPost: Dialog
-    lateinit var autoCompleteTag: AutoCompleteTextView
+    lateinit var autoCompleteTag: MaterialAutoCompleteTextView
     lateinit var autoTagListAdapter: ArrayAdapter<Tag>
     var imagePos:Int = 0
     var tagList: MutableList<Tag> = mutableListOf()
@@ -45,6 +50,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
     var selectedTagList: MutableList<Tag> = mutableListOf()
     var post = Publication()
     private var tagListAdapter = TagListRecyclerAdapter(this, selectedTagList,this, this)
+    private lateinit var loading : LoadingDialog.ActivityLD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +69,16 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
         textDescImage.onFocusChangeListener = this
 
+        loading = LoadingDialog().ActivityLD(this)
+
         if(intent.extras != null){
+            loading.startLoading()
             btnPublicar.visibility = View.GONE
             btnModif.visibility = View.VISIBLE
+            btnDeletePost.visibility = View.VISIBLE
             post = intent.getSerializableExtra("post") as Publication
             btnModif.setOnClickListener(this)
+            btnDeletePost.setOnClickListener(this)
             getTags()
 
 
@@ -79,104 +90,122 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
         if(v!=null){
             when (v.id){
                 R.id.btnPublicar ->{
-                    val postDesc = textDescCreatePost.text.toString();
-                    if(postDesc.isEmpty()){
-                        Toast.makeText(this, R.string.postDescEmptyErr, Toast.LENGTH_SHORT).show()
-                        return
-                    }else if(albumList.isEmpty()){
-                        Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
-                        return
-                    }else {
-                        for(a in albumList){
-                            val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
-                            val strEncodeImage: String = "data:image/png;base64," + encodedString
-                            a.imageString = strEncodeImage;
-                            if(a.description.isNullOrEmpty()){
-                                //a.description = R.string.emptyDescImage.toString()
-                                a.description = ""
+                    if(RestEngine.hasInternetConnection(this)){
+                        val postDesc = textDescCreatePost.text.toString();
+                        if(postDesc.isEmpty()){
+                            Toast.makeText(this, R.string.postDescEmptyErr, Toast.LENGTH_SHORT).show()
+                            return
+                        }else if(albumList.isEmpty()){
+                            Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
+                            return
+                        }else {
+                            for(a in albumList){
+                                val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
+                                val strEncodeImage: String = "data:image/png;base64," + encodedString
+                                a.imageString = strEncodeImage;
+                                if(a.description.isNullOrEmpty()){
+                                    //a.description = R.string.emptyDescImage.toString()
+                                    a.description = ""
+                                }
                             }
-                        }
-                        post.description = postDesc
-                        post.albums = albumList
-                        post.tags = selectedTagList
-                        post.email = loggedUser.getUser().email
+                            post.description = postDesc
+                            post.albums = albumList
+                            post.tags = selectedTagList
+                            post.email = loggedUser.getUser().email
 
-                        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
-                        val result: Call<RetrofitMessage> = service.insertPost(post)
+                            val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+                            val result: Call<RetrofitMessage> = service.insertPost(post)
 
-                        result.enqueue(object: Callback<RetrofitMessage> {
-                            override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                            result.enqueue(object: Callback<RetrofitMessage> {
+                                override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
 
-                                Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
-                            }
-
-                            override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
-                                val item =  response.body()
-                                when(item!!.message){
-                                    "ok" -> {
-                                        Toast.makeText(this@CreatePostActivity, "Funcionó", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else -> {
-                                        Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
-                                    }
+                                    Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
                                 }
 
-                            }
-                        })
+                                override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
+                                    val item =  response.body()
+                                    when(item!!.message){
+                                        "ok" -> {
+                                            showPost()
 
+                                        }
+                                        else -> {
+                                            Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+
+                                }
+                            })
+
+                        }
+                    }else{
+                        Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
                     }
+
                     //showPost()
                 }
                 R.id.btnModif -> {
-                    val postDesc = textDescCreatePost.text.toString();
-                    if(postDesc.isEmpty()){
-                        Toast.makeText(this, R.string.postDescEmptyErr, Toast.LENGTH_SHORT).show()
-                        return
-                    }else if(albumList.isEmpty()){
-                        Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
-                        return
-                    }else {
-                        for(a in albumList){
-                            val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
-                            val strEncodeImage: String = "data:image/png;base64," + encodedString
-                            a.imageString = strEncodeImage;
-                            if(a.description.isNullOrEmpty()){
-                                //a.description = R.string.emptyDescImage.toString()
-                                a.description = ""
+                    if(RestEngine.hasInternetConnection(this)){
+                        val postDesc = textDescCreatePost.text.toString();
+                        if(postDesc.isEmpty()){
+                            Toast.makeText(this, R.string.postDescEmptyErr, Toast.LENGTH_SHORT).show()
+                            return
+                        }else if(albumList.isEmpty()){
+                            Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
+                            return
+                        }else {
+                            for(a in albumList){
+                                val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
+                                val strEncodeImage: String = "data:image/png;base64," + encodedString
+                                a.imageString = strEncodeImage;
+                                if(a.description.isNullOrEmpty()){
+                                    //a.description = R.string.emptyDescImage.toString()
+                                    a.description = ""
+                                }
                             }
-                        }
-                        post.description = postDesc
-                        post.albums = albumList
-                        post.tags = selectedTagList
-                        post.email = loggedUser.getUser().email
+                            post.description = postDesc
+                            post.albums = albumList
+                            post.tags = selectedTagList
+                            post.email = loggedUser.getUser().email
 
-                        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
-                        val result: Call<RetrofitMessage> = service.updatePost(post)
+                            val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+                            val result: Call<RetrofitMessage> = service.updatePost(post)
 
-                        result.enqueue(object: Callback<RetrofitMessage> {
-                            override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                            result.enqueue(object: Callback<RetrofitMessage> {
+                                override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
 
-                                Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
-                            }
-
-                            override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
-                                val item =  response.body()
-                                when(item!!.message){
-                                    "ok" -> {
-                                        Toast.makeText(this@CreatePostActivity, "Funcionó", Toast.LENGTH_SHORT).show()
-                                    }
-                                    else -> {
-                                        Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
-                                    }
+                                    Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
                                 }
 
-                            }
-                        })
+                                override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
+                                    val item =  response.body()
+                                    when(item!!.message){
+                                        "ok" -> {
+                                            showPost()
+                                        }
+                                        else -> {
+                                            Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+
+                                }
+                            })
+                        }
+                    }else{
+                        Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+                R.id.btnDeletePost->{
+                    if(RestEngine.hasInternetConnection(this)){
+                        deleteDialog()
+                    }else{
+                        Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
                     }
                 }
                 R.id.btnTagsPost ->{
                     windowTagsPost.setContentView(viewTagsPost)
-                    autoCompleteTag = viewTagsPost.findViewById<AutoCompleteTextView>(R.id.autotv_Tag)
+                    autoCompleteTag = viewTagsPost.findViewById<MaterialAutoCompleteTextView>(R.id.autotv_Tag)
 
 
                     autoCompleteTag.setOnItemClickListener { parent, view, position, id ->
@@ -209,27 +238,33 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                     if(inputText.isEmpty())
                         return
 
-                    var alreadyExists = false
-                    for (tag in selectedTagList){
-                        if(tag.tagname!!.lowercase() == inputText.lowercase()){
-                            alreadyExists = true;
-                            break;
-                        }
-                    }
-                    if(!alreadyExists){
-                        for (tag in tagList){
+                    if(RestEngine.hasInternetConnection(this)){
+                        var alreadyExists = false
+                        for (tag in selectedTagList){
                             if(tag.tagname!!.lowercase() == inputText.lowercase()){
                                 alreadyExists = true;
                                 break;
                             }
                         }
+                        if(!alreadyExists){
+                            for (tag in tagList){
+                                if(tag.tagname!!.lowercase() == inputText.lowercase()){
+                                    alreadyExists = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(!alreadyExists){
+                            insertTag(Tag(null, inputText))
+                        }else{
+                            Toast.makeText(this, R.string.tagNameErr, Toast.LENGTH_SHORT).show()
+                        }
+                    }else{
+                        Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
                     }
 
-                    if(!alreadyExists){
-                        insertTag(Tag(null, inputText))
-                    }else{
-                        Toast.makeText(this, R.string.tagNameErr, Toast.LENGTH_SHORT).show()
-                    }
+
 
                 }
                 R.id.floatbtnAddImage -> {
@@ -344,7 +379,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
 
     private fun showPost(){
-        val intent = Intent(this, PostActivity::class.java)
+        val intent = Intent(this, FragmentsActivity::class.java)
         startActivity(intent)
     }
 
@@ -465,7 +500,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
         result.enqueue(object: Callback<List<Tag>> {
             override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
-                //loading.isDismiss()
+                loading.isDismiss()
                 Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
             }
 
@@ -487,7 +522,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
         result.enqueue(object: Callback<List<Album>> {
             override fun onFailure(call: Call<List<Album>>, t: Throwable) {
-                //loading.isDismiss()
+                loading.isDismiss()
                 Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
             }
 
@@ -514,7 +549,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
         textDescCreatePost.setText(post.description)
         if(albumList[0].description!!.isNotEmpty()){
-            textDescImage.setText(post.albums!![0].description!!)
+            textDescImage.setText(albumList[0].description!!)
         }
 
         imagePos = 1;
@@ -525,6 +560,55 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
         }
 
         tagListAdapter.notifyDataSetChanged()
+        loading.isDismiss()
+    }
+
+    private fun deleteDialog() {
+
+        val simpleDialog =  AlertDialog.Builder(this)
+            .setTitle(getString(R.string.deletePost))
+            .setMessage(getString(R.string.dialogDeletePostMessage))
+            .setIcon(R.drawable.ic_baseline_warning_24)
+            .setPositiveButton(getString(R.string.dialogYes)){ _,_ ->
+                deletePost()
+
+            }
+            .setNegativeButton(getString(R.string.dialogNo)){_,_->
+
+
+            }.create()
+
+        simpleDialog.show()
+    }
+
+    private fun deletePost(){
+        loading.startLoading()
+        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+        val result: Call<RetrofitMessage> = service.deletePost(post.id_publication!!)
+
+        result.enqueue(object: Callback<RetrofitMessage> {
+            override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                loading.isDismiss()
+                Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
+                val item =  response.body()
+                when(item!!.message){
+                    "ok" -> {
+                        loading.isDismiss()
+                        val intent = Intent(this@CreatePostActivity, FragmentsActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }
+                    else -> {
+                        loading.isDismiss()
+                        Toast.makeText(this@CreatePostActivity,item.message,Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        })
     }
 
 }

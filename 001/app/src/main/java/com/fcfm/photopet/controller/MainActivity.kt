@@ -5,8 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.Publication
+import com.fcfm.photopet.model.SuperData
+import com.fcfm.photopet.utils.retrofit.RestEngine
+import com.fcfm.photopet.utils.retrofit.ServicePost
+import com.fcfm.photopet.utils.retrofit.ServiceUtils
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -21,6 +29,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnIngresar.setOnClickListener(this)
         btnRegistrar.setOnClickListener(this)
+        saveToSQLite()
 
     }
 
@@ -51,5 +60,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(intent)
         overridePendingTransition(R.anim.transparencia, R.anim.static_anim)
         //overridePendingTransition(R.anim.translate_left_side, R.anim.static_anim)
+    }
+
+    private fun saveToSQLite(){
+        val service: ServiceUtils =  RestEngine.getRestEngine().create(ServiceUtils::class.java)
+        val result: Call<SuperData> = service.getAllData("a")
+
+        result.enqueue(object: Callback<SuperData> {
+            override fun onFailure(call: Call<SuperData>, t: Throwable) {
+                //loading.isDismiss()
+                Toast.makeText(this@MainActivity,t.message.toString(), Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<SuperData>, response: Response<SuperData>) {
+                val item =  response.body()
+                if(item!!.users[0].email == null){
+                    Toast.makeText(this@MainActivity, "Hola", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        })
     }
 }

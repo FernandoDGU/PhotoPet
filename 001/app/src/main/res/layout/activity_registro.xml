@@ -36,6 +36,7 @@
                 android:layout_height="96dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
+                android:contentDescription="@string/photoRegister"
 
                 android:src="@drawable/iconcamera"
                 app:civ_border_width="1dp"
@@ -64,11 +65,13 @@
                 android:layout_marginEnd="60dp"
                 android:ems="10"
                 android:inputType="text"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RegisterImage"
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/RegisterImage"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -89,11 +92,13 @@
                 android:layout_marginEnd="60dp"
                 android:ems="10"
                 android:inputType="text"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextName"
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/editTextName"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -114,11 +119,13 @@
                 android:layout_marginEnd="60dp"
                 android:ems="10"
                 android:inputType="textEmailAddress"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextLast"
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/editTextLast"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textPass"
@@ -139,11 +146,13 @@
                 android:layout_marginEnd="60dp"
                 android:ems="10"
                 android:inputType="textPassword"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister"
 
-                />
+                app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:importantForAutofill="no" />
 
 
             <TextView
@@ -165,11 +174,14 @@
                 android:layout_marginEnd="60dp"
                 android:ems="10"
                 android:inputType="text"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
 
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/PassError" />
+                app:layout_constraintTop_toBottomOf="@+id/PassError"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textPhoneRegister"
@@ -189,12 +201,14 @@
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="60dp"
                 android:ems="10"
-                android:inputType="number"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextDescRegister"
-
-                />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/buttonRegister"
@@ -205,25 +219,45 @@
                 android:background="@drawable/rounded_button_green"
                 android:text="@string/btnSignup"
                 android:textColor="@color/white"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextPhoneRegister" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextPhoneRegister"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/buttonModify"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="60dp"
                 android:background="@drawable/rounded_button_green"
                 android:text="@string/btnEdit"
                 android:textColor="@color/white"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonDelete"
+                app:layout_constraintTop_toBottomOf="@+id/PhoneError"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="96dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/rounded_button_red"
+                android:text="@string/deleteAccount"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonModify"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextPhoneRegister" />
+                app:layout_constraintTop_toBottomOf="@+id/PhoneError"
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/NameError"

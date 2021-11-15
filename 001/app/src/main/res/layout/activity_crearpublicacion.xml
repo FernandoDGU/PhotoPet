@@ -6,47 +6,43 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/CreatePost"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="wrap_content"
-        android:layout_height="3dp"
-
-
-        android:layout_marginTop="5dp"
-        android:background="@color/textColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/BtnbackPostC"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="8dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/cardHeaderCreatePost"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
-
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_24"
-        app:tint="@color/textColor" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/BtnbackPostC"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:background="@color/white"
+                android:contentDescription="@string/goBack"
+                app:srcCompat="@drawable/ic_arrow_back_24"
+                app:tint="@color/textColor" />
+
+            <TextView
+                android:id="@+id/TitlePost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/CreatePost"
+                android:textColor="@color/textColor"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="409dp"
@@ -56,7 +52,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
+        app:layout_constraintTop_toBottomOf="@+id/cardHeaderCreatePost">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -79,11 +75,15 @@
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:hint="@string/descpost"
+                android:importantForAutofill="no"
                 android:inputType="textImeMultiLine|textMultiLine"
 
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -103,12 +103,14 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTintMode="add"
                 android:clickable="true"
+                android:contentDescription="@string/addimageButton"
                 android:src="@drawable/ic_baseline_add_24"
                 app:backgroundTint="@color/black"
                 app:backgroundTintMode="screen"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                tools:ignore="RedundantDescriptionCheck" />
 
             <ImageView
                 android:id="@+id/imagesCreatePost"
@@ -119,6 +121,7 @@
                 android:maxHeight="400dp"
                 android:minHeight="300dp"
                 android:scaleType="fitXY"
+                android:contentDescription="@string/postImageContent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="0/10"
+                android:text="@string/imageCount"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,11 +146,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/greenPet"
+                android:contentDescription="@string/prevImage"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toStartOf="@+id/txtCount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imagesCreatePost"
                 app:srcCompat="@drawable/ic_arrow_back_24"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                tools:ignore="ImageContrastCheck" />
 
             <ImageButton
                 android:id="@+id/btnRight"
@@ -155,10 +161,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/greenPet"
+                android:contentDescription="@string/nextImage"
+                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtCount"
                 app:layout_constraintTop_toBottomOf="@+id/imagesCreatePost"
-                app:srcCompat="@drawable/ic_arrow_forward_24" />
+                app:srcCompat="@drawable/ic_arrow_forward_24"
+                tools:ignore="ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -168,6 +177,7 @@
                 android:layout_marginEnd="130dp"
                 android:text="@string/descimage"
                 android:textColor="@color/textColor"
+                app:layout_constraintBottom_toTopOf="@+id/textDescImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCount" />
@@ -176,11 +186,13 @@
                 android:id="@+id/textDescImage"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:importantForAutofill="no"
                 android:inputType="textImeMultiLine|textMultiLine"
-
-                app:layout_constraintEnd_toEndOf="parent"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnGuardarDesc"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintTop_toBottomOf="@+id/textView20"
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck,SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btnDeleteImage"
@@ -192,7 +204,8 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDescImage" />
+                app:layout_constraintTop_toBottomOf="@+id/textDescImage"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/btnTagsPost"
@@ -214,17 +227,19 @@
                 android:layout_marginBottom="90dp"
                 android:background="@drawable/rounded_button_green"
                 android:text="@string/btnPublicar"
+
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnTagsPost" />
+                app:layout_constraintTop_toBottomOf="@+id/btnTagsPost"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/btnModif"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="90dp"
                 android:background="@drawable/rounded_button_green"
                 android:text="@string/btnEdit"
@@ -232,8 +247,25 @@
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnDeletePost"
+                app:layout_constraintTop_toBottomOf="@+id/btnTagsPost"
+                tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/btnDeletePost"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="90dp"
+                android:background="@drawable/rounded_button_red"
+                android:text="@string/deletePost"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnModif"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnTagsPost" />
+                app:layout_constraintTop_toBottomOf="@+id/btnTagsPost"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/btnModificar"
@@ -252,15 +284,18 @@
 
             <Button
                 android:id="@+id/btnGuardarDesc"
-                android:layout_width="46dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginTop="121dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/ic_save_24"
                 android:backgroundTint="@color/greenPet"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="11sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textDescImage"
-                app:layout_constraintTop_toBottomOf="@+id/imagesCreatePost" />
+                app:layout_constraintTop_toBottomOf="@+id/imagesCreatePost"
+                tools:ignore="TextContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

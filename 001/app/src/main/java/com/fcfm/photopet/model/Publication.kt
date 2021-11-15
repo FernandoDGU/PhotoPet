@@ -12,3 +12,7 @@ class Publication(var id_publication: Int? = null, var description: String? = nu
 class LikedPublication(var id_liked_publication: Int? = null, var id_publication: Int? = null, var email: String? = null){
 
 }
+
+class PublicationTag(var id_publication_tag: Int? = null, var id_publication: Int? = null, var id_tag: Int? = null){
+
+}

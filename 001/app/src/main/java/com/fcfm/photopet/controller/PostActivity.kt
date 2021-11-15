@@ -70,6 +70,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
             likebtn.setAnimation(animation)
             likebtn.playAnimation()
             Toast.makeText(applicationContext, "Te gusta", Toast.LENGTH_SHORT).show()
+            likebtn.contentDescription = getString(R.string.LikeButton)
             likePost()
         }else{
             likebtn.animate()
@@ -82,6 +83,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
                     }
             })
             Toast.makeText(applicationContext, "Ya no te gusta", Toast.LENGTH_SHORT).show()
+            likebtn.contentDescription = getString(R.string.DislikeButton)
             dislikePost()
 
         }
@@ -239,6 +241,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
                 if(like){
                     likebtn.setAnimation(R.raw.apple_event)
                     likebtn.playAnimation()
+                    likebtn.contentDescription = getString(R.string.DislikeButton)
                 }
 
 

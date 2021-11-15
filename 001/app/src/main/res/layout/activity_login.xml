@@ -12,6 +12,7 @@
         android:layout_width="244dp"
         android:layout_height="209dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/appLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,12 +47,15 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="60dp"
         android:ems="10"
+        android:hint="@string/email"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-
-        />
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/textView4"
@@ -71,12 +75,15 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="60dp"
         android:ems="10"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextemail"
-
-        />
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
         <!--android:background="@drawable/edit_round"-->
 
     <Button
@@ -90,7 +97,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPass"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView5"
@@ -116,7 +124,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/EmailErr"

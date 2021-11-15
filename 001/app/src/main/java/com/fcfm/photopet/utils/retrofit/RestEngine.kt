@@ -1,5 +1,6 @@
 package com.fcfm.photopet.utils.retrofit
 
+import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,6 +8,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.GsonBuilder
 
 import com.google.gson.Gson
+import android.net.NetworkInfo
+
+import android.net.ConnectivityManager
+import androidx.core.content.ContextCompat
+
+import androidx.core.content.ContextCompat.getSystemService
+
+
+
 
 
 class RetrofitMessage(var message:String? = null){
@@ -36,6 +46,13 @@ class RestEngine{
 
         }
 
+        fun hasInternetConnection(context: Context):Boolean
+        {
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+            return isConnected
+        }
 
 
 

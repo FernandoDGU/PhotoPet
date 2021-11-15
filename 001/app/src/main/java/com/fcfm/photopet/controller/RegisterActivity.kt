@@ -9,11 +9,13 @@ import android.provider.MediaStore
 import android.text.InputType
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.ImageUtils
-import com.fcfm.photopet.utils.LoadingDialogActivity
+import com.fcfm.photopet.utils.LoadingDialog
+import com.fcfm.photopet.utils.UserApplication.Companion.prefs
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.RetrofitMessage
@@ -32,7 +34,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     var destiny: String? = null
     var choosedPhoto: Boolean = false
     private val REQUEST_GALLERY = 1001
-    private lateinit var loading : LoadingDialogActivity
+    private lateinit var loading : LoadingDialog.ActivityLD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
             buttonRegister.visibility = View.GONE
             buttonModify.visibility = View.VISIBLE
+            buttonDelete.visibility = View.VISIBLE
             buttonModify.setOnClickListener(this)
         }else if(destiny == "register"){
             buttonModify.visibility = View.GONE
@@ -65,7 +68,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         }
 
 
-        loading = LoadingDialogActivity(this)
+        loading = LoadingDialog().ActivityLD(this)
         RegisterImage.setOnClickListener(this)
     }
 
@@ -74,23 +77,43 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 when(v!!.id){
                     R.id.buttonRegister ->{
                         loading.startLoading()
-                        if(validate()){
-                            createUser()
+                        if(RestEngine.hasInternetConnection(this)){
+                            if(validate()){
+                                createUser()
+                            }else{
+                                loading.isDismiss()
+                                Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
+                            }
                         }else{
                             loading.isDismiss()
-                            Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
                         }
+                        
 
                     }
                     R.id.buttonModify ->{
                         loading.startLoading()
-                        if(validate()){
-                            modifyUser()
+                        if(RestEngine.hasInternetConnection(this)){
+                            if(validate()){
+                                modifyUser()
+                            }else{
+                                loading.isDismiss()
+                                Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
+                            }
                         }else{
                             loading.isDismiss()
-                            Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
                         }
 
+
+                    }
+                    R.id.buttonDelete -> {
+                        if(RestEngine.hasInternetConnection(this)){
+                            deleteDialog()
+                        }
+                        else{
+                            Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
+                        }
                     }
                     R.id.RegisterImage ->{
                         loadImage()
@@ -304,6 +327,55 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             //Photo.setImageURI(data!!.data)
 
         }
+    }
+
+    private fun deleteDialog() {
+
+        val simpleDialog =  AlertDialog.Builder(this)
+            .setTitle(getString(R.string.deleteAccount))
+            .setMessage(getString(R.string.dialogDeleteAccountMessage))
+            .setIcon(R.drawable.ic_baseline_warning_24)
+            .setPositiveButton(getString(R.string.dialogYes)){ _,_ ->
+                prefs.saveEmail("")
+                deleteUser()
+
+            }
+            .setNegativeButton(getString(R.string.dialogNo)){_,_->
+
+
+            }.create()
+
+        simpleDialog.show()
+    }
+
+    private fun deleteUser(){
+        loading.startLoading()
+        val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
+        val result: Call<RetrofitMessage> = service.deleteUser(loggedUser.getUser().email!!)
+
+        result.enqueue(object: Callback<RetrofitMessage> {
+            override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
+                loading.isDismiss()
+                Toast.makeText(this@RegisterActivity,t.message.toString(),Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<RetrofitMessage>, response: Response<RetrofitMessage>) {
+                val item =  response.body()
+                when(item!!.message){
+                    "ok" -> {
+                        loading.isDismiss()
+                        val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }
+                    else -> {
+                        loading.isDismiss()
+                        Toast.makeText(this@RegisterActivity,item.message,Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        })
     }
 
 

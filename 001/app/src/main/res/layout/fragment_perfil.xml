@@ -39,7 +39,7 @@
 
                 android:background="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints, ContentDescription">
 
             </View>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -52,7 +52,7 @@
         android:background="@color/greenPet"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:strokeColor="@color/textColor"
         app:strokeWidth="2dp"
         tools:ignore="MissingConstraints"
@@ -83,7 +83,7 @@
                 android:layout_marginStart="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Fernando D."
+                android:text="@string/Lorem"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
                 app:layout_constraintTop_toTopOf="@+id/imageProfilePost" />
@@ -98,7 +98,8 @@
                 android:text="@string/edit"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
-                app:layout_constraintTop_toBottomOf="@+id/txtNameProfile" />
+                app:layout_constraintTop_toBottomOf="@+id/txtNameProfile"
+                tools:ignore="TextContrastCheck" />
 
             <Button
                 android:id="@+id/btnCerrarSesion"
@@ -111,7 +112,8 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnEdit"
-                app:layout_constraintTop_toTopOf="@+id/btnEdit" />
+                app:layout_constraintTop_toTopOf="@+id/btnEdit"
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -163,11 +165,11 @@
             <TextView
                 android:id="@+id/txtEmailProfile"
                 android:layout_width="300dp"
-                android:ellipsize="end"
-                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="dogs.love@gmail.com"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/Lorem"
                 android:textColor="@color/textColor"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -177,7 +179,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="0123456789"
+                android:maxEms="10"
+                android:maxLines="1"
+                android:text="@string/Lorem"
                 android:textColor="@color/textColor"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
@@ -185,6 +189,44 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
+
+    <RadioGroup
+        android:id="@+id/toggle"
+        android:layout_width="310dp"
+        android:layout_height="48dp"
+        android:background="@drawable/black_out_line"
+        android:checkedButton="@+id/Mylikes"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:ignore="MissingConstraints">
+
+        <RadioButton
+            android:id="@+id/Myposts"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/myPosts"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck" />
+
+        <RadioButton
+            android:id="@+id/Mylikes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/myLikes"
+            android:textColor="@color/white"
+            tools:ignore="TextContrastCheck" />
+    </RadioGroup>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProfileCards"
         android:layout_width="412dp"
@@ -198,46 +240,5 @@
         app:layout_constraintTop_toBottomOf="@+id/toggle"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/card_publications" />
-
-    <RadioGroup
-        android:id="@+id/toggle"
-        android:layout_width="310dp"
-        android:layout_height="40dp"
-        android:background="@drawable/black_out_line"
-        android:checkedButton="@+id/Mylikes"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        tools:ignore="MissingConstraints">
-
-        <RadioButton
-            android:id="@+id/Myposts"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
-            android:button="@null"
-            android:gravity="center"
-            android:text="@string/myPosts"
-            android:textColor="@color/white" />
-
-        <RadioButton
-            android:id="@+id/Mylikes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_widget_background"
-            android:button="@null"
-            android:gravity="center"
-            android:text="@string/myLikes"
-            android:textColor="@color/white" />
-    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

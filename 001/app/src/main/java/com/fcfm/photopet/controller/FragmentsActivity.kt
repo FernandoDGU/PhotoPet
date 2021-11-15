@@ -16,6 +16,7 @@ class FragmentsActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
         supportActionBar?.hide()
+
         val tabLayout = findViewById(R.id.tabLayaout) as TabLayout
         //Tabs from fragment
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{

@@ -61,6 +61,7 @@
         android:src="@drawable/ic_baseline_add_24"
         app:backgroundTint="@color/black"
         app:backgroundTintMode="screen"
+        android:contentDescription="@string/CreatePost"
         app:layout_constraintBottom_toBottomOf="@+id/rvHomeCards"
         app:layout_constraintEnd_toEndOf="parent" />
 

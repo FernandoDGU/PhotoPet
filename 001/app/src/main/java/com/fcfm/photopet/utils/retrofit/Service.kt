@@ -5,15 +5,13 @@ import com.fcfm.photopet.model.Tag
 import retrofit2.Call
 import retrofit2.http.*
 
-//Retrofi usa una interface para hacer la petición hacia el servidor
 interface ServiceUser{
 
-    //Servicios para consumir el Album
     @GET("user.php")
     fun getUsers(): Call<List<User>>
 
-    @GET("user.php?email={emailParam}")
-    fun getUser(@Path("emailParam") email: String): Call<User>
+    @GET("user.php")
+    fun getUser(@Query("email") email: String): Call<User>
 
     @GET("user.php")
     fun logInUser(@Query("email") email: String, @Query("pass") password: String): Call<User>
@@ -26,8 +24,8 @@ interface ServiceUser{
     @PUT("user.php")
     fun updateUser(@Query("email") email: String, @Body userData: User): Call<RetrofitMessage>
 
-    @DELETE("user.php?email={emailParam}")
-    fun deleteUser(@Path("emailParam") email: String): Call<Int>
+    @DELETE("user.php")
+    fun deleteUser(@Query("email") email: String): Call<RetrofitMessage>
 
 }
 
@@ -74,9 +72,17 @@ interface ServicePost{
     @Headers("Content-Type: application/json")
     @PUT("publication.php")
     fun updatePost(@Body postData: Publication): Call<RetrofitMessage>
+
+    @DELETE("publication.php")
+    fun deletePost(@Query("id") id: Int): Call<RetrofitMessage>
 }
 
 interface ServiceAlbum{
     @GET("album.php")
     fun getAlbumPost(@Query("id_post") id_album: Int): Call<List<Album>>
+}
+
+interface ServiceUtils{
+    @GET("utils.php")
+    fun getAllData(@Query("getAllData") getAllData: String): Call<SuperData>
 }

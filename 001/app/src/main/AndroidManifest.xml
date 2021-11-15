@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fcfm.photopet">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
@@ -13,6 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_iconcamera2"
         android:supportsRtl="true"
+        android:name=".utils.UserApplication"
         android:theme="@style/Theme.PhotoPet">
         <activity
             android:name=".controller.MainActivity"
@@ -23,12 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.LoginActivity"/>
-        <activity android:name=".controller.RegisterActivity"/>
-        <activity android:name=".controller.FragmentsActivity"/>
+        <activity android:name=".controller.LoginActivity"
+                  android:label="@string/app_name"/>
+        <activity android:name=".controller.RegisterActivity"
+                  android:label="@string/app_name"/>
+        <activity android:name=".controller.FragmentsActivity"
+                  android:label="@string/app_name"/>
         <activity android:name=".controller.CreatePostActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".controller.PostActivity"/>
+                  android:label="@string/app_name"
+                  android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".controller.PostActivity"
+                  android:label="@string/app_name"/>
     </application>
 
 </manifest>

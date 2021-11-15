@@ -14,15 +14,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fcfm.photopet.R
 import com.fcfm.photopet.controller.Adapter.PostListRecyclerAdapter
+import com.fcfm.photopet.controller.FragmentsActivity
+import com.fcfm.photopet.controller.MainActivity
 import com.fcfm.photopet.controller.RegisterActivity
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.ImageUtils
+import com.fcfm.photopet.utils.UserApplication.Companion.prefs
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.ServicePost
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_registro.*
+import kotlinx.android.synthetic.main.fragment_perfil.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +35,7 @@ import java.util.*
 class Fragment_Perfil: Fragment(), View.OnClickListener{
     private lateinit var rootView: View
     private lateinit var editBtn: Button
+    private lateinit var signOffBtn: Button
     private lateinit var profileImg: CircleImageView
     private lateinit var profileName: TextView
     private lateinit var profileDescription: TextView
@@ -55,12 +60,14 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
         editBtn = rootView.findViewById<Button>(R.id.btnEdit)
         Myposts = rootView.findViewById<RadioButton>(R.id.Myposts)
         Mylikes = rootView.findViewById<RadioButton>(R.id.Mylikes)
+        signOffBtn = rootView.findViewById<Button>(R.id.btnCerrarSesion)
         actualUser = loggedUser.getUser()
         loadData()
 
         editBtn.setOnClickListener(this)
         Myposts.setOnClickListener(this)
         Mylikes.setOnClickListener(this)
+        signOffBtn.setOnClickListener(this)
 
         this.fillPostList(true)
         this.postAdapter =  PostListRecyclerAdapter(context, posts, activity)
@@ -89,8 +96,9 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
                     for(p in item!!){
                         posts.add(p)
                     }
-                    postAdapter!!.notifyDataSetChanged()
+
                 }
+                postAdapter!!.notifyDataSetChanged()
 
             }
         })
@@ -101,6 +109,12 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
             when (v.id){
                 R.id.btnEdit ->{
                     showModifyUser()
+                }
+                R.id.btnCerrarSesion->{
+                    prefs.saveEmail("")
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 }
                 R.id.Myposts ->{
                     this.fillPostList(true)

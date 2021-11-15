@@ -40,7 +40,7 @@
 
                 android:background="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints, ContentDescription">
 
             </View>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -78,14 +78,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!--<ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="42dp"
+                <ImageButton
+                    android:id="@+id/iconSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/ic_baseline_search_24"
+                    android:translationX="12dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toStartOf="@+id/autotv_search"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/ic_search_24"
-                    tools:layout_editor_absoluteY="0dp" />-->
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"/>
 
                 <AutoCompleteTextView
                     android:id="@+id/autotv_search"
@@ -97,6 +103,7 @@
                     android:ems="10"
                     android:completionThreshold="0"
                     android:visibility="gone"
+                    android:hint="@string/searchByTag"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,24 +117,13 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:visibility="visible"
+                    android:contentDescription="@string/searchByDesc"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/iconSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/ic_baseline_search_24"
-                    android:translationX="12dp"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@+id/autotv_search"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -156,10 +152,15 @@
 
                     <RadioGroup
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="70dp"
+                        android:layout_marginBottom="8dp"
                         android:orientation="horizontal"
+                        android:contentDescription="@string/SearchTitleradios"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -185,6 +186,22 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchCards"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+
+        android:background="@color/backgroundPet"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/card_publications" />
 
     <!-- CARD PARTE DE ABAJO -->
     <com.google.android.material.card.MaterialCardView
@@ -229,16 +246,20 @@
 
                 <RadioGroup
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:orientation="horizontal"
+                    android:contentDescription="@string/Order"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
                         android:id="@+id/OrderOld"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:checked="true"
                         android:text="@string/Orderradio3"
                         android:textColor="@color/textColor" />
@@ -246,17 +267,16 @@
                     <RadioButton
                         android:id="@+id/OrderNew"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="@string/Orderadio1"
                         android:textColor="@color/textColor" />
 
 
-
                     <RadioButton
                         android:id="@+id/OrderPopular"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/Orderradio2"
                         android:textColor="@color/textColor" />
                 </RadioGroup>
@@ -264,20 +284,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSearchCards"
-        android:layout_width="409dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
 
-        android:background="@color/backgroundPet"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        tools:ignore="MissingConstraints"
-        tools:listitem="@layout/card_publications" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

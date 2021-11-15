@@ -39,7 +39,7 @@ class Tag(var id_tag: Int? = null, var tagname: String? = null)  : Serializable 
             if(tags.isNotEmpty()){
                 for(t in tags){
                     if(tags[tags.lastIndex].id_tag == t.id_tag){
-                        text += "${t.tagname}"
+                        text += "${t.tagname}."
                     }else{
                         text += "${t.tagname}, "
                     }

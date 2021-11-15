@@ -5,29 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/cardHeaderPost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/TitlePost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Post"
-                android:textColor="@color/textColor"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/BtnbackPost"
@@ -35,21 +26,27 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
                 android:background="@color/white"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/goBack"
                 app:srcCompat="@drawable/ic_arrow_back_24"
                 app:tint="@color/textColor" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/TitlePost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/Post"
+                android:textColor="@color/textColor"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="670dp"
-        android:layout_marginEnd="2dp"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardHeaderPost">
@@ -74,7 +71,8 @@
                 app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/DescPost"
-                app:srcCompat="@drawable/picture" />
+                app:srcCompat="@drawable/picture"
+                android:contentDescription="@string/postImageContent" />
 
 
             <TextView
@@ -95,11 +93,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="48dp"
                 android:backgroundTint="@color/greenPet"
+                android:contentDescription="@string/nextImage"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtCountPost"
                 app:layout_constraintTop_toBottomOf="@+id/imagesPost"
-                app:srcCompat="@drawable/ic_arrow_forward_24" />
+                app:srcCompat="@drawable/ic_arrow_forward_24"
+                tools:ignore="ImageContrastCheck" />
 
             <ImageButton
                 android:id="@+id/btnLeftPost"
@@ -108,12 +108,14 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/greenPet"
+                android:contentDescription="@string/prevImage"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toStartOf="@+id/txtCountPost"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imagesPost"
                 app:srcCompat="@drawable/ic_arrow_back_24"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                tools:ignore="ImageContrastCheck" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageProfilePost"
@@ -136,7 +138,7 @@
                 android:layout_marginTop="32dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Darien Miguel  \nSánchez Árevalo"
+                android:text="@string/Lorem"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
@@ -150,7 +152,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:gravity="center"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra luctus nulla eget viverra. Mauris arcu est, scelerisque."
+                android:text="@string/Lorem"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.727"
@@ -166,7 +168,7 @@
                 android:layout_marginEnd="176dp"
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra luctus"
+                android:text="@string/Lorem"
                 android:textColor="@color/textColor"
                 app:layout_constraintBottom_toTopOf="@+id/txtTagsPost"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -182,7 +184,7 @@
                 android:scaleType="centerCrop"
                 android:scaleX="2"
                 android:scaleY="2"
-
+                android:contentDescription="@string/LikeButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtNamePost"
                 app:layout_constraintTop_toTopOf="parent"
