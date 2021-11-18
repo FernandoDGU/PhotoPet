@@ -20,6 +20,7 @@ import com.fcfm.photopet.controller.RegisterActivity
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.ImageUtils
+import com.fcfm.photopet.utils.LoadingDialog
 import com.fcfm.photopet.utils.UserApplication.Companion.prefs
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.RestEngine
@@ -43,6 +44,7 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
     private lateinit var profilePhone: TextView
     private lateinit var Myposts: RadioButton
     private lateinit var Mylikes: RadioButton
+    private lateinit var loading:LoadingDialog.FragmentLD
 
     private lateinit var actualUser: User
 
@@ -55,6 +57,7 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
         savedInstanceState: Bundle?
     ): View? {
         rootView =  inflater.inflate(R.layout.fragment_perfil, container, false)
+        loading = LoadingDialog().FragmentLD(this)
         val recyclerPostSearch = rootView.findViewById<RecyclerView>(R.id.rvProfileCards)
         recyclerPostSearch.layoutManager =  LinearLayoutManager(context)
         editBtn = rootView.findViewById<Button>(R.id.btnEdit)
@@ -69,39 +72,60 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
         Mylikes.setOnClickListener(this)
         signOffBtn.setOnClickListener(this)
 
-        this.fillPostList(true)
-        this.postAdapter =  PostListRecyclerAdapter(context, posts, activity)
+
+        this.postAdapter =  PostListRecyclerAdapter(context, R.layout.card_publications, posts, activity)
         recyclerPostSearch.adapter = this.postAdapter
+        this.fillPostList(true)
 
         return rootView
     }
 
     private fun fillPostList(order:Boolean){//1 My posts, 0 My likes
-        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
-        val result: Call<List<Publication>> = if(order)
-            service.getUserPosts(loggedUser.getUser().email!!)
-        else
-            service.getUserLikedPosts(loggedUser.getUser().email!!, 1)
+        loading.startLoading()
+        posts.clear()
+        if(RestEngine.hasInternetConnection(requireContext())){
+            val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+            val result: Call<List<Publication>> = if(order)
+                service.getUserPosts(loggedUser.getUser().email!!)
+            else
+                service.getUserLikedPosts(loggedUser.getUser().email!!, 1)
 
-        result.enqueue(object: Callback<List<Publication>> {
-            override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
-                //loading.isDismiss()
-                Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
+            result.enqueue(object: Callback<List<Publication>> {
+                override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
+                    loading.isDismiss()
+                    Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
+                }
 
-            override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
-                posts.clear()
-                val item =  response.body()
-                if(item!![0].id_publication != null){
-                    for(p in item!!){
-                        posts.add(p)
+                override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                    val item =  response.body()
+                    if(item!![0].id_publication != null){
+                        for(p in item!!){
+                            posts.add(p)
+                        }
+
                     }
+                    postAdapter!!.notifyDataSetChanged()
+                    loading.isDismiss()
 
                 }
-                postAdapter!!.notifyDataSetChanged()
+            })
+        }else{
+            var item: MutableList<Publication>
+            item = if(order){
+                Publication().PublicationSQLite().GetPostImageUser(loggedUser.getUser().email!!)
+            }else{
+                Publication().PublicationSQLite().GetPostIUL(loggedUser.getUser().email!!)
+            }
+            if(item[0].id_publication != null){
+                for(p in item){
+                    posts.add(p)
+                }
 
             }
-        })
+            postAdapter!!.notifyDataSetChanged()
+            loading.isDismiss()
+        }
+
     }
 
     override fun onClick(v: View?) {

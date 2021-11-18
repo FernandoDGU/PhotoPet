@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/RelLay_Dialog"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
+    android:layout_width="500dp"
+    android:layout_height="300dp"
     android:layout_gravity="center"
     android:background="@null"
     android:gravity="center">

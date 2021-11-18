@@ -35,6 +35,7 @@ import com.fcfm.photopet.controller.Fragment.Fragment_Perfil
 import com.fcfm.photopet.utils.ImageUtils
 import com.fcfm.photopet.utils.LoadingDialog
 import com.fcfm.photopet.utils.UserApplication
+import com.fcfm.photopet.utils.UserApplication.Companion.prefs
 import com.fcfm.photopet.utils.retrofit.*
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
@@ -82,6 +83,15 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
             getTags()
 
 
+        }else{
+            loading.startLoading()
+            post = prefs.getPost()
+            if(post.albums!!.isNotEmpty()){
+                albumList = post.albums!!.toMutableList()
+            }
+
+            post.albums = mutableListOf<Album>()
+            loadData()
         }
 
     }
@@ -90,6 +100,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
         if(v!=null){
             when (v.id){
                 R.id.btnPublicar ->{
+
                     if(RestEngine.hasInternetConnection(this)){
                         val postDesc = textDescCreatePost.text.toString();
                         if(postDesc.isEmpty()){
@@ -99,6 +110,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                             Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
                             return
                         }else {
+                            loading.startLoading()
                             for(a in albumList){
                                 val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
                                 val strEncodeImage: String = "data:image/png;base64," + encodedString
@@ -118,7 +130,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                             result.enqueue(object: Callback<RetrofitMessage> {
                                 override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
-
+                                    loading.isDismiss()
                                     Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
                                 }
 
@@ -126,10 +138,12 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                                     val item =  response.body()
                                     when(item!!.message){
                                         "ok" -> {
+                                            prefs.savePost(Publication())
                                             showPost()
 
                                         }
                                         else -> {
+                                            loading.isDismiss()
                                             Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
                                         }
                                     }
@@ -154,6 +168,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                             Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
                             return
                         }else {
+                            loading.startLoading()
                             for(a in albumList){
                                 val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
                                 val strEncodeImage: String = "data:image/png;base64," + encodedString
@@ -168,12 +183,13 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                             post.tags = selectedTagList
                             post.email = loggedUser.getUser().email
 
+
                             val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
                             val result: Call<RetrofitMessage> = service.updatePost(post)
 
                             result.enqueue(object: Callback<RetrofitMessage> {
                                 override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
-
+                                    loading.isDismiss()
                                     Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
                                 }
 
@@ -184,6 +200,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                                             showPost()
                                         }
                                         else -> {
+                                            loading.isDismiss()
                                             Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
                                         }
                                     }
@@ -204,19 +221,18 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                     }
                 }
                 R.id.btnTagsPost ->{
+                    loading.startLoading()
                     windowTagsPost.setContentView(viewTagsPost)
                     autoCompleteTag = viewTagsPost.findViewById<MaterialAutoCompleteTextView>(R.id.autotv_Tag)
 
 
                     autoCompleteTag.setOnItemClickListener { parent, view, position, id ->
+                        loading.startLoading()
                         var selectedTag = parent!!.getItemAtPosition(position) as Tag
                         selectedTagList.add(selectedTag);
                         tagListAdapter.notifyDataSetChanged()
                         autoCompleteTag.text = null
-
-                        tagList.remove(selectedTag)
-                        autoTagListAdapter.remove(selectedTag)
-                        autoCompleteTag.setAdapter(autoTagListAdapter)
+                        fillTagList()
                     }
                     val recycler_tagList = viewTagsPost.findViewById<RecyclerView>(R.id.rv_tagList)
                     recycler_tagList.layoutManager = LinearLayoutManager(this)
@@ -239,6 +255,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         return
 
                     if(RestEngine.hasInternetConnection(this)){
+                        loading.startLoading()
                         var alreadyExists = false
                         for (tag in selectedTagList){
                             if(tag.tagname!!.lowercase() == inputText.lowercase()){
@@ -258,6 +275,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         if(!alreadyExists){
                             insertTag(Tag(null, inputText))
                         }else{
+                            loading.isDismiss()
                             Toast.makeText(this, R.string.tagNameErr, Toast.LENGTH_SHORT).show()
                         }
                     }else{
@@ -310,7 +328,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                 R.id.btnDeleteImage ->{
                     if(albumList.isEmpty())
                         return
-
+                    loading.startLoading()
                     var index = imagePos - 1
                     if(albumList.size == 1){
                         imagesCreatePost.setImageResource(R.drawable.picture) //PONER IMAGEN DEFAULT
@@ -330,16 +348,22 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                         txtCount.text = "${imagePos}/10"
                         textDescImage.setText(albumList[index].description)
+                        loading.isDismiss()
 
                     }
                 }
                 R.id.btnGuardarDesc -> {
+                    loading.startLoading()
                     val descriptionImage = textDescImage.text.toString() //Botón guardar descripción
-                    if(descriptionImage.isEmpty() || imagePos == 0)
+                    if(descriptionImage.isEmpty() || imagePos == 0){
+                        loading.isDismiss()
                         return
+                    }
+
                     val index = imagePos - 1;
                     albumList[index].description = descriptionImage
-                    Toast.makeText(this, "Descripción guardada", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.DescSaved, Toast.LENGTH_SHORT).show()
+                    loading.isDismiss()
                 }
 
                 R.id.BtnbackPostC ->{
@@ -355,7 +379,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
         result.enqueue(object: Callback<RetrofitMessage> {
             override fun onFailure(call: Call<RetrofitMessage>, t: Throwable) {
-
+                loading.isDismiss()
                 Toast.makeText(this@CreatePostActivity,t.message.toString(),Toast.LENGTH_LONG).show()
             }
 
@@ -369,6 +393,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         fillTagList()
                     }
                     else -> {
+                        loading.isDismiss()
                         Toast.makeText(this@CreatePostActivity, item.message, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -379,60 +404,88 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
 
     private fun showPost(){
+        loading.isDismiss()
         val intent = Intent(this, FragmentsActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun fillTagList(){
         tagList.clear()
-        val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
-        val result: Call<List<Tag>> = service.getTags()
+        if(RestEngine.hasInternetConnection(this)){
+            val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
+            val result: Call<List<Tag>> = service.getTags()
 
-        result.enqueue(object: Callback<List<Tag>> {
-            override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
-                //loading.isDismiss()
-                Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
-                val item =  response.body()
-                if(item!![0].id_tag != null){
-
-                    tagList = item.toMutableList()
-
-                    for(tag in selectedTagList){
-                        for(innerTag in tagList){
-                            if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
-                                if(tag.id_tag == null){
-                                    selectedTagList.remove(tag)
-                                    selectedTagList.add(innerTag)
-                                }
-                                tagList.remove(innerTag)
-                                break
-                            }
-
-                        }
-                    }
-                    autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
-                    autoCompleteTag.setAdapter(autoTagListAdapter)
+            result.enqueue(object: Callback<List<Tag>> {
+                override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
+                    loading.isDismiss()
+                    Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
                 }
 
+                override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
+                    val item =  response.body()
+                    if(item!![0].id_tag != null){
+
+                        tagList = item.toMutableList()
+
+                        for(tag in selectedTagList){
+                            for(innerTag in tagList){
+                                if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
+                                    if(tag.id_tag == null){
+                                        selectedTagList.remove(tag)
+                                        selectedTagList.add(innerTag)
+                                    }
+                                    tagList.remove(innerTag)
+                                    break
+                                }
+
+                            }
+                        }
+                        autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
+                        autoCompleteTag.setAdapter(autoTagListAdapter)
+                        tagListAdapter.notifyDataSetChanged()
+                        loading.isDismiss()
+                    }
+
+                }
+            })
+        }else{
+            val item = Tag().TagSQLite().GetTags()
+            if(item[0].id_tag != null){
+
+                tagList = item.toMutableList()
+
+                for(tag in selectedTagList){
+                    for(innerTag in tagList){
+                        if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
+                            if(tag.id_tag == null){
+                                selectedTagList.remove(tag)
+                                selectedTagList.add(innerTag)
+                            }
+                            tagList.remove(innerTag)
+                            break
+                        }
+
+                    }
+                }
+                autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
+                autoCompleteTag.setAdapter(autoTagListAdapter)
+                tagListAdapter.notifyDataSetChanged()
+                loading.isDismiss()
             }
-        })
+        }
+
 
 
     }
 
     override fun onitemClick(tag: Tag) {
-        Toast.makeText(this, tag.tagname, Toast.LENGTH_SHORT).show()
     }
 
     override fun ondeleteitemClick(tag: Tag) {
+        loading.startLoading()
         selectedTagList.remove(tag)
-        tagListAdapter.notifyDataSetChanged()
-        tagList.add(tag)
-        autoTagListAdapter.add(tag)
-        autoCompleteTag.setAdapter(autoTagListAdapter)
+        fillTagList()
     }
 
     private fun openGalleryForImages(){
@@ -495,64 +548,99 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
     }
 
     private fun getTags(){
-        val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
-        val result: Call<List<Tag>> = service.getTagPost(post.id_publication!!)
+        if(RestEngine.hasInternetConnection(this)){
+            val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
+            val result: Call<List<Tag>> = service.getTagPost(post.id_publication!!)
 
-        result.enqueue(object: Callback<List<Tag>> {
-            override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
-                loading.isDismiss()
-                Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
-                val item =  response.body()
-                if(item!![0].id_tag != null){
-                    post.tags = item.toMutableList()
+            result.enqueue(object: Callback<List<Tag>> {
+                override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
+                    loading.isDismiss()
+                    Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
                 }
 
-                getAlbums()
+                override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
+                    val item =  response.body()
+                    if(item!![0].id_tag != null){
+                        post.tags = item.toMutableList()
+                    }
 
+                    getAlbums()
+
+                }
+            })
+        }else{
+            val item = Tag().TagSQLite().GetPostTag(post.id_publication!!)
+            if(item[0].id_tag != null){
+                post.tags = item.toMutableList()
             }
-        })
+
+            getAlbums()
+        }
+
     }
 
     private fun getAlbums(){
-        val service: ServiceAlbum =  RestEngine.getRestEngine().create(ServiceAlbum::class.java)
-        val result: Call<List<Album>> = service.getAlbumPost(post.id_publication!!)
+        if(RestEngine.hasInternetConnection(this)){
+            val service: ServiceAlbum =  RestEngine.getRestEngine().create(ServiceAlbum::class.java)
+            val result: Call<List<Album>> = service.getAlbumPost(post.id_publication!!)
 
-        result.enqueue(object: Callback<List<Album>> {
-            override fun onFailure(call: Call<List<Album>>, t: Throwable) {
-                loading.isDismiss()
-                Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<List<Album>>, response: Response<List<Album>>) {
-                val item =  response.body()
-                if(item!![0].id_album != null){
-                    for(a in item){
-                        var strImage:String =  a.imageString!!.replace("data:image/png;base64,","")
-                        var byteArray =  Base64.getDecoder().decode(strImage)
-                        a.image = byteArray
-                        albumList.add(a)
-                    }
-                    //albumList = item.toMutableList()
+            result.enqueue(object: Callback<List<Album>> {
+                override fun onFailure(call: Call<List<Album>>, t: Throwable) {
+                    loading.isDismiss()
+                    Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
                 }
-                loadData()
+
+                override fun onResponse(call: Call<List<Album>>, response: Response<List<Album>>) {
+                    val item =  response.body()
+                    if(item!![0].id_album != null){
+                        for(a in item){
+                            val strImage:String =  a.imageString!!.replace("data:image/png;base64,","")
+                            val byteArray =  Base64.getDecoder().decode(strImage)
+                            a.image = byteArray
+                            albumList.add(a)
+                        }
+                        //albumList = item.toMutableList()
+                    }
+                    loadData()
+                }
+            })
+        }else{
+            val item = Album().AlbumSQLite().GetAlbumPost(post.id_publication!!)
+            if(item[0].id_album != null){
+                for(a in item){
+                    val strImage:String =  a.imageString!!.replace("data:image/png;base64,","")
+                    val byteArray =  Base64.getDecoder().decode(strImage)
+                    a.image = byteArray
+                    albumList.add(a)
+                }
+                //albumList = item.toMutableList()
             }
-        })
+            loadData()
+        }
+
     }
 
     private fun loadData(){
-        val imageData = albumList[0].image
-        val bmp = BitmapFactory.decodeByteArray(imageData, 0, imageData!!.size)
-        imagesCreatePost.setImageBitmap(bmp)
-
-        textDescCreatePost.setText(post.description)
-        if(albumList[0].description!!.isNotEmpty()){
-            textDescImage.setText(albumList[0].description!!)
+        if(albumList.isNotEmpty()){
+            val imageData = albumList[0].image
+            val bmp = BitmapFactory.decodeByteArray(imageData, 0, imageData!!.size)
+            imagesCreatePost.setImageBitmap(bmp)
+            imagePos = 1;
+        }else{
+            imagePos = 0;
         }
 
-        imagePos = 1;
+        if(!post.description!!.isNullOrEmpty())
+            textDescCreatePost.setText(post.description)
+
+        if(!albumList.isEmpty()){
+            if(!albumList[0].description!!.isNullOrEmpty()){
+                textDescImage.setText(albumList[0].description!!)
+            }
+        }
+
+
+
         txtCount.text = "${imagePos}/10"
 
         for(t in post.tags!!){
@@ -570,7 +658,12 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
             .setMessage(getString(R.string.dialogDeletePostMessage))
             .setIcon(R.drawable.ic_baseline_warning_24)
             .setPositiveButton(getString(R.string.dialogYes)){ _,_ ->
-                deletePost()
+                if(RestEngine.hasInternetConnection(this)){
+                    deletePost()
+                }else{
+                    Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
+                }
+
 
             }
             .setNegativeButton(getString(R.string.dialogNo)){_,_->
@@ -609,6 +702,33 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
             }
         })
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        doPostDraft()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        doPostDraft()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        doPostDraft()
+
+    }
+
+    private fun doPostDraft(){
+        if(intent.extras == null){
+            post.albums = albumList
+            post.tags = selectedTagList
+            post.description  = textDescCreatePost.text.toString()
+            post.email = loggedUser.getUser().email
+            prefs.savePost(post)
+        }
+
     }
 
 }

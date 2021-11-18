@@ -3,7 +3,7 @@
     <string name="app_name">PhotoPet</string>
     <string name="email">Correo</string>
     <string name="password">Contraseña</string>
-    <string name="account">"No tienes una cuenta? "</string>
+    <string name="account">"¿No tienes una cuenta? "</string>
     <string name="singup">Registrarse</string>
     <string name="title">PHOTOPET</string>
     <string name="btnSignin">Ingresar</string>
@@ -77,9 +77,12 @@
     <string name="InternetErr">Por favor verifica tu conexión a internet.</string>
     <string name="deleteAccount">Eliminar cuenta</string>
     <string name="deletePost">Eliminar publicación</string>
-    <string name="titleDeleteUser">El</string>
     <string name="dialogDeleteAccountMessage">¿Estás seguro que quieres eliminar tu cuenta?</string>
     <string name="dialogYes">Sí</string>
     <string name="dialogNo">No</string>
     <string name="dialogDeletePostMessage">¿Estás seguro que quieres eliminar esta publicación?</string>
+    <string name="likeMessage">Te gusta esta publicación</string>
+    <string name="dislikeMessage">Ya no te gusta esta publicación</string>
+    <string name="DescSaved">Descripción Guardada</string>
+    <string name="imageCircleShowUserPosts">Presiona para acceder a las publicaciones de este usuario.</string>
 </resources>

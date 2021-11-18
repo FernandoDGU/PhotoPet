@@ -60,5 +60,5 @@
         android:background="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/tabLayaout"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"></View>
+        tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

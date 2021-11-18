@@ -8,45 +8,61 @@
     tools:context=".controller.MainActivity">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnIngresar"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:background="@drawable/rounded_button_green"
-        android:text="@string/btnSignin"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints,TextContrastCheck" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="244dp"
+                    android:layout_height="209dp"
+                    android:layout_marginTop="60dp"
+                    android:contentDescription="@string/appLogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_iconcamera2" />
+
+                <Button
+                    android:id="@+id/btnRegistrarse"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="37dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/rounded_button_blue"
+                    android:text="@string/btnSignup"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnIngresar"
+                    tools:ignore="TextContrastCheck" />
+
+                <Button
+                    android:id="@+id/btnIngresar"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="65dp"
+                    android:background="@drawable/rounded_button_green"
+                    android:text="@string/btnSignin"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                    tools:ignore="MissingConstraints,TextContrastCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <!-- android:backgroundTint="@color/bluePet" -->
-    <Button
-        android:id="@+id/btnRegistrarse"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/rounded_button_blue"
-        android:text="@string/btnSignup"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIngresar"
-        tools:ignore="TextContrastCheck" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="244dp"
-        android:layout_height="209dp"
-        android:layout_marginTop="60dp"
-        android:contentDescription="@string/appLogo"
-        app:layout_constraintBottom_toTopOf="@+id/btnIngresar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_iconcamera2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

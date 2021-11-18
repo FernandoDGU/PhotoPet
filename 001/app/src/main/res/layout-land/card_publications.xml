@@ -10,8 +10,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:background="@color/backgroundPet"
         app:cardBackgroundColor="@color/backgroundPet">
 
@@ -78,7 +79,7 @@
                 android:layout_marginTop="-18dp"
                 android:layout_marginBottom="-18dp"
                 android:elevation="10dp"
-                android:translationX="-3dp"
+                android:translationX="-5dp"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/txtDesc"

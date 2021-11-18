@@ -12,6 +12,7 @@ import com.fcfm.photopet.R
 import com.fcfm.photopet.controller.Adapter.PostListRecyclerAdapter
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.Tag
+import com.fcfm.photopet.utils.LoadingDialog
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.ServicePost
 import com.fcfm.photopet.utils.retrofit.ServiceTag
@@ -22,10 +23,11 @@ import retrofit2.Response
 
  class Fragment_Busqueda: Fragment(), androidx.appcompat.widget.SearchView.OnQueryTextListener, View.OnClickListener{
     private lateinit var rootView: View
+    private lateinit var loading: LoadingDialog.FragmentLD
     private var postAdapter: PostListRecyclerAdapter? = null
      lateinit var autoTagListAdapter: ArrayAdapter<Tag>
      var tagList: MutableList<Tag> = mutableListOf()
-     var orderStatus = 0;
+     var orderStatus = 1;
 
     private var posts: MutableList<Publication> = mutableListOf()
     override fun onCreateView(
@@ -34,6 +36,7 @@ import retrofit2.Response
         savedInstanceState: Bundle?
     ): View {
         rootView =  inflater.inflate(R.layout.fragment_busqueda, container, false)
+        loading = LoadingDialog().FragmentLD(this)
         val recyclerPostSearch = rootView.findViewById<RecyclerView>(R.id.rvSearchCards)
         val editSV = rootView.findViewById<androidx.appcompat.widget.SearchView>(R.id.editSearch)
         val autotv_search = rootView.findViewById<AutoCompleteTextView>(R.id.autotv_search)
@@ -46,8 +49,8 @@ import retrofit2.Response
         //val radioTag = rootView.findViewById<androidx.appcompat.widget.SearchView>(R.id.radioTag)
 
         recyclerPostSearch.layoutManager =  LinearLayoutManager(context)
-        this.fillPostList()
-        this.postAdapter =  PostListRecyclerAdapter(context, posts, activity)
+
+        this.postAdapter =  PostListRecyclerAdapter(context, R.layout.card_publications, posts, activity)
         recyclerPostSearch.adapter = this.postAdapter
 
         editSV.setOnQueryTextListener(this)
@@ -60,59 +63,88 @@ import retrofit2.Response
         OrderOld.setOnClickListener(this)
         OrderNew.setOnClickListener(this)
         OrderPopular.setOnClickListener(this)
-
+        this.fillPostList()
         return rootView
     }
 
 
     private fun fillPostList(){
+        loading.startLoading()
         posts.clear()
-        val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
-        val result: Call<List<Publication>> = service.getPublications()
+        if(RestEngine.hasInternetConnection(requireContext())){
+            val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+            val result: Call<List<Publication>> = service.getPublications()
 
-        result.enqueue(object: Callback<List<Publication>> {
-            override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
-                //loading.isDismiss()
-                Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
+            result.enqueue(object: Callback<List<Publication>> {
+                override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
+                    loading.isDismiss()
+                    Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
+                }
 
-            override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
-                val item =  response.body()
-                if (item!![0].id_publication != null){
-                    for(p in item){
-                        posts.add(p)
+                override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                    val item =  response.body()
+                    if (item!![0].id_publication != null){
+                        for(p in item){
+                            posts.add(p)
+                        }
+
                     }
+                    postAdapter!!.notifyDataSetChanged()
+                    loading.isDismiss()
 
                 }
-                postAdapter!!.notifyDataSetChanged()
-
+            })
+        }else{
+            val item = Publication().PublicationSQLite().GetPostImages()
+            if (item!![0].id_publication != null){
+                for(p in item){
+                    posts.add(p)
+                }
             }
-        })
+            postAdapter!!.notifyDataSetChanged()
+            loading.isDismiss()
+        }
+
     }
 
      private fun searchByTag(id_tag:Int){
+         loading.startLoading()
          posts.clear()
-         val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
-         val result: Call<List<Publication>> = service.getPostTag(id_tag)
+         if(RestEngine.hasInternetConnection(requireContext())){
+             val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
+             val result: Call<List<Publication>> = service.getPostTag(id_tag)
 
-         result.enqueue(object: Callback<List<Publication>> {
-             override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
-                 //loading.isDismiss()
-                 Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
-             }
+             result.enqueue(object: Callback<List<Publication>> {
+                 override fun onFailure(call: Call<List<Publication>>, t: Throwable) {
+                     loading.isDismiss()
+                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
+                 }
 
-             override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
-                 val item =  response.body()
-                 if (item!![0].id_publication != null){
-                     for(p in item){
-                         posts.add(p)
+                 override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
+                     val item =  response.body()
+                     if (item!![0].id_publication != null){
+                         for(p in item){
+                             posts.add(p)
+                         }
+
                      }
+                     postAdapter!!.notifyDataSetChanged()
+                     loading.isDismiss()
 
                  }
-                 postAdapter!!.notifyDataSetChanged()
+             })
+         }else{
+             val item = Publication().PublicationSQLite().GetPostTag(id_tag)
+             if (item[0].id_publication != null){
+                 for(p in item){
+                     posts.add(p)
+                 }
 
              }
-         })
+             postAdapter!!.notifyDataSetChanged()
+             loading.isDismiss()
+         }
+
      }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -156,7 +188,9 @@ import retrofit2.Response
                  }
                  R.id.OrderOld ->{
                      if(orderStatus != 0){
+                         loading.startLoading()
                          orderStatus = Tag().TagServices().setOrder(posts, postAdapter!!, 0)
+                         loading.isDismiss()
 
                      }
 
@@ -164,16 +198,18 @@ import retrofit2.Response
 
                  R.id.OrderNew ->{
                      if(orderStatus != 1){
+                         loading.startLoading()
                         orderStatus = Tag().TagServices().setOrder(posts, postAdapter!!, 1)
-
+                        loading.isDismiss()
                      }
                  }
 
                  R.id.OrderPopular ->{
 
                      if(orderStatus != 2){
+                         loading.startLoading()
                          orderStatus = Tag().TagServices().setOrder(posts, postAdapter!!, 2)
-
+                         loading.isDismiss()
                      }
                  }
 
@@ -182,28 +218,43 @@ import retrofit2.Response
      }
 
      private fun fillTagList(){
+         loading.startLoading()
          tagList.clear()
-         val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
-         val result: Call<List<Tag>> = service.getTags()
+         if(RestEngine.hasInternetConnection(requireContext())){
+             val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
+             val result: Call<List<Tag>> = service.getTags()
 
-         result.enqueue(object: Callback<List<Tag>> {
-             override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
-                 //loading.isDismiss()
-                 Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
-             }
-
-             override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
-                 val item =  response.body()
-                 if(item!![0].id_tag != null){
-
-                     tagList = item.toMutableList()
-
-                     autoTagListAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, tagList)
-                     autotv_search.setAdapter(autoTagListAdapter)
+             result.enqueue(object: Callback<List<Tag>> {
+                 override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
+                     loading.isDismiss()
+                     Toast.makeText(context,t.message.toString(), Toast.LENGTH_LONG).show()
                  }
 
+                 override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
+                     val item =  response.body()
+                     if(item!![0].id_tag != null){
+
+                         tagList = item.toMutableList()
+
+                         autoTagListAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, tagList)
+                         autotv_search.setAdapter(autoTagListAdapter)
+                     }
+                     loading.isDismiss()
+
+                 }
+             })
+         }else{
+             val item = Tag().TagSQLite().GetTags()
+             if(item[0].id_tag != null){
+
+                 tagList = item.toMutableList()
+
+                 autoTagListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, tagList)
+                 autotv_search.setAdapter(autoTagListAdapter)
              }
-         })
+             loading.isDismiss()
+         }
+
 
 
      }

@@ -135,16 +135,19 @@
                     android:id="@+id/SearchBy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="70dp"
+                    android:layout_marginStart="200dp"
                     android:text="@string/SearchTitleradios"
                     android:textColor="@color/textColor"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="312dp"
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="250dp"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="200dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/SearchBy"
@@ -157,8 +160,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="70dp"
                         android:layout_marginBottom="8dp"
-                        android:orientation="horizontal"
                         android:contentDescription="@string/SearchTitleradios"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +192,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchCards"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
@@ -207,16 +210,17 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardBottom"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="80dp"
         android:background="@color/greenPet"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/textColor"
         app:strokeWidth="2dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:ignore="MissingConstraints">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -227,18 +231,21 @@
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="200dp"
                 android:text="@string/Order"
                 android:textColor="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="200dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -253,9 +260,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
-
-
                     <RadioButton
                         android:id="@+id/OrderNew"
                         android:layout_width="match_parent"
@@ -271,6 +275,8 @@
 
                         android:text="@string/Orderradio3"
                         android:textColor="@color/textColor" />
+
+
 
 
                     <RadioButton

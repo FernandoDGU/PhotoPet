@@ -37,7 +37,7 @@ class RestEngine{
 
             val client =  OkHttpClient.Builder().addInterceptor(interceptor).build()
             val retrofit =  Retrofit.Builder()
-                .baseUrl("http://${this.ip}/PhotoPetAPI/") // tu url
+                .baseUrl("http://142.93.6.183/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()
@@ -60,7 +60,6 @@ class RestEngine{
 
 
 
-        private val ip: String = "";
     }
 
 

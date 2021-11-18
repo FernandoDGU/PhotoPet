@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "936032783365",
+    "project_id": "photopet-9d0ce",
+    "storage_bucket": "photopet-9d0ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936032783365:android:0f545869913b18395e206c",
+        "android_client_info": {
+          "package_name": "com.fcfm.photopet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936032783365-t4n2rg8f1gdl0bf1e3mrpg604q52trjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOtwJCk3t_2uR8kSkYggsmh6O7hM37XB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936032783365-t4n2rg8f1gdl0bf1e3mrpg604q52trjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

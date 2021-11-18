@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btnIngresar.setOnClickListener(this)
         btnRegistrar.setOnClickListener(this)
-        saveToSQLite()
 
     }
 
@@ -62,23 +61,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         //overridePendingTransition(R.anim.translate_left_side, R.anim.static_anim)
     }
 
-    private fun saveToSQLite(){
-        val service: ServiceUtils =  RestEngine.getRestEngine().create(ServiceUtils::class.java)
-        val result: Call<SuperData> = service.getAllData("a")
 
-        result.enqueue(object: Callback<SuperData> {
-            override fun onFailure(call: Call<SuperData>, t: Throwable) {
-                //loading.isDismiss()
-                Toast.makeText(this@MainActivity,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<SuperData>, response: Response<SuperData>) {
-                val item =  response.body()
-                if(item!!.users[0].email == null){
-                    Toast.makeText(this@MainActivity, "Hola", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-        })
-    }
 }

@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="@string/CreatePost"
+                android:labelFor="@+id/textDescCreatePost"
                 android:textColor="@color/textColor"
                 android:textSize="24sp" />
 
@@ -51,6 +52,7 @@
         android:layout_marginEnd="2dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardHeaderCreatePost">
 
@@ -63,11 +65,12 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:labelFor="@+id/textDescCreatePost"
                 android:text="@string/descpost"
                 android:textColor="@color/textColor"
-                android:labelFor="@+id/textDescCreatePost"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,9 +82,8 @@
 
                 android:importantForAutofill="no"
                 android:inputType="textImeMultiLine|textMultiLine"
-
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/floatbtnAddImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15"
                 tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,DuplicateSpeakableTextCheck" />
@@ -90,12 +92,12 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/addimage"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDescCreatePost" />
+                app:layout_constraintStart_toEndOf="@+id/textDescCreatePost"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/floatbtnAddImage"
@@ -109,7 +111,7 @@
                 app:backgroundTint="@color/black"
                 app:backgroundTintMode="screen"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textDescCreatePost"
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
                 tools:ignore="RedundantDescriptionCheck" />
 
@@ -117,7 +119,9 @@
                 android:id="@+id/imagesCreatePost"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="128dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="128dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/postImageContent"
                 android:maxHeight="400dp"
@@ -176,7 +180,6 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/descimage"
                 android:textColor="@color/textColor"
-                android:labelFor="@+id/textDescImage"
                 app:layout_constraintBottom_toTopOf="@+id/textDescImage"
                 app:layout_constraintEnd_toStartOf="@+id/btnGuardarDesc"
                 app:layout_constraintStart_toStartOf="parent"
@@ -192,7 +195,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btnGuardarDesc"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck,SpeakableTextPresentCheck" />
+                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
             <Button
                 android:id="@+id/btnDeleteImage"

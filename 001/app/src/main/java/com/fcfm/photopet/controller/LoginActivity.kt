@@ -77,30 +77,36 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun loggingUser(){
-        val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
-        val email = editTextemail.text.toString();
-        val pass = editTextPass.text.toString()
-        val result: Call<User> = service.logInUser(email, pass)
+        if(RestEngine.hasInternetConnection(this)){
+            val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
+            val email = editTextemail.text.toString();
+            val pass = editTextPass.text.toString()
+            val result: Call<User> = service.logInUser(email, pass)
 
-        result.enqueue(object: Callback<User> {
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                loading.isDismiss()
-                Toast.makeText(this@LoginActivity,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                val item =  response.body()
-                if(item!!.email.isNullOrEmpty()){
+            result.enqueue(object: Callback<User> {
+                override fun onFailure(call: Call<User>, t: Throwable) {
                     loading.isDismiss()
-                    Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
-                }else{
-                    loggedUser.setUser(item)
-                    prefs.saveEmail(item.email!!)
-                    showHome()
+                    Toast.makeText(this@LoginActivity,t.message.toString(), Toast.LENGTH_LONG).show()
                 }
 
-            }
-        })
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    val item =  response.body()
+                    if(item!!.email.isNullOrEmpty()){
+                        loading.isDismiss()
+                        Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
+                    }else{
+                        loggedUser.setUser(item)
+                        prefs.saveEmail(item.email!!)
+                        showHome()
+                    }
+
+                }
+            })
+        }else{
+            loading.isDismiss()
+            Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun showHome(){
@@ -126,33 +132,32 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun autoLogIn(email: String){
-        val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
-        val result: Call<User> = service.getUser(email)
-        result.enqueue(object: Callback<User> {
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                loading.isDismiss()
-                Toast.makeText(this@LoginActivity,t.message.toString(), Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                val item =  response.body()
-                if(item!!.email.isNullOrEmpty()){
+        if(RestEngine.hasInternetConnection(this)){
+            val service: ServiceUser =  RestEngine.getRestEngine().create(ServiceUser::class.java)
+            val result: Call<User> = service.getUser(email)
+            result.enqueue(object: Callback<User> {
+                override fun onFailure(call: Call<User>, t: Throwable) {
                     loading.isDismiss()
-                    Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
-                }else{
-                    loggedUser.setUser(item)
-                    showHome()
+                    Toast.makeText(this@LoginActivity,t.message.toString(), Toast.LENGTH_LONG).show()
                 }
 
-            }
-        })
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    val item =  response.body()
+                    if(item!!.email.isNullOrEmpty()){
+                        loading.isDismiss()
+                        Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
+                    }else{
+                        loggedUser.setUser(item)
+                        showHome()
+                    }
+
+                }
+            })
+        }else{
+            loggedUser.setUser(User().UserSQLite().GetUser(email))
+            showHome()
+        }
+
     }
 
-    override fun onResume() {
-        super.onResume()
-        if(canAutoLog()){
-            prefs.saveEmail("")
-            finish()
-        }
-    }
 }

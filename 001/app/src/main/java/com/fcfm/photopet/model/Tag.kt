@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import com.fcfm.photopet.controller.Adapter.PostListRecyclerAdapter
+import com.fcfm.photopet.utils.UserApplication
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.ServiceTag
 import retrofit2.Call
@@ -15,6 +16,28 @@ import java.io.Serializable
 class Tag(var id_tag: Int? = null, var tagname: String? = null)  : Serializable {
     override fun toString(): String {
         return this.tagname!!
+    }
+
+    inner class TagSQLite{
+       fun CreateTag(tags: MutableList<Tag>){
+            if(!UserApplication.dbHelper.deleteTagTable()){
+                return
+            }
+
+            for (t in tags){
+                UserApplication.dbHelper.insertTag(t)
+            }
+
+        }
+
+        fun GetTags(): MutableList<Tag>{
+            val getTags:MutableList<Tag> = UserApplication.dbHelper.getAllTags()
+            return getTags
+        }
+
+        fun GetPostTag(id_post: Int): MutableList<Tag> {
+            return UserApplication.dbHelper.Tags_by_Posts(1)
+        }
     }
 
     inner class TagServices{

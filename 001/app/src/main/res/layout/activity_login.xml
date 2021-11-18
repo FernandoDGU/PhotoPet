@@ -7,150 +7,163 @@
     android:background="@color/backgroundPet"
     android:backgroundTint="@color/backgroundPet">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="244dp"
-        android:layout_height="209dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/appLogo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_iconcamera2" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/title"
-        android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/email"
-        android:textColor="@color/textColor"
-        app:layout_constraintBottom_toTopOf="@+id/editTextemail"
-        app:layout_constraintStart_toStartOf="@+id/editTextemail" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextemail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="60dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+                <TextView
+                    android:id="@+id/PassErr"
+                    android:layout_width="303dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/ErrEmpty_L"
+                    android:textColor="@color/design_default_color_error"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/editTextemail"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextemail"
+                    tools:visibility="gone" />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:labelFor="@+id/editTextemail"
+                    android:textColor="@color/textColor"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextemail"
+                    app:layout_constraintStart_toStartOf="@+id/editTextemail" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/password"
-        android:textColor="@color/textColor"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPass"
-        app:layout_constraintStart_toStartOf="@+id/editTextPass" />
+                <TextView
+                    android:id="@+id/EmailErr"
+                    android:layout_width="303dp"
+                    android:layout_height="18dp"
+                    android:text="@string/ErrEmpty_L"
+                    android:textColor="@color/design_default_color_error"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/editTextPass"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextPass"
+                    tools:visibility="gone" />
 
-    <EditText
-        android:id="@+id/editTextPass"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="60dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/title"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextemail"
-        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
-        <!--android:background="@drawable/edit_round"-->
+                    android:textColor="@color/textColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <Button
-        android:id="@+id/btnLoginIngresar"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/rounded_button_green"
-        android:text="@string/btnSignin"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPass"
-        tools:ignore="TextContrastCheck" />
+                <EditText
+                    android:id="@+id/editTextPass"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/account"
-        android:textColor="@color/textColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/SignUp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLoginIngresar" />
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextemail"
+                    tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-    <TextView
-        android:id="@+id/SignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="100dp"
-        android:text="@string/singup"
-        android:textColor="@color/textColorBlue"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/password"
+                    android:labelFor="@+id/editTextPass"
+                    android:textColor="@color/textColor"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextPass"
+                    app:layout_constraintStart_toStartOf="@+id/editTextPass" />
 
-    <TextView
-        android:id="@+id/EmailErr"
-        android:layout_width="303dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:textColor="@color/design_default_color_error"
-        android:text="@string/ErrEmpty_L"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextemail" />
+                <EditText
+                    android:id="@+id/editTextemail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
 
-    <TextView
-        android:id="@+id/PassErr"
-        android:layout_width="303dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:textColor="@color/design_default_color_error"
-        android:text="@string/ErrEmpty_L"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPass" />
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="244dp"
+                    android:layout_height="209dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/appLogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_iconcamera2" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="41dp"
+                    android:text="@string/account"
+                    android:textColor="@color/textColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/SignUp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnLoginIngresar" />
+
+                <Button
+                    android:id="@+id/btnLoginIngresar"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button_green"
+                    android:text="@string/btnSignin"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextPass"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/SignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="41dp"
+                    android:layout_marginEnd="100dp"
+                    android:text="@string/singup"
+                    android:textColor="@color/textColorBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/btnLoginIngresar"
+                    tools:ignore="TextContrastCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--android:background="@drawable/edit_round"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ import com.fcfm.photopet.utils.ImageUtils
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
-class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publication>, val activity: Activity?): RecyclerView.Adapter<PostListRecyclerAdapter.ViewHolder>(),
+class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, var posts: MutableList<Publication>, val activity: Activity?): RecyclerView.Adapter<PostListRecyclerAdapter.ViewHolder>(),
     Filterable {
 
     private  val layoutInflater =  LayoutInflater.from(context)
@@ -28,6 +28,7 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
         val txtDescription =  itemView?.findViewById<TextView>(R.id.txtDesc)
         val imgAlbumCard =  itemView?.findViewById<ImageView>(R.id.imagePost)
         val ivAuthor =  itemView?.findViewById<CircleImageView>(R.id.iv_author)
+
         var postPosition:Int =  0
 
         init{
@@ -53,7 +54,7 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView =  this.layoutInflater.inflate(R.layout.card_publications,parent,false)
+        val itemView =  this.layoutInflater.inflate(idDrawerRecycler,parent,false)
         return  ViewHolder(itemView)
     }
 
@@ -63,17 +64,24 @@ class PostListRecyclerAdapter(val context: Context?, var posts: MutableList<Publ
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
             val post = this.posts[position]
-            holder.txtAuthor.text = post.author
+
+
             holder.txtDescription.setText(post.description)
             holder.postPosition = position
             //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
 
-            var strImage: String = posts[position].imgArray!!.replace("data:image/png;base64,", "")
-            var byteArray = Base64.getDecoder().decode(strImage)
-            holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
-            strImage= posts[position].authorImage!!.replace("data:image/png;base64,", "")
-            byteArray = Base64.getDecoder().decode(strImage)
-            holder.ivAuthor.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+            if(idDrawerRecycler != R.layout.card_publication_smaller){
+                holder.txtAuthor.text = post.author
+
+                var strImage: String = posts[position].imgArray!!.replace("data:image/png;base64,", "")
+                var byteArray = Base64.getDecoder().decode(strImage)
+                holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+                strImage= posts[position].authorImage!!.replace("data:image/png;base64,", "")
+                byteArray = Base64.getDecoder().decode(strImage)
+                holder.ivAuthor.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
+
+            }
+
 
     }
 

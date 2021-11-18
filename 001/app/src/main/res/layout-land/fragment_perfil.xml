@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundPet">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/toggle"
+                android:layout_width="310dp"
+                android:layout_height="48dp"
+                android:background="@drawable/black_out_line"
+                android:checkedButton="@+id/Mylikes"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/rvProfileCards"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+                tools:ignore="MissingConstraints">
+
+                <RadioButton
+                    android:id="@+id/Myposts"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_widget_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/myPosts"
+                    android:textColor="@color/white"
+                    tools:ignore="TextContrastCheck" />
+
+                <RadioButton
+                    android:id="@+id/Mylikes"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_widget_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/myLikes"
+                    android:textColor="@color/white"
+                    tools:ignore="TextContrastCheck" />
+            </RadioGroup>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProfileCards"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/backgroundPet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggle"
+                tools:ignore="MissingConstraints"
+                tools:listitem="@layout/card_publications" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/greenPet"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:strokeColor="@color/textColor"
+                app:strokeWidth="2dp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="40dp">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/cardProfile">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageProfilePost"
+                        android:layout_width="105dp"
+                        android:layout_height="99dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="60dp"
+                        android:src="@drawable/puppy"
+                        app:civ_border_width="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/txtNameProfile"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/Lorem"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
+                        app:layout_constraintTop_toTopOf="@+id/imageProfilePost" />
+
+                    <Button
+                        android:id="@+id/btnEdit"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/rounded_button_green"
+                        android:text="@string/edit"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtNameProfile"
+                        tools:ignore="TextContrastCheck" />
+
+                    <Button
+                        android:id="@+id/btnCerrarSesion"
+                        android:layout_width="145dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="300dp"
+                        android:background="@drawable/rounded_button_green"
+                        android:text="@string/close"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btnEdit"
+                        app:layout_constraintTop_toTopOf="@+id/btnEdit"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/desc"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageProfilePost" />
+
+                    <TextView
+                        android:id="@+id/txtDescProfile"
+                        android:layout_width="580dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@string/Lorem"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintBottom_toTopOf="@+id/txtEmailProfile"
+                        app:layout_constraintStart_toEndOf="@+id/textView10"
+                        app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/email"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/phone"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                    <TextView
+                        android:id="@+id/txtEmailProfile"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/Lorem"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintStart_toEndOf="@+id/textView12"
+                        app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+                    <TextView
+                        android:id="@+id/txtNumberProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:maxEms="10"
+                        android:maxLines="1"
+                        android:text="@string/Lorem"
+                        android:textColor="@color/textColor"
+                        app:layout_constraintStart_toEndOf="@+id/textView13"
+                        app:layout_constraintTop_toTopOf="@+id/textView13" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:translationZ="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/profiletab"
+                        android:textColor="@color/textColor"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+
+                        android:background="@color/textColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:ignore="MissingConstraints, ContentDescription">
+
+                    </View>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

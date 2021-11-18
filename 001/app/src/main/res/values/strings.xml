@@ -2,7 +2,7 @@
     <string name="app_name">PhotoPet</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="account">Do not have an account ? </string>
+    <string name="account">Do not have an account? </string>
     <string name="singup">Sign up</string>
     <string name="title">PHOTOPET</string>
     <string name="btnSignin">Sign in</string>
@@ -22,6 +22,10 @@
     <string name="dialogDeletePostMessage">Are you sure you want to delete this post?</string>
     <string name="dialogYes">Yes</string>
     <string name="dialogNo">No</string>
+    <string name="likeMessage">You like this post</string>
+    <string name="dislikeMessage">You no longer like this post</string>
+
+
 
 
 
@@ -76,6 +80,7 @@
     <string name="emptyDesc">There is no description</string>
     <string name="emptyPhone">There is no phone</string>
     <string name="save">Save</string>
+    <string name="DescSaved">Description Saved</string>
 
 
     <!--Validaciones-->
@@ -104,6 +109,7 @@
     <string name="searchByDesc">Search by description</string>
     <string name="LikeButton">Press to like</string>
     <string name="DislikeButton">Press to dislike</string>
+    <string name="imageCircleShowUserPosts">Press to access this user\'s posts.</string>
 
 
 

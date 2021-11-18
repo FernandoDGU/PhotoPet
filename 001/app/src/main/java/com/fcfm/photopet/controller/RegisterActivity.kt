@@ -40,8 +40,10 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
         supportActionBar?.hide()
+        loading = LoadingDialog().ActivityLD(this)
          destiny = intent.getStringExtra("destiny");
         if(destiny == "modify"){
+            loading.startLoading()
             val actualUser = loggedUser.getUser()
             editTextName.setText(actualUser.firstname)
             editTextLast.setText(actualUser.lastname)
@@ -52,7 +54,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             editTextDescRegister.setText(actualUser.description)
             editTextPhoneRegister.setText(actualUser.phone)
 
-            var byteArray:ByteArray? = null
+            var byteArray: ByteArray?
             val strImage:String =  actualUser.image!!.replace("data:image/png;base64,","")
             byteArray =  Base64.getDecoder().decode(strImage)
             RegisterImage!!.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
@@ -61,6 +63,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             buttonModify.visibility = View.VISIBLE
             buttonDelete.visibility = View.VISIBLE
             buttonModify.setOnClickListener(this)
+            buttonDelete.setOnClickListener(this)
+            loading.isDismiss()
         }else if(destiny == "register"){
             buttonModify.visibility = View.GONE
             buttonRegister.visibility = View.VISIBLE
@@ -68,7 +72,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         }
 
 
-        loading = LoadingDialog().ActivityLD(this)
+
         RegisterImage.setOnClickListener(this)
     }
 
@@ -209,6 +213,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 when(item!!.message){
                     "ok" -> {
                         loggedUser.setUser(user)
+                        prefs.saveEmail(loggedUser.getUser().email!!)
                         loading.isDismiss()
                         finish()
                     }
@@ -231,6 +236,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     private fun validateName():Boolean {
         if(editTextName.text.toString().isEmpty()){
             NameError.text = getString(R.string.ErrEmpty_L)
+            Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
+            NameError.requestFocus()
             return false
         }
         NameError.text = ""
@@ -240,6 +247,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     private fun validateLast():Boolean{
         if(editTextLast.text.toString().isEmpty()){
             LastError.text = getString(R.string.ErrEmpty_L)
+            Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
+            LastError.requestFocus()
             return false
         }
         LastError.text = ""
@@ -249,9 +258,13 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     private fun validateEmail():Boolean{
         if(editTextEmailRegister.text.toString().isEmpty()){
             EmailError.text = getString(R.string.ErrEmpty_L)
+            Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
+            EmailError.requestFocus()
             return false
         }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(editTextEmailRegister.text).matches()){
             EmailError.text = getString(R.string.ErrEmail)
+            Toast.makeText(this, R.string.ErrEmail, Toast.LENGTH_SHORT).show()
+            EmailError.requestFocus()
             return false
         }
         EmailError.text = ""
@@ -272,12 +285,17 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         if(editTextPasslRegister.text.toString().isEmpty() || destiny == "register"){
             if(editTextPasslRegister.text.toString().isEmpty()){
                 PassError.text = getString(R.string.ErrEmpty_L)
+                Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
+                PassError.requestFocus()
                 return false
             }else if (!isValidPassword(editTextPasslRegister.text.toString())){
                 PassError.text = getString(R.string.ErrCharacter)
+                PassError.requestFocus()
                 return false
             }else if(editTextPasslRegister.text.toString().length < 8){
                 PassError.text = getString(R.string.ErrPass)
+                Toast.makeText(this, R.string.ErrPass, Toast.LENGTH_SHORT).show()
+                PassError.requestFocus()
                 return false
             }
         }
@@ -289,9 +307,13 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     private fun validatePhone():Boolean{
         if(editTextPhoneRegister.text.toString().length < 10 && !editTextPhoneRegister.text.isEmpty()){
             PhoneError.text = getString(R.string.ErrPhone)
+            Toast.makeText(this, R.string.ErrPhone, Toast.LENGTH_SHORT).show()
+            PhoneError.requestFocus()
             return false
         }else if(editTextPhoneRegister.text.toString().length > 10){
             PhoneError.text = getString(R.string.ErrPhone)
+            Toast.makeText(this, R.string.ErrPhone, Toast.LENGTH_SHORT).show()
+            PhoneError.requestFocus()
             return false
         }
         PhoneError.text = ""
