@@ -36,7 +36,7 @@ class Tag(var id_tag: Int? = null, var tagname: String? = null)  : Serializable 
         }
 
         fun GetPostTag(id_post: Int): MutableList<Tag> {
-            return UserApplication.dbHelper.Tags_by_Posts(1)
+            return UserApplication.dbHelper.Tags_by_Posts(id_post)
         }
     }
 

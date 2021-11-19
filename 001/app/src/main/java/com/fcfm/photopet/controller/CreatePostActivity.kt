@@ -177,6 +177,10 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         }else if(albumList.isEmpty()){
                             Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
                             return
+                        }else if(selectedTagList.isEmpty()) {
+                            Toast.makeText(this, R.string.postEmptyTagErr, Toast.LENGTH_SHORT).show()
+                            loading.isDismiss()
+                            return
                         }else {
                             loading.startLoading()
                             for(a in albumList){

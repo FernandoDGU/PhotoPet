@@ -16,6 +16,7 @@ import com.fcfm.photopet.utils.LoadingDialog
 import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.ServicePost
 import com.fcfm.photopet.utils.retrofit.ServiceTag
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import kotlinx.android.synthetic.main.fragment_busqueda.*
 import org.w3c.dom.Text
 import retrofit2.Call
@@ -25,6 +26,7 @@ import retrofit2.Response
  class Fragment_Busqueda: Fragment(), androidx.appcompat.widget.SearchView.OnQueryTextListener, View.OnClickListener{
     private lateinit var rootView: View
     private lateinit var loading: LoadingDialog.FragmentLD
+    private lateinit var autotv_search:MaterialAutoCompleteTextView
     private var postAdapter: PostListRecyclerAdapter? = null
      lateinit var autoTagListAdapter: ArrayAdapter<Tag>
      var tagList: MutableList<Tag> = mutableListOf()
@@ -41,7 +43,7 @@ import retrofit2.Response
         loading = LoadingDialog().FragmentLD(this)
         val recyclerPostSearch = rootView.findViewById<RecyclerView>(R.id.rvSearchCards)
         val editSV = rootView.findViewById<androidx.appcompat.widget.SearchView>(R.id.editSearch)
-        val autotv_search = rootView.findViewById<AutoCompleteTextView>(R.id.autotv_search)
+        autotv_search = rootView.findViewById<MaterialAutoCompleteTextView>(R.id.autotv_search)
         val radioDesc = rootView.findViewById<RadioButton>(R.id.radioDesc)
         val radioTag = rootView.findViewById<RadioButton>(R.id.radioTag)
         val OrderOld = rootView.findViewById<RadioButton>(R.id.OrderOld)
@@ -189,7 +191,7 @@ import retrofit2.Response
                          editSV.visibility = View.VISIBLE
                          autotv_search.visibility = View.GONE
                          iconSearch.visibility = View.INVISIBLE
-                         autotv_search.text = null
+                         //autotv_search
                          fillPostList()
 
                      }

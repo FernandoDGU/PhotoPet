@@ -94,7 +94,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"/>
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/autotv_search"
                     android:layout_width="250dp"
                     android:layout_height="0dp"
@@ -103,7 +103,6 @@
                     android:background="@null"
                     android:completionThreshold="0"
                     android:visibility="gone"
-                    android:hint="@string/searchByTag"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

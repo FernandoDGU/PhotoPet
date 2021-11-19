@@ -370,6 +370,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             .setIcon(R.drawable.ic_baseline_warning_24)
             .setPositiveButton(getString(R.string.dialogYes)){ _,_ ->
                 prefs.saveEmail("")
+                prefs.savePost(Publication())
                 deleteUser()
 
             }
