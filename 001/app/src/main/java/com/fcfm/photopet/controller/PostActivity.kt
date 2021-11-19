@@ -21,8 +21,8 @@ import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.*
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_crearpublicacion.*
+import kotlinx.android.synthetic.main.activity_publicacion.*
 import kotlinx.android.synthetic.main.dialog_user_publication.*
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -198,7 +198,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
 
         if(loggedUser.getUser().email.equals(post.email)){
             btnModif.visibility = View.VISIBLE
-            TitlePost.setText(R.string.HeaderEditPost)
+            TitlePostPubication.setText(R.string.HeaderEditPost)
         }
 
     }

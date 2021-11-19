@@ -78,6 +78,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
             btnModif.visibility = View.VISIBLE
             btnDeletePost.visibility = View.VISIBLE
             post = intent.getSerializableExtra("post") as Publication
+            TitlePost.setText(R.string.HeaderEditPost)
             btnModif.setOnClickListener(this)
             btnDeletePost.setOnClickListener(this)
             getTags()

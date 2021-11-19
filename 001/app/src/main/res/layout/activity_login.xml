@@ -21,7 +21,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/PassErr"
+                    android:id="@+id/EmailErr"
                     android:layout_width="303dp"
                     android:layout_height="18dp"
                     android:layout_marginStart="16dp"
@@ -45,7 +45,7 @@
                     app:layout_constraintStart_toStartOf="@+id/editTextemail" />
 
                 <TextView
-                    android:id="@+id/EmailErr"
+                    android:id="@+id/PassErr"
                     android:layout_width="303dp"
                     android:layout_height="18dp"
                     android:text="@string/ErrEmpty_L"
