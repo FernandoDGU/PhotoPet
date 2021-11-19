@@ -115,6 +115,7 @@
 
     <string name="LogInErr">Some of the data entered is wrong</string>
     <string name="HeaderEditPost">Edit Post</string>
+    <string name="CheckBoxPass">Edit Password?</string>
 
 
 

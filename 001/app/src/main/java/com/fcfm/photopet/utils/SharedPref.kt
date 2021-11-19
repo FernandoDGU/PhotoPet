@@ -38,10 +38,9 @@ class SharedPref (val context: Context){
             return Publication()
         }else{
             var post = Gson().fromJson(postJSON, Publication::class.java)
-            if(post.id_publication!=null)
+
                 return post
-            else
-                return Publication()
+
         }
 
     }

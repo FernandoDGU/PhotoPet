@@ -221,7 +221,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                     }
                 }
                 R.id.btnTagsPost ->{
-                    loading.startLoading()
+
                     windowTagsPost.setContentView(viewTagsPost)
                     autoCompleteTag = viewTagsPost.findViewById<MaterialAutoCompleteTextView>(R.id.autotv_Tag)
 
@@ -245,7 +245,6 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                     window!!.setGravity(Gravity.CENTER)
                     windowTagsPost.show()
                     viewTagsPost.btn_createtag.setOnClickListener(this)
-
                     fillTagList()
                 }
                 R.id.btn_createtag ->{
@@ -273,6 +272,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         }
 
                         if(!alreadyExists){
+
                             insertTag(Tag(null, inputText))
                         }else{
                             loading.isDismiss()
@@ -442,10 +442,12 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                             }
                         }
+                        loading.isDismiss()
                         autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
                         autoCompleteTag.setAdapter(autoTagListAdapter)
                         tagListAdapter.notifyDataSetChanged()
-                        loading.isDismiss()
+
+
                     }
 
                 }
@@ -469,10 +471,11 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                     }
                 }
+                loading.isDismiss()
                 autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
                 autoCompleteTag.setAdapter(autoTagListAdapter)
                 tagListAdapter.notifyDataSetChanged()
-                loading.isDismiss()
+
             }
         }
 

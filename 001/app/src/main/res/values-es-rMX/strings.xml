@@ -87,4 +87,5 @@
     <string name="imageCircleShowUserPosts">Presiona para acceder a las publicaciones de este usuario.</string>
     <string name="LogInErr">Alguno de los datos introducidos son erróneos</string>
     <string name="HeaderEditPost">Editar Publicación</string>
+    <string name="CheckBoxPass">¿Editar contraseña?</string>
 </resources>

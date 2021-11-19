@@ -61,6 +61,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
             buttonRegister.visibility = View.GONE
             buttonModify.visibility = View.VISIBLE
+            checkPass.visibility = View.VISIBLE
+
             buttonDelete.visibility = View.VISIBLE
             buttonModify.setOnClickListener(this)
             buttonDelete.setOnClickListener(this)
@@ -177,8 +179,12 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun modifyUser(){
-        var pass = editTextPasslRegister.text.toString()
-        if(pass.isNullOrEmpty()) pass = loggedUser.getUser().password!!
+        var pass:String = ""
+        if(!checkPass.isChecked){
+            pass = editTextPasslRegister.text.toString()
+        }else{
+            pass = loggedUser.getUser().password!!
+        }
 
         var strEncodeImage = loggedUser.getUser().image
         if(choosedPhoto){
@@ -284,9 +290,9 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun validatePass():Boolean{
-        if(editTextPasslRegister.text.toString().isEmpty() || destiny == "register"){
-            if(editTextPasslRegister.text.toString().isEmpty()){
-                PassError.text = getString(R.string.ErrEmpty_L)
+            if(checkPass.isChecked){
+            if(editTextPasslRegister.text.toString().isEmpty() && destiny == "register"){
+                //PassError.text = getString(R.string.ErrEmpty_L)
                 Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
                 editTextPasslRegister.requestFocus()
                 return false
@@ -295,13 +301,12 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 editTextPasslRegister.requestFocus()
                 return false
             }else if(editTextPasslRegister.text.toString().length < 8){
-                PassError.text = getString(R.string.ErrPass)
+                //PassError.text = getString(R.string.ErrPass)
                 Toast.makeText(this, R.string.ErrPass, Toast.LENGTH_SHORT).show()
                 editTextPasslRegister.requestFocus()
                 return false
             }
-        }
-
+            }
         PassError.text = ""
         return true
     }

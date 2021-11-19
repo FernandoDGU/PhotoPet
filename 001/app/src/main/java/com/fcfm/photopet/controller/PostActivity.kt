@@ -116,7 +116,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
                     val window = windowTagsPost.window
                     window!!.setGravity(Gravity.CENTER)
                     windowTagsPost.show()
-                    this.postAdapter =  PostListRecyclerAdapter(this, R.layout.card_publication_smaller, posts, this)
+                    this.postAdapter =  PostListRecyclerAdapter(this, R.layout.card_publications2, posts, this)
                     viewUserPost.findViewById<RecyclerView>(R.id.rvShowUserPosts).layoutManager =  LinearLayoutManager(this)
                     viewUserPost.findViewById<RecyclerView>(R.id.rvShowUserPosts).adapter = this.postAdapter
                     viewUserPost.findViewById<Button>(R.id.btn_goBackDialog).setOnClickListener(this)

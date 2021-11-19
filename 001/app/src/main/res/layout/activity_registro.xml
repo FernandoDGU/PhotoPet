@@ -328,6 +328,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPhoneRegister" />
 
+            <CheckBox
+                android:id="@+id/checkPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="5dp"
+                android:checked="true"
+                android:text="@string/CheckBoxPass"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/editTextPasslRegister"
+                app:layout_constraintStart_toEndOf="@+id/textPass" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

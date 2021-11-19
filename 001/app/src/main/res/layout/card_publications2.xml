@@ -5,11 +5,9 @@
     android:id="@+id/card_item_publication"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:animateLayoutChanges="true"
-    android:background="@color/backgroundPet"
-    app:cardBackgroundColor="@color/backgroundPet"
+
+    app:cardBackgroundColor="@color/cardColor"
     app:cardCornerRadius="20dp"
-    app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout

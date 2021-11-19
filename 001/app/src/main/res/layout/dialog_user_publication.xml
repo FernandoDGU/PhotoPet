@@ -105,12 +105,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="300dp"
                     android:layout_marginTop="16dp"
-                    android:foregroundGravity="center_horizontal"
                     android:background="@drawable/drawable_interior_border"
+                    android:foregroundGravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPhoneUserShowPost"
-                    tools:listitem="@layout/card_publication_smaller">
+                    tools:listitem="@layout/card_publications2">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
