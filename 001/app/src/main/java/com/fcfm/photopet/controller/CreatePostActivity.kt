@@ -45,13 +45,14 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
     lateinit var windowTagsPost: Dialog
     lateinit var autoCompleteTag: MaterialAutoCompleteTextView
     lateinit var autoTagListAdapter: ArrayAdapter<Tag>
-    var imagePos:Int = 0
-    var tagList: MutableList<Tag> = mutableListOf()
-    var albumList: MutableList<Album> = mutableListOf()
-    var selectedTagList: MutableList<Tag> = mutableListOf()
-    var post = Publication()
+    private var imagePos:Int = 0
+    private var tagList: MutableList<Tag> = mutableListOf()
+    private var albumList: MutableList<Album> = mutableListOf()
+    private var selectedTagList: MutableList<Tag> = mutableListOf()
+    private var post = Publication()
     private var tagListAdapter = TagListRecyclerAdapter(this, selectedTagList,this, this)
     private lateinit var loading : LoadingDialog.ActivityLD
+    private var isPostCreated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,17 +102,23 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
         if(v!=null){
             when (v.id){
                 R.id.btnPublicar ->{
-
+                    loading.startLoading()
                     if(RestEngine.hasInternetConnection(this)){
                         val postDesc = textDescCreatePost.text.toString();
                         if(postDesc.isEmpty()){
                             Toast.makeText(this, R.string.postDescEmptyErr, Toast.LENGTH_SHORT).show()
+                            loading.isDismiss()
                             return
                         }else if(albumList.isEmpty()){
                             Toast.makeText(this, R.string.postEmptyErr, Toast.LENGTH_SHORT).show()
+                            loading.isDismiss()
                             return
-                        }else {
-                            loading.startLoading()
+                        }else if(selectedTagList.isEmpty()) {
+                            Toast.makeText(this, R.string.postEmptyTagErr, Toast.LENGTH_SHORT).show()
+                            loading.isDismiss()
+                            return
+                        }else{
+
                             for(a in albumList){
                                 val encodedString: String =  Base64.getEncoder().encodeToString(a.image)
                                 val strEncodeImage: String = "data:image/png;base64," + encodedString
@@ -122,8 +129,8 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                                 }
                             }
                             post.description = postDesc
-                            post.albums = albumList
-                            post.tags = selectedTagList
+                            post.albums = albumList.toMutableList()
+                            post.tags = selectedTagList.toMutableList()
                             post.email = loggedUser.getUser().email
 
                             val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
@@ -139,7 +146,8 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                                     val item =  response.body()
                                     when(item!!.message){
                                         "ok" -> {
-                                            prefs.savePost(Publication())
+                                            isPostCreated = true
+                                            post = Publication()
                                             showPost()
 
                                         }
@@ -155,6 +163,7 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         }
                     }else{
                         Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
+                        loading.isDismiss()
                     }
 
                     //showPost()
@@ -584,6 +593,8 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
     }
 
+
+
     private fun getAlbums(){
         if(RestEngine.hasInternetConnection(this)){
             val service: ServiceAlbum =  RestEngine.getRestEngine().create(ServiceAlbum::class.java)
@@ -727,10 +738,12 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
     private fun doPostDraft(){
         if(intent.extras == null){
-            post.albums = albumList
-            post.tags = selectedTagList
-            post.description  = textDescCreatePost.text.toString()
-            post.email = loggedUser.getUser().email
+            if(!isPostCreated){
+                post.albums = albumList
+                post.tags = selectedTagList
+                post.description  = textDescCreatePost.text.toString()
+                post.email = loggedUser.getUser().email
+            }
             prefs.savePost(post)
         }
 

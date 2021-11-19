@@ -30,6 +30,7 @@ import com.fcfm.photopet.utils.retrofit.ServicePost
 import com.fcfm.photopet.utils.retrofit.ServiceTag
 import com.fcfm.photopet.utils.retrofit.ServiceUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

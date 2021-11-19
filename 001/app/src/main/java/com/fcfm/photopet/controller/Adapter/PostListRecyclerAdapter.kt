@@ -12,6 +12,7 @@ import com.fcfm.photopet.R
 import com.fcfm.photopet.controller.PostActivity
 import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.utils.ImageUtils
+import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -19,7 +20,7 @@ class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, v
     Filterable {
 
     private  val layoutInflater =  LayoutInflater.from(context)
-    private val fullAlbums =  posts
+    private val fullPosts =  posts
 
     //se hace cargo de los graficos
     inner class  ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
@@ -79,16 +80,16 @@ class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, v
         return object : Filter(){
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
 
-                //Obtenemos la cadena
+
                 val filterResults = Filter.FilterResults()
                 filterResults.values =  if (charSequence == null || charSequence.isEmpty()){
 
-                    fullAlbums
+                    fullPosts
 
                 }else{
                     val queryString = charSequence.toString().lowercase()
 
-
+                    posts = fullPosts.toMutableList()
 
                     posts.filter { post ->
 

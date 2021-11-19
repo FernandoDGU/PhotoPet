@@ -19,6 +19,7 @@ import com.fcfm.photopet.utils.ImageUtils
 import com.fcfm.photopet.utils.LoadingDialog
 import com.fcfm.photopet.utils.loggedUser
 import com.fcfm.photopet.utils.retrofit.*
+import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_crearpublicacion.*
 import kotlinx.android.synthetic.main.activity_publicacion.*
@@ -61,7 +62,8 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
         setContentView(R.layout.activity_publicacion)
         supportActionBar?.hide()
         overridePendingTransition(R.anim.zoom_in, R.anim.static_anim)
-        post = intent.getSerializableExtra("post") as Publication;
+        val postString = intent.getStringExtra("post")
+        post = intent.getSerializableExtra("post") as Publication
 
         windowTagsPost = Dialog(this)
         viewUserPost = layoutInflater.inflate(R.layout.dialog_user_publication, null);
@@ -460,6 +462,11 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
             loading.isDismiss()
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        windowTagsPost.dismiss()
     }
 
 }

@@ -88,4 +88,7 @@
     <string name="LogInErr">Alguno de los datos introducidos son erróneos</string>
     <string name="HeaderEditPost">Editar Publicación</string>
     <string name="CheckBoxPass">¿Editar contraseña?</string>
+    <string name="postEmptyTagErr">La publicación necesita al menos una etiqueta}</string>
+    <string name="imageSizeErr">"Número de imágenes que excedían el tamaño esperado (7MB): "</string>
+    <string name="imageSizeErrHeader">Error de imagen</string>
 </resources>

@@ -17,6 +17,7 @@ import com.fcfm.photopet.utils.retrofit.RestEngine
 import com.fcfm.photopet.utils.retrofit.ServicePost
 import com.fcfm.photopet.utils.retrofit.ServiceTag
 import kotlinx.android.synthetic.main.fragment_busqueda.*
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,9 +28,10 @@ import retrofit2.Response
     private var postAdapter: PostListRecyclerAdapter? = null
      lateinit var autoTagListAdapter: ArrayAdapter<Tag>
      var tagList: MutableList<Tag> = mutableListOf()
+     var completePostList: MutableList<Publication> = mutableListOf()
      var orderStatus = 1;
-
     private var posts: MutableList<Publication> = mutableListOf()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +47,7 @@ import retrofit2.Response
         val OrderOld = rootView.findViewById<RadioButton>(R.id.OrderOld)
         val OrderNew = rootView.findViewById<RadioButton>(R.id.OrderNew)
         val OrderPopular = rootView.findViewById<RadioButton>(R.id.OrderPopular)
+        val textHeader = rootView.findViewById<TextView>(R.id.textView9)
 
         //val radioTag = rootView.findViewById<androidx.appcompat.widget.SearchView>(R.id.radioTag)
 
@@ -83,8 +86,10 @@ import retrofit2.Response
 
                 override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
                     val item =  response.body()
+
                     if (item!![0].id_publication != null){
-                        for(p in item){
+                        completePostList = item.toMutableList()
+                        for(p in completePostList){
                             posts.add(p)
                         }
 
@@ -97,7 +102,8 @@ import retrofit2.Response
         }else{
             val item = Publication().PublicationSQLite().GetPostImages()
             if (item!![0].id_publication != null){
-                for(p in item){
+                completePostList = item.toMutableList()
+                for(p in completePostList){
                     posts.add(p)
                 }
             }
@@ -153,7 +159,11 @@ import retrofit2.Response
 
     override fun onQueryTextChange(newText: String?): Boolean {
         if (newText != null){
-            if(postAdapter != null) this.postAdapter?.filter?.filter(newText)
+            if(postAdapter != null) {
+                //posts = completePostList.toMutableList()
+                postAdapter!!.notifyDataSetChanged()
+                this.postAdapter?.filter?.filter(newText)
+            }
         }
         return false
     }

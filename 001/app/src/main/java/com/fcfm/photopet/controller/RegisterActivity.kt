@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
+import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.ImageUtils
 import com.fcfm.photopet.utils.LoadingDialog
@@ -166,6 +167,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 when(item!!.message){
                     "ok" -> {
                         loggedUser.setUser(user)
+                        prefs.saveEmail(loggedUser.getUser().email!!)
+                        prefs.savePost(Publication())
                         showHome()
                     }
                     "23000" -> {
@@ -181,9 +184,9 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
     private fun modifyUser(){
         var pass:String = ""
         if(!checkPass.isChecked){
-            pass = editTextPasslRegister.text.toString()
-        }else{
             pass = loggedUser.getUser().password!!
+        }else{
+            pass = editTextPasslRegister.text.toString()
         }
 
         var strEncodeImage = loggedUser.getUser().image
@@ -221,7 +224,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                 when(item!!.message){
                     "ok" -> {
                         loggedUser.setUser(user)
-                        prefs.saveEmail(loggedUser.getUser().email!!)
+
                         loading.isDismiss()
                         finish()
                     }
@@ -239,6 +242,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         val intent = Intent(this, FragmentsActivity::class.java)
         loading.isDismiss()
         startActivity(intent)
+        finish()
     }
 
     private fun validateName():Boolean {
@@ -291,7 +295,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
 
     private fun validatePass():Boolean{
             if(checkPass.isChecked){
-            if(editTextPasslRegister.text.toString().isEmpty() && destiny == "register"){
+            if(editTextPasslRegister.text.toString().isEmpty()){
                 //PassError.text = getString(R.string.ErrEmpty_L)
                 Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
                 editTextPasslRegister.requestFocus()
