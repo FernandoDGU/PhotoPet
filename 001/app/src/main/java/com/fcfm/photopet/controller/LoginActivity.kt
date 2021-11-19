@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.fcfm.photopet.R
+import com.fcfm.photopet.model.Publication
 import com.fcfm.photopet.model.User
 import com.fcfm.photopet.utils.LoadingDialog
 import com.fcfm.photopet.utils.UserApplication
@@ -97,6 +98,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
                     }else{
                         loggedUser.setUser(item)
                         prefs.saveEmail(item.email!!)
+                        prefs.savePost(Publication())
                         showHome()
                     }
 
