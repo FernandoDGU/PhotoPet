@@ -119,6 +119,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
                     this.postAdapter =  PostListRecyclerAdapter(this, R.layout.card_publication_smaller, posts, this)
                     viewUserPost.findViewById<RecyclerView>(R.id.rvShowUserPosts).layoutManager =  LinearLayoutManager(this)
                     viewUserPost.findViewById<RecyclerView>(R.id.rvShowUserPosts).adapter = this.postAdapter
+                    viewUserPost.findViewById<Button>(R.id.btn_goBackDialog).setOnClickListener(this)
                     loading.startLoading()
                     getUserofPost()
 
@@ -166,6 +167,9 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
                     val index = imagePos - 1
                     changeImage(index)
                 }
+                R.id.btn_goBackDialog ->{
+                    windowTagsPost.dismiss()
+                }
             }
         }
     }
@@ -194,6 +198,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
 
         if(loggedUser.getUser().email.equals(post.email)){
             btnModif.visibility = View.VISIBLE
+            TitlePost.setText(R.string.HeaderEditPost)
         }
 
     }

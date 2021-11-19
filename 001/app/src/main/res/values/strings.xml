@@ -4,7 +4,7 @@
     <string name="password">Password</string>
     <string name="account">Do not have an account? </string>
     <string name="singup">Sign up</string>
-    <string name="title">PHOTOPET</string>
+    <string name="title">PhotoPet</string>
     <string name="btnSignin">Sign in</string>
     <string name="btnSignup">Sign Up</string>
     <string name="btnEdit">Apply changes</string>
@@ -110,6 +110,11 @@
     <string name="LikeButton">Press to like</string>
     <string name="DislikeButton">Press to dislike</string>
     <string name="imageCircleShowUserPosts">Press to access this user\'s posts.</string>
+
+
+
+    <string name="LogInErr">Some of the data entered is wrong</string>
+    <string name="HeaderEditPost">Edit Post</string>
 
 
 

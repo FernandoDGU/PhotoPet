@@ -24,10 +24,10 @@ class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, v
     //se hace cargo de los graficos
     inner class  ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
-        val txtAuthor = itemView?.findViewById<TextView>(R.id.txtAuthor)
-        val txtDescription =  itemView?.findViewById<TextView>(R.id.txtDesc)
-        val imgAlbumCard =  itemView?.findViewById<ImageView>(R.id.imagePost)
-        val ivAuthor =  itemView?.findViewById<CircleImageView>(R.id.iv_author)
+        val txtAuthor = itemView?.findViewById<TextView>(R.id.txtAuthorCard)
+        val txtDescription =  itemView?.findViewById<TextView>(R.id.txtDescCard)
+        val imgAlbumCard =  itemView?.findViewById<ImageView>(R.id.imagePostCard)
+        //val ivAuthor =  itemView?.findViewById<CircleImageView>(R.id.iv_author)
 
         var postPosition:Int =  0
 
@@ -37,12 +37,7 @@ class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, v
         override fun onClick(v: View?) {
 
             when(v!!.id){
-                R.id.FrameLayoutPostList->{
-                    //Toast.makeText(context, this.albumPosition.toString(), Toast.LENGTH_SHORT).show()
-                    //Lanzamos el intent para abrir el detall
-                    //val  activityIntent =  Intent(context,AlbumActivity::class.java)
-                    //activityIntent.putExtra(ALBUM_POSITION,this.albumPosition)
-                    //context.startActivity(activityIntent)
+                R.id.card_item_publication->{
                     val intent = Intent(context, PostActivity::class.java)
                     intent.putExtra("post", posts[postPosition])
                     context!!.startActivity(intent)
@@ -68,7 +63,6 @@ class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, v
 
             holder.txtDescription.setText(post.description)
             holder.postPosition = position
-            //holder.imgAlbumCard.setImageBitmap(ImageUtilities.getBitMapFromByteArray(album.imgArray!!))
 
             if(idDrawerRecycler != R.layout.card_publication_smaller){
                 holder.txtAuthor.text = post.author
@@ -76,10 +70,6 @@ class PostListRecyclerAdapter(val context: Context?, var idDrawerRecycler:Int, v
                 var strImage: String = posts[position].imgArray!!.replace("data:image/png;base64,", "")
                 var byteArray = Base64.getDecoder().decode(strImage)
                 holder.imgAlbumCard.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
-                strImage= posts[position].authorImage!!.replace("data:image/png;base64,", "")
-                byteArray = Base64.getDecoder().decode(strImage)
-                holder.ivAuthor.setImageBitmap(ImageUtils.getBitMapFromByteArray(byteArray))
-
             }
 
 

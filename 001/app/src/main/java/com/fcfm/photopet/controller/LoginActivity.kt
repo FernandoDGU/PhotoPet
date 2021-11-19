@@ -93,7 +93,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
                     val item =  response.body()
                     if(item!!.email.isNullOrEmpty()){
                         loading.isDismiss()
-                        Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, R.string.LogInErr, Toast.LENGTH_SHORT).show()
                     }else{
                         loggedUser.setUser(item)
                         prefs.saveEmail(item.email!!)
@@ -145,7 +145,7 @@ class LoginActivity: AppCompatActivity(), View.OnClickListener {
                     val item =  response.body()
                     if(item!!.email.isNullOrEmpty()){
                         loading.isDismiss()
-                        Toast.makeText(this@LoginActivity, "Compruebe los datos", Toast.LENGTH_SHORT).show()
+
                     }else{
                         loggedUser.setUser(item)
                         showHome()

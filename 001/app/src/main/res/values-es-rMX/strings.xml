@@ -5,7 +5,7 @@
     <string name="password">Contraseña</string>
     <string name="account">"¿No tienes una cuenta? "</string>
     <string name="singup">Registrarse</string>
-    <string name="title">PHOTOPET</string>
+    <string name="title">PhotoPet</string>
     <string name="btnSignin">Ingresar</string>
     <string name="btnSignup">Registrarse</string>
     <string name="namesReg">Nombre(s)</string>
@@ -85,4 +85,6 @@
     <string name="dislikeMessage">Ya no te gusta esta publicación</string>
     <string name="DescSaved">Descripción Guardada</string>
     <string name="imageCircleShowUserPosts">Presiona para acceder a las publicaciones de este usuario.</string>
+    <string name="LogInErr">Alguno de los datos introducidos son erróneos</string>
+    <string name="HeaderEditPost">Editar Publicación</string>
 </resources>

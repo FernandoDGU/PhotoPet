@@ -382,7 +382,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
             Album = Album()
             Album.id_publication = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_ID)).toInt()
             Album.id_publication = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_PUBLICATION)).toInt()
-            Album.imageString = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_PUBLICATION)).toString() //Duda de si cambiar por blob
+            Album.imageString = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_IMAGE)).toString() //Duda de si cambiar por blob
             Album.description = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_DESCRIPTION)).toString()
         }
         data.close()
@@ -402,7 +402,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
                 val Album:Album = Album()
                 Album.id_publication = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_ID)).toInt()
                 Album.id_publication = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_PUBLICATION)).toInt()
-                Album.imageString = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_PUBLICATION)).toString() //Duda de si cambiar por blob
+                Album.imageString = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_IMAGE)).toString() //Duda de si cambiar por blob
                 Album.description = data.getString(data.getColumnIndex(SetDB.tblAlbum.COL_DESCRIPTION)).toString()
 
                 ListAlbums.add(Album)
@@ -625,7 +625,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
         val database: SQLiteDatabase = this.writableDatabase
 
         val data = database.rawQuery("SELECT DISTINCT publication.id_publication, publication.description, publication.email, album.image AS imgArray, user.image AS authorImage, user.fullname AS author , publication.likes AS likes " +
-                "FROM publication INNER JOIN album ON publication.id_publication == album.id_publication INNER JOIN user ON publication.email == user.email ORDER BY publication.id_publication DESC", null)
+                "FROM publication INNER JOIN album ON publication.id_publication == album.id_publication INNER JOIN user ON publication.email == user.email GROUP BY publication.id_publication ORDER BY publication.id_publication DESC ", null)
 
         if(data!=null && data.moveToFirst()){
             do{
@@ -653,7 +653,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
         val data = database.rawQuery("SELECT DISTINCT publication.id_publication, publication.description, publication.email, album.image AS imgArray, user.image AS authorImage, user.fullname AS author , publication.likes AS likes " +
                 "FROM publication INNER JOIN album ON publication.id_publication == album.id_publication INNER JOIN user ON publication.email == user.email " +
                 "WHERE publication.id_publication == ${id_post} " +
-                "GROUP BY publication.id_publication ", null)
+                "GROUP BY publication.id_publication ORDER BY publication.id_publication DESC ", null)
 
 
         if(data!=null && data.moveToFirst()){
@@ -683,7 +683,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
         val data = database.rawQuery("SELECT DISTINCT publication.id_publication, publication.description, publication.email, album.image AS imgArray, user.image AS authorImage, user.fullname AS author , publication.likes AS likes " +
                 "FROM publication INNER JOIN album ON publication.id_publication == album.id_publication INNER JOIN user ON publication.email == user.email " +
                 "WHERE publication.email == '${email}' " +
-                "GROUP BY publication.id_publication ", null)
+                "GROUP BY publication.id_publication ORDER BY publication.id_publication DESC", null)
 
 
         if(data!=null && data.moveToFirst()){
@@ -714,7 +714,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
                 "FROM publication INNER JOIN album ON publication.id_publication == album.id_publication " +
                 "INNER JOIN user ON publication.email == user.email " +
                 "INNER JOIN liked_publications ON liked_publications.email == '${email}' " +
-                "WHERE  liked_publications.id_publication == publication.id_publication ", null)
+                "WHERE  liked_publications.id_publication == publication.id_publication GROUP BY publication.id_publication ORDER BY publication.id_publication DESC", null)
 
         if(data!=null && data.moveToFirst()){
             do{
@@ -745,7 +745,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
                 "FROM publication INNER JOIN album ON publication.id_publication == album.id_publication " +
                 "INNER JOIN user ON publication.email == user.email " +
                 "INNER JOIN publication_tag ON publication.id_publication == publication_tag.id_publication " +
-                "WHERE  publication_tag.id_tag == ${id_tag} ", null)
+                "WHERE  publication_tag.id_tag == ${id_tag} GROUP BY publication.id_publication ORDER BY publication.id_publication DESC", null)
 
         if(data!=null && data.moveToFirst()){
             do{
@@ -775,7 +775,7 @@ class DataDB (var context: Context): SQLiteOpenHelper(context, SetDB.DB_NAME, nu
                 "FROM tag " +
                 "INNER JOIN publication ON ${id_post} ==  publication.id_publication " +
                 "INNER JOIN publication_tag ON publication.id_publication == publication_tag.id_publication " +
-                "WHERE publication_tag.id_tag == tag.id_tag ", null)
+                "WHERE publication_tag.id_tag == tag.id_tag GROUP BY tag.id_tag ", null)
 
         if(data!=null && data.moveToFirst()) {
             do {

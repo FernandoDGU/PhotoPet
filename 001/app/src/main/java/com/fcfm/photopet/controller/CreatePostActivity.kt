@@ -348,9 +348,10 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
 
                         txtCount.text = "${imagePos}/10"
                         textDescImage.setText(albumList[index].description)
-                        loading.isDismiss()
+
 
                     }
+                    loading.isDismiss()
                 }
                 R.id.btnGuardarDesc -> {
                     loading.startLoading()

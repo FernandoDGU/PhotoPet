@@ -86,7 +86,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                                 createUser()
                             }else{
                                 loading.isDismiss()
-                                Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
+
+                                //Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
                             }
                         }else{
                             loading.isDismiss()
@@ -102,7 +103,8 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
                                 modifyUser()
                             }else{
                                 loading.isDismiss()
-                                Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
+
+                            //Toast.makeText(this, R.string.ErrData, Toast.LENGTH_SHORT).show()
                             }
                         }else{
                             loading.isDismiss()
@@ -237,7 +239,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         if(editTextName.text.toString().isEmpty()){
             NameError.text = getString(R.string.ErrEmpty_L)
             Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
-            NameError.requestFocus()
+            editTextName.requestFocus()
             return false
         }
         NameError.text = ""
@@ -248,7 +250,7 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         if(editTextLast.text.toString().isEmpty()){
             LastError.text = getString(R.string.ErrEmpty_L)
             Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
-            LastError.requestFocus()
+            editTextLast.requestFocus()
             return false
         }
         LastError.text = ""
@@ -259,12 +261,12 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         if(editTextEmailRegister.text.toString().isEmpty()){
             EmailError.text = getString(R.string.ErrEmpty_L)
             Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
-            EmailError.requestFocus()
+            editTextEmailRegister.requestFocus()
             return false
         }else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(editTextEmailRegister.text).matches()){
             EmailError.text = getString(R.string.ErrEmail)
             Toast.makeText(this, R.string.ErrEmail, Toast.LENGTH_SHORT).show()
-            EmailError.requestFocus()
+            editTextEmailRegister.requestFocus()
             return false
         }
         EmailError.text = ""
@@ -286,16 +288,16 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
             if(editTextPasslRegister.text.toString().isEmpty()){
                 PassError.text = getString(R.string.ErrEmpty_L)
                 Toast.makeText(this, R.string.ErrEmpty_L, Toast.LENGTH_SHORT).show()
-                PassError.requestFocus()
+                editTextPasslRegister.requestFocus()
                 return false
             }else if (!isValidPassword(editTextPasslRegister.text.toString())){
                 PassError.text = getString(R.string.ErrCharacter)
-                PassError.requestFocus()
+                editTextPasslRegister.requestFocus()
                 return false
             }else if(editTextPasslRegister.text.toString().length < 8){
                 PassError.text = getString(R.string.ErrPass)
                 Toast.makeText(this, R.string.ErrPass, Toast.LENGTH_SHORT).show()
-                PassError.requestFocus()
+                editTextPasslRegister.requestFocus()
                 return false
             }
         }
@@ -308,12 +310,12 @@ class RegisterActivity: AppCompatActivity(), View.OnClickListener {
         if(editTextPhoneRegister.text.toString().length < 10 && !editTextPhoneRegister.text.isEmpty()){
             PhoneError.text = getString(R.string.ErrPhone)
             Toast.makeText(this, R.string.ErrPhone, Toast.LENGTH_SHORT).show()
-            PhoneError.requestFocus()
+            editTextPhoneRegister.requestFocus()
             return false
         }else if(editTextPhoneRegister.text.toString().length > 10){
             PhoneError.text = getString(R.string.ErrPhone)
             Toast.makeText(this, R.string.ErrPhone, Toast.LENGTH_SHORT).show()
-            PhoneError.requestFocus()
+            editTextPhoneRegister.requestFocus()
             return false
         }
         PhoneError.text = ""

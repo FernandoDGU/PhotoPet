@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayoutCardHome"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
+    android:layout_margin="15dp"
     android:translationX="0dp">
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardview_home"
-        android:layout_width="170dp"
-        android:layout_height="183dp"
-        android:layout_gravity="center"
-        android:background="@color/backgroundPet"
-        app:cardBackgroundColor="@color/backgroundPet"
-        app:cardCornerRadius="15dp"
-        app:strokeColor="@color/textColor"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        app:strokeWidth="2dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview_home"
+            android:layout_width="140dp"
+            android:layout_height="173dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
 
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp">
+            android:layout_marginBottom="8dp"
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black">
+            android:background="@color/backgroundPet"
+            app:cardBackgroundColor="@color/backgroundPet"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/textColor"
+            app:strokeWidth="2dp"
+            tools:ignore="MissingConstraints">
 
-            <ImageView
-                android:id="@+id/imageHomecard"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:contentDescription="@string/postImageContent"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toTopOf="@+id/textHomecard"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/background001" />
-
-            <TextView
-                android:id="@+id/textHomecard"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:background="@drawable/card_home_text_border"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:text="@string/Lorem"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/textColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageHomecard" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                android:layout_height="match_parent"
+                android:background="@color/black">
 
-</FrameLayout>
+                <ImageView
+                    android:id="@+id/imageHomecard"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/postImageContent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toTopOf="@+id/textHomecard"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/background001" />
+
+                <TextView
+                    android:id="@+id/textHomecard"
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:background="@drawable/card_home_text_border"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="@string/Lorem"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageHomecard" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

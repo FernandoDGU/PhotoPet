@@ -59,28 +59,29 @@
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/drawable/drawable_interior_border.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/activity_crearpublicacion.xml" value="0.33" />
-        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/activity_publicacion.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/activity_publicacion.xml" value="0.33" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/card_home.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/card_publications.xml" value="0.33" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/dialog_tags_publication.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/fragment_busqueda.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/fragment_inicio.xml" value="0.33" />
-        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/fragment_perfil.xml" value="0.22839506172839505" />
+        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout-land/fragment_perfil.xml" value="0.340625" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_crearpublicacion.xml" value="0.25" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_fragment.xml" value="1.0" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_publicacion.xml" value="0.33" />
-        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_registro.xml" value="0.33" />
+        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/activity_registro.xml" value="0.4494556765163297" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/card_home.xml" value="0.33" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/card_publication_smaller.xml" value="0.5" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/card_publications.xml" value="0.57856093979442" />
+        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/card_publications2.xml" value="0.5" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/dialog_loading.xml" value="0.3183876811594203" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/dialog_tags_publication.xml" value="0.33" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/dialog_user_publication.xml" value="0.5225048923679061" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/drawer_taglist.xml" value="0.5" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/fragment_busqueda.xml" value="0.33" />
-        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/fragment_inicio.xml" value="0.22" />
+        <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/fragment_inicio.xml" value="0.5" />
         <entry key="..\:/Users/Darie/OneDrive/Documents/GitHub/PhotoPet/001/app/src/main/res/layout/fragment_perfil.xml" value="0.34372926343729265" />
       </map>
     </option>

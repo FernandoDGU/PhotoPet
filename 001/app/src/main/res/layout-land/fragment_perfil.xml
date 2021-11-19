@@ -62,7 +62,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toggle"
                 tools:ignore="MissingConstraints"
-                tools:listitem="@layout/card_publications" />
+                tools:listitem="@layout/card_publications2" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
@@ -87,7 +87,7 @@
                         android:layout_width="105dp"
                         android:layout_height="99dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="16dp"
                         android:src="@drawable/puppy"
                         app:civ_border_width="2dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +101,7 @@
                         android:layout_marginStart="16dp"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:textStyle="bold"
                         android:text="@string/Lorem"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
@@ -110,13 +111,12 @@
                         android:id="@+id/btnEdit"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="100dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/rounded_button_green"
                         android:text="@string/edit"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toStartOf="@+id/btnCerrarSesion"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageProfilePost"
                         app:layout_constraintTop_toBottomOf="@+id/txtNameProfile"
                         tools:ignore="TextContrastCheck" />
 
@@ -138,7 +138,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="46dp"
+                        android:textStyle="bold"
                         android:text="@string/desc"
                         android:textColor="@color/textColor"
                         app:layout_constraintStart_toStartOf="parent"
@@ -165,6 +166,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/email"
+                        android:textStyle="bold"
                         android:textColor="@color/textColor"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -175,6 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
+                        android:textStyle="bold"
                         android:text="@string/phone"
                         android:textColor="@color/textColor"
                         app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +214,11 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:translationZ="10dp">
+                android:translationZ="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/materialCardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

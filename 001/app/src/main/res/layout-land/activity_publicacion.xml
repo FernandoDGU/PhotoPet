@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:text="@string/Post"
+                android:textStyle="bold"
                 android:textColor="@color/textColor"
                 android:textSize="24sp" />
 
@@ -152,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="@string/Lorem"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +171,7 @@
                 android:gravity="center"
                 android:text="@string/Lorem"
                 android:textColor="@color/textColor"
-                app:layout_constraintBottom_toTopOf="@+id/txtTagsPost"
+                app:layout_constraintBottom_toTopOf="@+id/BtnModif"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCountPost" />
@@ -192,30 +194,27 @@
                 android:id="@+id/BtnModif"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_button_green"
                 android:text="@string/edit"
                 android:textColor="@color/white"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtNamePost"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DescImagePost" />
 
             <TextView
                 android:id="@+id/txtTagsPost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
                 android:text="@string/Tags"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/imageProfilePost"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DescImagePost" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

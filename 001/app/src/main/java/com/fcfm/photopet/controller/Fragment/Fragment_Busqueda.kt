@@ -50,7 +50,7 @@ import retrofit2.Response
 
         recyclerPostSearch.layoutManager =  LinearLayoutManager(context)
 
-        this.postAdapter =  PostListRecyclerAdapter(context, R.layout.card_publications, posts, activity)
+        this.postAdapter =  PostListRecyclerAdapter(context, R.layout.card_publications2, posts, activity)
         recyclerPostSearch.adapter = this.postAdapter
 
         editSV.setOnQueryTextListener(this)

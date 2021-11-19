@@ -28,6 +28,7 @@
                 android:text="@string/searchtab"
                 android:textColor="@color/textColor"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,13 +138,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="70dp"
                     android:text="@string/SearchTitleradios"
+                    android:textStyle="bold"
                     android:textColor="@color/textColor"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="312dp"
+                    android:id="@+id/constraintLayout5"
+                    android:layout_width="250dp"
                     android:layout_height="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -157,8 +161,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="70dp"
                         android:layout_marginBottom="8dp"
-                        android:orientation="horizontal"
                         android:contentDescription="@string/SearchTitleradios"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -201,7 +205,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView"
         tools:ignore="MissingConstraints"
-        tools:listitem="@layout/card_publications" />
+        tools:listitem="@layout/card_publications2" />
 
     <!-- CARD PARTE DE ABAJO -->
     <com.google.android.material.card.MaterialCardView
@@ -229,12 +233,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:text="@string/Order"
+                android:textStyle="bold"
                 android:textColor="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -255,7 +262,6 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-
                     <RadioButton
                         android:id="@+id/OrderNew"
                         android:layout_width="match_parent"
@@ -264,6 +270,7 @@
                         android:checked="true"
                         android:text="@string/Orderadio1"
                         android:textColor="@color/textColor" />
+
                     <RadioButton
                         android:id="@+id/OrderOld"
                         android:layout_width="match_parent"
