@@ -101,12 +101,15 @@ import retrofit2.Response
             })
         }else{
             val item = Publication().PublicationSQLite().GetPostImages()
-            if (item!![0].id_publication != null){
-                completePostList = item.toMutableList()
-                for(p in completePostList){
-                    posts.add(p)
+            if(item.size != 0){
+                if (item[0].id_publication != null){
+                    completePostList = item.toMutableList()
+                    for(p in completePostList){
+                        posts.add(p)
+                    }
                 }
             }
+
             postAdapter!!.notifyDataSetChanged()
             loading.isDismiss()
         }
@@ -128,6 +131,7 @@ import retrofit2.Response
 
                  override fun onResponse(call: Call<List<Publication>>, response: Response<List<Publication>>) {
                      val item =  response.body()
+
                      if (item!![0].id_publication != null){
                          for(p in item){
                              posts.add(p)
@@ -141,11 +145,13 @@ import retrofit2.Response
              })
          }else{
              val item = Publication().PublicationSQLite().GetPostTag(id_tag)
-             if (item[0].id_publication != null){
-                 for(p in item){
-                     posts.add(p)
-                 }
+             if(item.size != 0){
+                 if (item[0].id_publication != null){
+                     for(p in item){
+                         posts.add(p)
+                     }
 
+                 }
              }
              postAdapter!!.notifyDataSetChanged()
              loading.isDismiss()
@@ -255,13 +261,16 @@ import retrofit2.Response
              })
          }else{
              val item = Tag().TagSQLite().GetTags()
-             if(item[0].id_tag != null){
+             if(item.size != 0){
+                 if(item[0].id_tag != null){
 
-                 tagList = item.toMutableList()
+                     tagList = item.toMutableList()
 
-                 autoTagListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, tagList)
-                 autotv_search.setAdapter(autoTagListAdapter)
+                     autoTagListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, tagList)
+                     autotv_search.setAdapter(autoTagListAdapter)
+                 }
              }
+
              loading.isDismiss()
          }
 

@@ -111,17 +111,21 @@ class Fragment_Perfil: Fragment(), View.OnClickListener{
             })
         }else{
             var item: MutableList<Publication>
+
             item = if(order){
                 Publication().PublicationSQLite().GetPostImageUser(loggedUser.getUser().email!!)
             }else{
                 Publication().PublicationSQLite().GetPostIUL(loggedUser.getUser().email!!)
             }
-            if(item[0].id_publication != null){
-                for(p in item){
-                    posts.add(p)
-                }
+            if(item.size != 0){
+                if(item[0].id_publication != null){
+                    for(p in item){
+                        posts.add(p)
+                    }
 
+                }
             }
+
             postAdapter!!.notifyDataSetChanged()
             loading.isDismiss()
         }
