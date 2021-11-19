@@ -464,29 +464,32 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
             })
         }else{
             val item = Tag().TagSQLite().GetTags()
-            if(item[0].id_tag != null){
+            if(item.size!=0){
+                if(item[0].id_tag != null){
 
-                tagList = item.toMutableList()
+                    tagList = item.toMutableList()
 
-                for(tag in selectedTagList){
-                    for(innerTag in tagList){
-                        if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
-                            if(tag.id_tag == null){
-                                selectedTagList.remove(tag)
-                                selectedTagList.add(innerTag)
+                    for(tag in selectedTagList){
+                        for(innerTag in tagList){
+                            if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
+                                if(tag.id_tag == null){
+                                    selectedTagList.remove(tag)
+                                    selectedTagList.add(innerTag)
+                                }
+                                tagList.remove(innerTag)
+                                break
                             }
-                            tagList.remove(innerTag)
-                            break
+
                         }
-
                     }
-                }
-                loading.isDismiss()
-                autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
-                autoCompleteTag.setAdapter(autoTagListAdapter)
-                tagListAdapter.notifyDataSetChanged()
+                    loading.isDismiss()
+                    autoTagListAdapter = ArrayAdapter(viewTagsPost.context, android.R.layout.simple_list_item_1, tagList)
+                    autoCompleteTag.setAdapter(autoTagListAdapter)
+                    tagListAdapter.notifyDataSetChanged()
 
+                }
             }
+
         }
 
 
