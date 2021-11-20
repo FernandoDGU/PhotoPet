@@ -526,6 +526,9 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
             
             if (data?.getClipData() != null){ //Múltiples imágenes
                 for (i in 0 until data.clipData!!.itemCount){
+                    if(albumList.size < 10){
+
+
                     album = Album()
                     photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.clipData!!.getItemAt(i).uri)
                     stream = ByteArrayOutputStream()
@@ -533,24 +536,31 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                     album.image = stream.toByteArray()
 
                     albumList.add(album);
+
+                    }
                 }
-                imagePos = albumList.size
-                txtCount.text = "${imagePos}/10"
-                imagesCreatePost.setImageBitmap(photo)
-                textDescImage.text = null
+                if(albumList.size < 10){
+                    imagePos = albumList.size
+                    txtCount.text = "${imagePos}/10"
+                    imagesCreatePost.setImageBitmap(photo)
+                    textDescImage.text = null
+                }
 
             }else{ //Una imagen
-                album = Album()
-                photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data!!.data)
-                stream = ByteArrayOutputStream()
-                photo.compress(Bitmap.CompressFormat.JPEG, 80, stream)
-                album.image = stream.toByteArray()
+                if(albumList.size < 10){
+                    album = Album()
+                    photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data!!.data)
+                    stream = ByteArrayOutputStream()
+                    photo.compress(Bitmap.CompressFormat.JPEG, 80, stream)
+                    album.image = stream.toByteArray()
 
-                albumList.add(album)
-                imagePos = albumList.size
-                txtCount.text = "${imagePos}/10"
-                imagesCreatePost.setImageBitmap(photo)
-                textDescImage.text = null
+                    albumList.add(album)
+                    imagePos = albumList.size
+                    txtCount.text = "${imagePos}/10"
+                    imagesCreatePost.setImageBitmap(photo)
+                    textDescImage.text = null
+                }
+
             }
         }
     }
