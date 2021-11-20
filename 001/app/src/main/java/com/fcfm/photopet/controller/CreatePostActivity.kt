@@ -268,30 +268,8 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
                         return
 
                     if(RestEngine.hasInternetConnection(this)){
-                        loading.startLoading()
-                        var alreadyExists = false
-                        for (tag in selectedTagList){
-                            if(tag.tagname!!.lowercase() == inputText.lowercase()){
-                                alreadyExists = true;
-                                break;
-                            }
-                        }
-                        if(!alreadyExists){
-                            for (tag in tagList){
-                                if(tag.tagname!!.lowercase() == inputText.lowercase()){
-                                    alreadyExists = true;
-                                    break;
-                                }
-                            }
-                        }
+                        fillTagListBeforeCreation(inputText)
 
-                        if(!alreadyExists){
-
-                            insertTag(Tag(null, inputText))
-                        }else{
-                            loading.isDismiss()
-                            Toast.makeText(this, R.string.tagNameErr, Toast.LENGTH_SHORT).show()
-                        }
                     }else{
                         Toast.makeText(this, R.string.InternetErr, Toast.LENGTH_SHORT).show()
                     }
@@ -417,6 +395,68 @@ class CreatePostActivity: AppCompatActivity(),View.OnFocusChangeListener, View.O
         })
     }
 
+
+    private fun fillTagListBeforeCreation(inputText: String){
+        loading.startLoading()
+        tagList.clear()
+        val service: ServiceTag =  RestEngine.getRestEngine().create(ServiceTag::class.java)
+        val result: Call<List<Tag>> = service.getTags()
+
+        result.enqueue(object: Callback<List<Tag>> {
+            override fun onFailure(call: Call<List<Tag>>, t: Throwable) {
+                loading.isDismiss()
+                Toast.makeText(this@CreatePostActivity,t.message.toString(), Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<List<Tag>>, response: Response<List<Tag>>) {
+                val item =  response.body()
+                if(item!![0].id_tag != null){
+
+                    tagList = item.toMutableList()
+
+                    for(tag in selectedTagList){
+                        for(innerTag in tagList){
+                            if(innerTag.tagname!!.lowercase() == tag.tagname!!.lowercase()){
+                                if(tag.id_tag == null){
+                                    selectedTagList.remove(tag)
+                                    selectedTagList.add(innerTag)
+                                }
+                                tagList.remove(innerTag)
+                                break
+                            }
+
+                        }
+                    }
+
+
+                    var alreadyExists = false
+                    for (tag in selectedTagList){
+                        if(tag.tagname!!.lowercase() == inputText.lowercase()){
+                            alreadyExists = true;
+                            break;
+                        }
+                    }
+                    if(!alreadyExists){
+                        for (tag in tagList){
+                            if(tag.tagname!!.lowercase() == inputText.lowercase()){
+                                alreadyExists = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(!alreadyExists){
+
+                        insertTag(Tag(null, inputText))
+                    }else{
+                        loading.isDismiss()
+                        Toast.makeText(this@CreatePostActivity, R.string.tagNameErr, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
+        })
+    }
 
     private fun showPost(){
         loading.isDismiss()
