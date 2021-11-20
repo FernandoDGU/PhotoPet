@@ -431,6 +431,7 @@ class PostActivity: AppCompatActivity(), View.OnClickListener{
     }
 
     private fun getUserPosts(){
+        posts.clear()
         if(RestEngine.hasInternetConnection(this)){
             val service: ServicePost =  RestEngine.getRestEngine().create(ServicePost::class.java)
             val result: Call<List<Publication>> = service.getUserPosts(post.email!!)
