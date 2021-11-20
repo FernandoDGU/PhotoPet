@@ -80,18 +80,18 @@
                     android:layout_marginBottom="2dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@string/Author"
                     android:textColor="@color/textColor"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="@string/Author" />
 
                 <TextView
                     android:id="@+id/txtDescCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Lorem"
-                    android:textColor="@color/textColor" />
+                    android:textColor="@color/textColor"
+                    tools:text="@string/Lorem" />
 
             </LinearLayout>
         </RelativeLayout>
